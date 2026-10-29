@@ -13,7 +13,7 @@ export default {
         "surface-base": "#0B0E14",
         "surface-panel": "#141923",
         "surface-panel-elevated": "#1C2333",
-        "border-active": "#FF3208",
+        "border-active": "#D63400",
         "border-subtle": "#252F45",
         "brand-amber": "#FF6B00",
         "text-primary": "#FFFFFF",

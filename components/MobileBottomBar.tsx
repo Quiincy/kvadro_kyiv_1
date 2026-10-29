@@ -23,7 +23,7 @@ export function MobileBottomBar({ settings }: MobileBottomBarProps) {
       {/* Tours */}
       <a
         href="#tours"
-        className="flex flex-col items-center justify-center text-[#94A3B8] py-1 px-2 hover:text-[#FF3208] transition-colors active:scale-95"
+        className="flex flex-col items-center justify-center text-text-muted py-1 px-2 hover:text-white transition-colors active:scale-95"
       >
         <MaterialIcon className="text-xl">sports_motorsports</MaterialIcon>
         <span className="font-label-caps text-[10px] uppercase mt-0.5 tracking-wider font-semibold">Маршрути</span>
@@ -33,7 +33,7 @@ export function MobileBottomBar({ settings }: MobileBottomBarProps) {
       <a
         href="#booking"
         onClick={scrollToBooking}
-        className="flex flex-col items-center justify-center bg-[#FF3208] text-white rounded-lg py-1.5 px-4 font-bold shadow-md shadow-[#FF3208]/30 ignition-glow active:scale-95 transition-transform"
+        className="flex flex-col items-center justify-center bg-border-active text-white rounded-lg py-1.5 px-4 font-bold shadow-md shadow-border-active/30 ignition-glow active:scale-95 transition-transform"
       >
         <MaterialIcon className="text-xl">calendar_today</MaterialIcon>
         <span className="font-label-caps text-[10px] uppercase mt-0.5 tracking-wider font-bold">Бронювання</span>
@@ -42,7 +42,7 @@ export function MobileBottomBar({ settings }: MobileBottomBarProps) {
       {/* Prices */}
       <a
         href="#prices"
-        className="flex flex-col items-center justify-center text-[#94A3B8] py-1 px-2 hover:text-[#FF3208] transition-colors active:scale-95"
+        className="flex flex-col items-center justify-center text-text-muted py-1 px-2 hover:text-white transition-colors active:scale-95"
       >
         <MaterialIcon className="text-xl">payments</MaterialIcon>
         <span className="font-label-caps text-[10px] uppercase mt-0.5 tracking-wider font-semibold">Ціни</span>
@@ -51,7 +51,7 @@ export function MobileBottomBar({ settings }: MobileBottomBarProps) {
       {/* Contact / Call */}
       <a
         href={`tel:${currentSettings.phoneRaw}`}
-        className="flex flex-col items-center justify-center text-[#94A3B8] py-1 px-2 hover:text-[#FF3208] transition-colors active:scale-95"
+        className="flex flex-col items-center justify-center text-text-muted py-1 px-2 hover:text-white transition-colors active:scale-95"
       >
         <MaterialIcon className="text-xl">call</MaterialIcon>
         <span className="font-label-caps text-[10px] uppercase mt-0.5 tracking-wider font-semibold">Контакти</span>

@@ -36,7 +36,7 @@ export function ReviewsSection({ reviews }: ReviewsSectionProps) {
               <div key={i} className="bg-surface-panel p-4 rounded-xl border border-border-subtle space-y-2">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-border-active/20 flex items-center justify-center text-border-active font-bold text-xs">
+                    <div className="w-7 h-7 rounded-full bg-border-active flex items-center justify-center text-white font-bold text-xs shadow-sm">
                       {getInitials(rev.author)}
                     </div>
                     <span className="font-bold text-sm text-text-primary">{rev.author}</span>

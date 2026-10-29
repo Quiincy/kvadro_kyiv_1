@@ -500,8 +500,8 @@ export function BookingCalculator({
                       onClick={() => handleSelectVehicle(tech.id)}
                       className={`p-2.5 rounded-lg border text-center transition-all font-semibold select-none ${
                         selectedVehicleId === tech.id
-                          ? 'border-border-active bg-surface-panel-elevated text-border-active ring-1 ring-border-active shadow-sm'
-                          : 'border-border-subtle bg-surface-base text-text-muted hover:border-slate-600'
+                          ? 'border-border-active bg-border-active text-white font-bold ring-1 ring-border-active shadow-md'
+                          : 'border-border-subtle bg-surface-base text-text-muted hover:border-slate-500 hover:text-white'
                       }`}
                     >
                       {tech.name}
@@ -529,8 +529,8 @@ export function BookingCalculator({
                           !isAvailable
                             ? 'opacity-40 cursor-not-allowed border-border-subtle bg-surface-base/50 text-text-dim'
                             : isSelected
-                            ? 'border-border-active bg-surface-panel-elevated text-text-primary ring-1 ring-border-active'
-                            : 'border-border-subtle bg-surface-base text-text-muted hover:border-slate-600'
+                            ? 'border-border-active bg-border-active text-white font-bold ring-1 ring-border-active shadow-md'
+                            : 'border-border-subtle bg-surface-base text-text-muted hover:border-slate-500 hover:text-white'
                         }`}
                       >
                         {h} {h === 1 ? 'година' : 'години'}
