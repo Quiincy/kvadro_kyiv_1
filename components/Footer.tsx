@@ -20,7 +20,7 @@ export function Footer({ settings, onOpenSafety, onOpenOffer }: FooterProps) {
   return (
     <footer className="scroll-mt-20 lg:scroll-mt-24 bg-surface-base border-t border-border-subtle w-full text-text-muted" id="contacts">
       {/* ===================== MOBILE VIEW (< lg) ===================== */}
-      <div className="lg:hidden w-full px-4 py-8 max-w-md mx-auto flex flex-col items-center text-center gap-4">
+      <div className="lg:hidden w-full px-4 pt-8 pb-28 pb-[max(7rem,calc(5.5rem+env(safe-area-inset-bottom)))] max-w-md mx-auto flex flex-col items-center text-center gap-4">
         {/* Brand & Description */}
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full border border-border-active overflow-hidden flex items-center justify-center p-0.5 bg-surface-panel">
