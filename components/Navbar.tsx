@@ -6,7 +6,12 @@ import Image from 'next/image'
 import { Send, MapPin } from 'lucide-react'
 import { defaultSettings } from '@/lib/defaultData'
 
-export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
+interface NavbarProps {
+  settings?: typeof defaultSettings
+  onOpenContacts?: () => void
+}
+
+export function Navbar({ settings, onOpenContacts }: NavbarProps) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const s = settings || defaultSettings
 
@@ -130,6 +135,19 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
                   <MaterialIcon className="text-xl">shield</MaterialIcon>
                   <span>Безпека та правила</span>
                 </a>
+                {onOpenContacts && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDrawerOpen(false)
+                      onOpenContacts()
+                    }}
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-panel-elevated transition-colors font-headline-sm text-sm text-left cursor-pointer"
+                  >
+                    <MaterialIcon className="text-xl text-border-active">call</MaterialIcon>
+                    <span>Контакти та карта</span>
+                  </button>
+                )}
               </nav>
             </div>
 
@@ -208,8 +226,14 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-border-active transition-all duration-300 group-hover:w-full" />
             </a>
             <a
-              className="text-text-muted hover:text-text-primary transition-colors duration-200 font-label-caps text-xs xl:text-[13px] tracking-wider uppercase font-bold py-1 relative group"
+              className="text-text-muted hover:text-text-primary transition-colors duration-200 font-label-caps text-xs xl:text-[13px] tracking-wider uppercase font-bold py-1 relative group cursor-pointer"
               href="#contacts"
+              onClick={(e) => {
+                if (onOpenContacts) {
+                  e.preventDefault()
+                  onOpenContacts()
+                }
+              }}
             >
               <span>Контакти</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-border-active transition-all duration-300 group-hover:w-full" />

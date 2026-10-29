@@ -6,15 +6,23 @@ import { defaultSettings } from '@/lib/defaultData'
 
 interface MobileBottomBarProps {
   settings?: typeof defaultSettings
+  onOpenContacts?: () => void
 }
 
-export function MobileBottomBar({ settings }: MobileBottomBarProps) {
+export function MobileBottomBar({ settings, onOpenContacts }: MobileBottomBarProps) {
   const currentSettings = settings || defaultSettings
   const scrollToBooking = (e: React.MouseEvent) => {
     e.preventDefault()
     const el = document.getElementById('booking')
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const handleContactsClick = (e: React.MouseEvent) => {
+    if (onOpenContacts) {
+      e.preventDefault()
+      onOpenContacts()
     }
   }
 
@@ -50,8 +58,9 @@ export function MobileBottomBar({ settings }: MobileBottomBarProps) {
 
       {/* Contact / Call */}
       <a
-        href={`tel:${currentSettings.phoneRaw}`}
-        className="flex flex-col items-center justify-center text-text-muted py-1 px-2 hover:text-white transition-colors active:scale-95"
+        href="#contacts"
+        onClick={handleContactsClick}
+        className="flex flex-col items-center justify-center text-text-muted py-1 px-2 hover:text-white transition-colors active:scale-95 cursor-pointer"
       >
         <MaterialIcon className="text-xl">call</MaterialIcon>
         <span className="font-label-caps text-[10px] uppercase mt-0.5 tracking-wider font-semibold">Контакти</span>

@@ -16,6 +16,7 @@ import { FaqSection } from '@/components/FaqSection'
 import { Footer } from '@/components/Footer'
 import { MobileBottomBar } from '@/components/MobileBottomBar'
 import { LegalModal, LegalModalType } from '@/components/LegalModal'
+import { ContactsModal } from '@/components/ContactsModal'
 
 interface HomePageClientProps {
   data: SiteData
@@ -30,6 +31,7 @@ export function HomePageClient({ data }: HomePageClientProps) {
     data.fleet[0]?.title || 'Квадро прогулянка'
   )
   const [legalModalType, setLegalModalType] = useState<LegalModalType | null>(null)
+  const [isContactsOpen, setIsContactsOpen] = useState(false)
 
   const handleOpenOneClick = (vehicleTitle?: string) => {
     setOneClickVehicle(vehicleTitle || selectedVehicle)
@@ -39,7 +41,10 @@ export function HomePageClient({ data }: HomePageClientProps) {
   return (
     <div className="min-h-screen bg-[#0B0E14] text-slate-100 flex flex-col font-sans">
       {/* Top Fixed Header */}
-      <Navbar settings={data.settings} />
+      <Navbar
+        settings={data.settings}
+        onOpenContacts={() => setIsContactsOpen(true)}
+      />
 
       {/* Main Content */}
       <main className="flex-1">
@@ -93,7 +98,18 @@ export function HomePageClient({ data }: HomePageClientProps) {
       />
 
       {/* Mobile-Only Bottom App Bar */}
-      <MobileBottomBar settings={data.settings} />
+      <MobileBottomBar
+        settings={data.settings}
+        onOpenContacts={() => setIsContactsOpen(true)}
+      />
+
+      {/* Contacts & Map Modal Popup */}
+      <ContactsModal
+        isOpen={isContactsOpen}
+        onClose={() => setIsContactsOpen(false)}
+        settings={data.settings}
+        onOpenOneClick={() => handleOpenOneClick(selectedVehicle)}
+      />
 
       {/* Fast 1-Click Booking Modal Popup */}
       <OneClickModal
