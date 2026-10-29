@@ -5,7 +5,7 @@ import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { FormFieldTooltip, FormAlertBanner } from '@/components/ui/FormFieldTooltip'
 import { Check, Send, Phone, Calendar, User, Sparkles, CheckCircle2, ChevronDown } from 'lucide-react'
 import { InstagramIcon } from '@/components/InstagramIcon'
-import { defaultSettings, defaultFleet, FleetItem } from '@/lib/defaultData'
+import { defaultSettings, defaultFleet, FleetItem, formatPrice } from '@/lib/defaultData'
 import {
   formatUkrainianPhone,
   handlePhoneKeyDown,
@@ -274,18 +274,12 @@ export function BookingCalculator({
   const [withPassenger, setWithPassenger] = useState<boolean>(false)
   const [isIndividual, setIsIndividual] = useState<boolean>(false)
 
-  // Dedicated selection handler that keeps hours and passenger options valid
+  // Dedicated selection handler that keeps passenger options valid without polluting preferred duration
   const handleSelectVehicle = (id: string) => {
     setSelectedVehicleId(id)
     const vehicle = vehicles.find((v) => v.id === id)
-    if (vehicle) {
-      const hoursList = Object.keys(vehicle.rates).map(Number)
-      if (!hoursList.includes(hours) && hoursList.length > 0) {
-        setHours(hoursList[0])
-      }
-      if (!vehicle.passengerRate) {
-        setWithPassenger(false)
-      }
+    if (vehicle && !vehicle.passengerRate) {
+      setWithPassenger(false)
     }
   }
 
@@ -302,16 +296,12 @@ export function BookingCalculator({
       )
       if (match) {
         setSelectedVehicleId(match.id)
-        const hoursList = Object.keys(match.rates).map(Number)
-        if (!hoursList.includes(hours) && hoursList.length > 0) {
-          setHours(hoursList[0])
-        }
         if (!match.passengerRate) {
           setWithPassenger(false)
         }
       }
     }
-  }, [initialVehicle, vehicles, hours])
+  }, [initialVehicle, vehicles])
 
   // Form fields
   const [clientName, setClientName] = useState('')
@@ -445,13 +435,22 @@ export function BookingCalculator({
   // Duration dropdown options
   const durationOptions: CustomSelectOption[] = availableHours.map((h) => ({
     value: h,
-    label: `${h} ${h === 1 ? 'година' : 'години'} ${h === 2 ? '(Рекомендовано)' : h === 3 ? '(Максимум вражень)' : ''}`,
+    label: `${h} ${h === 1 ? 'година' : 'години'} — ${formatPrice(currentVehicle.rates[h])} грн${h === 2 ? ' (Хіт)' : ''}`,
   }))
 
-  // Group format dropdown options
+  const individualTotalForDuration = currentSettings.individualSurchargePerHour * validHours
+  const passengerTotalForDuration = (currentVehicle.passengerRate || 0) * validHours
+
+  // Group format dropdown options (dynamically synchronized with selected duration)
   const formatOptions: CustomSelectOption[] = [
-    { value: 'standard', label: 'У складі групи' },
-    { value: 'individual', label: `Індивідуально без сторонніх (+${currentSettings.individualSurchargePerHour} грн/год)` },
+    { value: 'standard', label: 'У складі групи (стандарт)' },
+    {
+      value: 'individual',
+      label:
+        validHours === 1
+          ? `Індивідуально без сторонніх (+${formatPrice(individualTotalForDuration)} грн)`
+          : `Індивідуально без сторонніх (+${formatPrice(individualTotalForDuration)} грн за ${validHours} год)`,
+    },
   ]
 
   return (
@@ -557,13 +556,14 @@ export function BookingCalculator({
                   {([1, 2, 3] as const).map((h) => {
                     const isAvailable = availableHours.includes(h)
                     const isSelected = validHours === h
+                    const rateForHour = currentVehicle.rates[h]
                     return (
                       <button
                         key={h}
                         type="button"
                         disabled={!isAvailable}
                         onClick={() => setHours(h)}
-                        className={`p-2.5 rounded-lg border text-center font-semibold transition-all select-none ${
+                        className={`p-2 rounded-lg border text-center font-semibold transition-all select-none flex flex-col items-center justify-center ${
                           !isAvailable
                             ? 'opacity-40 cursor-not-allowed border-border-subtle bg-surface-base/50 text-text-dim'
                             : isSelected
@@ -571,7 +571,14 @@ export function BookingCalculator({
                             : 'border-border-subtle bg-surface-base text-text-muted hover:border-slate-500 hover:text-white'
                         }`}
                       >
-                        {h} {h === 1 ? 'година' : 'години'}
+                        <span>{h} {h === 1 ? 'година' : 'години'}</span>
+                        {rateForHour ? (
+                          <span className={`text-[10px] font-mono mt-0.5 ${isSelected ? 'text-white/90' : 'text-brand-amber'}`}>
+                            {formatPrice(rateForHour)} грн
+                          </span>
+                        ) : (
+                          <span className="text-[10px] mt-0.5">—</span>
+                        )}
                       </button>
                     )
                   })}
@@ -582,8 +589,17 @@ export function BookingCalculator({
               <CustomCheckbox
                 checked={withPassenger}
                 onChange={setWithPassenger}
-                label={`Поїздка з пасажиром (+${currentVehicle.passengerRate || 0} грн/год)`}
-                badge={`+${(currentVehicle.passengerRate || 0) * validHours} грн`}
+                label="Поїздка з пасажиром (другий райдер)"
+                sublabel={
+                  validHours > 1
+                    ? `Додаткове місце (${currentVehicle.passengerRate || 0} грн/год × ${validHours} год)`
+                    : 'Додаткове місце на техніці'
+                }
+                badge={
+                  validHours > 1
+                    ? `+${formatPrice(passengerTotalForDuration)} грн (${validHours} год)`
+                    : `+${formatPrice(passengerTotalForDuration)} грн`
+                }
                 disabled={!currentVehicle.passengerRate}
                 disabledMessage="Поїздка з пасажиром (недоступно для одномісного мото)"
               />
@@ -592,9 +608,17 @@ export function BookingCalculator({
               <CustomCheckbox
                 checked={isIndividual}
                 onChange={setIsIndividual}
-                label={`Індивідуальний тур без групи (+${currentSettings.individualSurchargePerHour} грн/год)`}
-                sublabel="Тільки ваша компанія та інструктор"
-                badge={`+${currentSettings.individualSurchargePerHour * validHours} грн`}
+                label="Індивідуальний тур без групи"
+                sublabel={
+                  validHours > 1
+                    ? `Тільки ваша компанія (${currentSettings.individualSurchargePerHour} грн/год × ${validHours} год)`
+                    : 'Тільки ваша компанія та інструктор'
+                }
+                badge={
+                  validHours > 1
+                    ? `+${formatPrice(individualTotalForDuration)} грн (${validHours} год)`
+                    : `+${formatPrice(individualTotalForDuration)} грн`
+                }
               />
 
               {/* Personal Data Inputs */}
@@ -685,11 +709,20 @@ export function BookingCalculator({
               </div>
 
               {/* Live Cost Summary */}
-              <div className="p-3 bg-surface-base rounded-lg border border-border-subtle flex items-center justify-between text-xs min-h-[44px]">
-                <span className="text-text-muted">Вартість заїзду:</span>
-                <span className="font-price-val text-lg font-black text-border-active">
-                  {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} грн
-                </span>
+              <div className="p-3 bg-surface-base rounded-lg border border-border-subtle space-y-1 text-xs min-h-[44px]">
+                <div className="flex items-center justify-between">
+                  <span className="text-text-muted">Вартість заїзду ({validHours} год):</span>
+                  <span className="font-price-val text-lg font-black text-border-active">
+                    {formatPrice(totalPrice)} грн
+                  </span>
+                </div>
+                {(passengerSurcharge > 0 || individualSurcharge > 0) && (
+                  <div className="text-[11px] text-text-dim font-mono flex flex-wrap gap-x-2">
+                    <span>База: {formatPrice(basePrice)} ₴</span>
+                    {passengerSurcharge > 0 && <span>+ Пасажир: {formatPrice(passengerSurcharge)} ₴</span>}
+                    {individualSurcharge > 0 && <span>+ Індивідуально: {formatPrice(individualSurcharge)} ₴</span>}
+                  </div>
+                )}
               </div>
 
               <FormAlertBanner message={errorMsg} onDismiss={() => setErrorMsg('')} />
@@ -978,8 +1011,17 @@ export function BookingCalculator({
                   <CustomCheckbox
                     checked={withPassenger}
                     onChange={setWithPassenger}
-                    label={`Поїздка з пасажиром (+${currentVehicle.passengerRate || 0} грн/год)`}
-                    badge={`+${(currentVehicle.passengerRate || 0) * validHours} грн`}
+                    label="Поїздка з пасажиром (другий райдер)"
+                    sublabel={
+                      validHours > 1
+                        ? `Додаткове місце (${currentVehicle.passengerRate || 0} грн/год × ${validHours} год)`
+                        : 'Додаткове місце на техніці'
+                    }
+                    badge={
+                      validHours > 1
+                        ? `+${formatPrice(passengerTotalForDuration)} грн (${validHours} год)`
+                        : `+${formatPrice(passengerTotalForDuration)} грн`
+                    }
                     disabled={!currentVehicle.passengerRate}
                     disabledMessage="Поїздка з пасажиром (недоступно для одномісного мото)"
                   />
@@ -1065,13 +1107,22 @@ export function BookingCalculator({
                     </div>
                     <div className="min-w-0">
                       <label className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
-                        Розрахована сума:
+                        Розрахована сума ({validHours} год):
                       </label>
-                      <div className="w-full bg-surface-base border border-border-subtle rounded-xl px-4 py-3 flex items-center justify-between min-h-[48px]">
-                        <span className="text-xs text-text-muted">Вартість заїзду:</span>
-                        <span className="font-price-val text-xl font-black text-border-active">
-                          {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} грн
-                        </span>
+                      <div className="w-full bg-surface-base border border-border-subtle rounded-xl px-4 py-2.5 flex flex-col justify-center min-h-[48px]">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-text-muted">Вартість заїзду:</span>
+                          <span className="font-price-val text-xl font-black text-border-active">
+                            {formatPrice(totalPrice)} грн
+                          </span>
+                        </div>
+                        {(passengerSurcharge > 0 || individualSurcharge > 0) && (
+                          <div className="text-[11px] text-text-dim font-mono flex flex-wrap gap-x-2 mt-0.5">
+                            <span>База: {formatPrice(basePrice)} ₴</span>
+                            {passengerSurcharge > 0 && <span>+ Пасажир: {formatPrice(passengerSurcharge)} ₴</span>}
+                            {individualSurcharge > 0 && <span>+ Індивідуально: {formatPrice(individualSurcharge)} ₴</span>}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
