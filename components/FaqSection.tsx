@@ -10,9 +10,40 @@ interface FaqSectionProps {
 
 export function FaqSection({ faqs }: FaqSectionProps) {
   const activeFaqs = faqs && faqs.length > 0 ? faqs : defaultFaqs
-  const articles = activeFaqs.filter((f) => f.isArticle)
-  const displayArticles = articles.length >= 3 ? articles.slice(0, 3) : activeFaqs.slice(0, 3)
-  const remainingFaqs = activeFaqs.filter((f) => !displayArticles.includes(f))
+
+  const fallbackBadges = [
+    'Гід для початківців',
+    'Все включено',
+    'Ідеї для свят',
+    'Двомісні тури та діти',
+    'Екіпірування та погода',
+    'Бонусна програма',
+  ]
+
+  const getCardAction = (faq: FaqItem, index: number): { label: string; href: string } => {
+    const qLower = faq.q.toLowerCase()
+    if (qLower.includes('сертифікат') || qLower.includes('знижк')) {
+      return { label: 'Обрати сертифікат', href: '#certificates' }
+    }
+    if (qLower.includes('вартість') || qLower.includes('входить')) {
+      return { label: 'Дивитись техніку та ціни', href: '#pricing' }
+    }
+    if (qLower.includes('корпоратив') || qLower.includes('народження') || qLower.includes('компані')) {
+      return { label: 'Забронювати для компанії', href: '#booking' }
+    }
+    if (qLower.includes('вік') || qLower.includes('вдвох') || qLower.includes('пасажир')) {
+      return { label: 'Розрахувати вартість', href: '#booking' }
+    }
+    if (qLower.includes('дощ') || qLower.includes('одяг')) {
+      return { label: 'Переглянути галерею трас', href: '#routes' }
+    }
+    if (qLower.includes('прав')) {
+      return { label: 'Як проходить інструктаж', href: '#stages' }
+    }
+    return index % 2 === 0
+      ? { label: 'Забронювати заїзд', href: '#booking' }
+      : { label: 'Дивитись прайс', href: '#pricing' }
+  }
 
   return (
     <section id="faq" className="scroll-mt-20 lg:scroll-mt-24 border-b border-border-subtle relative bg-surface-base">
@@ -24,7 +55,7 @@ export function FaqSection({ faqs }: FaqSectionProps) {
               Часті питання
             </span>
             <p className="font-headline-xl-mobile text-headline-xl-mobile font-black text-text-primary uppercase mt-1 leading-tight">
-              Корисні поради
+              Корисні поради райдерам
             </p>
           </div>
 
@@ -57,64 +88,48 @@ export function FaqSection({ faqs }: FaqSectionProps) {
                 Корисна інформація
               </span>
               <h2 className="font-headline-xl text-3xl md:text-headline-xl text-text-primary font-black uppercase mt-2">
-                Новини та поради для райдерів
+                Часті питання та поради для райдерів
               </h2>
             </div>
             <p className="font-body-sm text-text-muted max-w-sm">
-              Відповіді на популярні запитання про прокат, права та підготовку до поїздки.
+              Відповіді на популярні запитання про прокат, права, екіпірування та підготовку до поїздки.
             </p>
           </div>
 
-          {/* Quick technical article cards matching Stitch Desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {displayArticles.map((art, i) => (
-              <div
-                key={i}
-                className="bg-surface-panel border border-border-subtle rounded-xl p-6 hover:border-border-active transition-all group flex flex-col justify-between"
-              >
-                <div>
-                  <span className="font-label-caps text-[10px] uppercase text-brand-amber font-bold block mb-2">
-                    {art.articleBadge || (i === 0 ? 'Гід для початківців' : i === 1 ? 'Підготовка до заїзду' : 'Ідеї для свят')}
-                  </span>
-                  <h3 className="font-headline-sm text-base text-text-primary font-bold group-hover:text-border-active transition-colors">
-                    {art.q}
-                  </h3>
-                  <p className="font-body-sm text-text-muted text-xs mt-2">
-                    {art.a}
-                  </p>
-                </div>
-                <a
-                  className="mt-6 inline-flex items-center gap-2 text-xs font-headline-sm font-bold text-border-active uppercase"
-                  href={i === 2 ? '#booking' : '#stages'}
-                >
-                  <span>{i === 2 ? 'Замовити заїзд' : 'Читати далі'}</span>
-                  <MaterialIcon className="text-xs">arrow_forward</MaterialIcon>
-                </a>
-              </div>
-            ))}
-          </div>
-
-          {/* Additional FAQ Accordion Items on Desktop */}
-          {remainingFaqs.length > 0 && (
-            <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-              {remainingFaqs.map((faq, idx) => (
+          {/* Unified Symmetric 3x2 FAQ & Tips Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {activeFaqs.map((faq, i) => {
+              const action = getCardAction(faq, i)
+              const badge = faq.articleBadge || fallbackBadges[i % fallbackBadges.length]
+              return (
                 <div
-                  key={idx}
-                  className="bg-surface-panel/70 border border-border-subtle rounded-xl p-6 hover:border-border-active/60 transition-all"
+                  key={i}
+                  className="bg-surface-panel border border-border-subtle rounded-xl p-6 hover:border-border-active transition-all group flex flex-col justify-between"
                 >
-                  <span className="font-label-caps text-[10px] uppercase text-border-active font-bold block mb-2">
-                    Часте питання
-                  </span>
-                  <h3 className="font-headline-sm text-sm text-text-primary font-bold">
-                    {faq.q}
-                  </h3>
-                  <p className="font-body-sm text-text-muted text-xs mt-2 leading-relaxed">
-                    {faq.a}
-                  </p>
+                  <div>
+                    <span className="font-label-caps text-[10px] uppercase text-brand-amber font-bold tracking-wider block mb-2">
+                      {badge}
+                    </span>
+                    <h3 className="font-headline-sm text-base text-text-primary font-bold group-hover:text-border-active transition-colors leading-snug">
+                      {faq.q}
+                    </h3>
+                    <p className="font-body-sm text-text-muted text-xs mt-2.5 leading-relaxed">
+                      {faq.a}
+                    </p>
+                  </div>
+                  <a
+                    className="mt-6 inline-flex items-center gap-2 text-xs font-headline-sm font-bold text-border-active hover:text-brand-amber uppercase transition-colors"
+                    href={action.href}
+                  >
+                    <span>{action.label}</span>
+                    <MaterialIcon className="text-xs group-hover:translate-x-1 transition-transform">
+                      arrow_forward
+                    </MaterialIcon>
+                  </a>
                 </div>
-              ))}
-            </div>
-          )}
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>

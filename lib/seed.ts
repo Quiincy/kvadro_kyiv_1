@@ -303,8 +303,8 @@ export async function seedDatabase(payload: Payload, force = false) {
       collection: 'faqs',
       overrideAccess: true,
     })
-    if (faqsCount === 0 || force) {
-      if (force && faqsCount > 0) {
+    if (faqsCount < defaultFaqItems.length || force) {
+      if (faqsCount > 0) {
         await payload.delete({
           collection: 'faqs',
           where: { id: { exists: true } },
