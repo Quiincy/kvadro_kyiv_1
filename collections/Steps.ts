@@ -1,10 +1,18 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCollectionAfterChange, revalidateCollectionAfterDelete } from '@/lib/revalidate'
 
 export const Steps: CollectionConfig = {
   slug: 'steps',
   labels: {
     singular: 'Етап прогулянки',
     plural: 'Етапи прогулянки',
+  },
+  access: {
+    read: () => true,
+  },
+  hooks: {
+    afterChange: [revalidateCollectionAfterChange],
+    afterDelete: [revalidateCollectionAfterDelete],
   },
   admin: {
     useAsTitle: 'title',

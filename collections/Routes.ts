@@ -1,10 +1,18 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCollectionAfterChange, revalidateCollectionAfterDelete } from '@/lib/revalidate'
 
 export const Routes: CollectionConfig = {
   slug: 'routes',
   labels: {
     singular: 'Маршрут / Фото',
     plural: 'Маршрути та Галерея',
+  },
+  access: {
+    read: () => true,
+  },
+  hooks: {
+    afterChange: [revalidateCollectionAfterChange],
+    afterDelete: [revalidateCollectionAfterDelete],
   },
   admin: {
     useAsTitle: 'title',

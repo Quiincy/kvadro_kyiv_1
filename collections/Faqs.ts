@@ -1,10 +1,18 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCollectionAfterChange, revalidateCollectionAfterDelete } from '@/lib/revalidate'
 
 export const Faqs: CollectionConfig = {
   slug: 'faqs',
   labels: {
     singular: 'Питання та відповідь (FAQ)',
     plural: 'Питання та відповіді (FAQ)',
+  },
+  access: {
+    read: () => true,
+  },
+  hooks: {
+    afterChange: [revalidateCollectionAfterChange],
+    afterDelete: [revalidateCollectionAfterDelete],
   },
   admin: {
     useAsTitle: 'question',
