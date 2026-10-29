@@ -6,6 +6,13 @@ export const Bookings: CollectionConfig = {
     singular: 'Заявка на бронювання',
     plural: 'Заявки на бронювання (Ліди)',
   },
+  lockDocuments: false,
+  access: {
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  },
   admin: {
     useAsTitle: 'clientPhone',
     defaultColumns: ['clientPhone', 'clientName', 'bookingType', 'vehicleType', 'status', 'createdAt'],

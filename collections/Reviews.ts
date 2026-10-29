@@ -6,8 +6,12 @@ export const Reviews: CollectionConfig = {
     singular: 'Відгук клієнта',
     plural: 'Відгуки клієнтів',
   },
+  lockDocuments: false,
   access: {
     read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
   admin: {
     useAsTitle: 'author',

@@ -3,8 +3,10 @@ import type { GlobalConfig } from 'payload'
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   label: 'Налаштування сайту та Контакти',
+  lockDocuments: false,
   access: {
     read: () => true,
+    update: () => true,
   },
   fields: [
     {

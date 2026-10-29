@@ -6,8 +6,12 @@ export const Steps: CollectionConfig = {
     singular: 'Етап прогулянки',
     plural: 'Етапи прогулянки',
   },
+  lockDocuments: false,
   access: {
     read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
   admin: {
     useAsTitle: 'title',

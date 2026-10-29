@@ -6,8 +6,12 @@ export const Fleet: CollectionConfig = {
     singular: 'Техніка та тариф',
     plural: 'Техніка та тарифи',
   },
+  lockDocuments: false,
   access: {
     read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
   admin: {
     useAsTitle: 'title',

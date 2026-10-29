@@ -6,8 +6,12 @@ export const Routes: CollectionConfig = {
     singular: 'Маршрут / Фото',
     plural: 'Маршрути та Галерея',
   },
+  lockDocuments: false,
   access: {
     read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
   admin: {
     useAsTitle: 'title',

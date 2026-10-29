@@ -6,8 +6,12 @@ export const Faqs: CollectionConfig = {
     singular: 'Питання та відповідь (FAQ)',
     plural: 'Питання та відповіді (FAQ)',
   },
+  lockDocuments: false,
   access: {
     read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
   admin: {
     useAsTitle: 'question',
