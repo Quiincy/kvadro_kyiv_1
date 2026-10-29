@@ -308,7 +308,7 @@ export function OneClickModal({
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Як до вас звертатися?"
-                  className="w-full bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary placeholder:text-text-dim text-sm focus:border-border-active focus:ring-1 focus:ring-border-active outline-none transition-all"
+                  className="w-full bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary placeholder:text-text-dim text-base focus:border-border-active focus:ring-1 focus:ring-border-active outline-none transition-all"
                 />
               </div>
 

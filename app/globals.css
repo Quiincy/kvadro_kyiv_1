@@ -7,6 +7,12 @@
   --foreground: #FFFFFF;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
@@ -16,7 +22,48 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
-  overflow-x: clip;
+}
+
+/* Prevent iOS Safari auto-zoom on focus by enforcing 16px minimum font size on mobile */
+@media screen and (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Normalize and constrain date inputs across mobile (especially iOS Safari) */
+input[type="date"] {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+}
+
+/* Fix iOS Safari inner value alignment and height */
+input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
+  min-height: 1.5em;
+  margin: 0;
+  padding: 0;
+}
+
+/* Dark mode styling for native calendar picker indicator in WebKit/Blink */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.85);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  margin-right: 2px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 /* Global Anchor Scroll Margin for all sections and anchor targets */

@@ -321,6 +321,7 @@ export function BookingCalculator({
   const desktopNameInputId = useId()
   const desktopPhoneInputId = useId()
   const desktopDateInputId = useId()
+  const todayDate = new Date().toLocaleDateString('en-CA')
 
   // Phone input formatting helper: +380 (XX) XXX-XX-XX
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -551,8 +552,8 @@ export function BookingCalculator({
               />
 
               {/* Personal Data Inputs */}
-              <div className="space-y-3 pt-1">
-                <div>
+              <div className="space-y-3 pt-1 min-w-0">
+                <div className="min-w-0">
                   <label htmlFor={nameInputId} className="block font-label-caps text-[11px] text-text-muted uppercase mb-1 font-semibold">
                     Ваше ім&apos;я
                   </label>
@@ -563,10 +564,10 @@ export function BookingCalculator({
                     value={clientName}
                     onChange={(e) => setClientName(e.target.value)}
                     placeholder="Олександр"
-                    className="w-full bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-sm focus:border-border-active focus:ring-1 focus:ring-border-active outline-none"
+                    className="w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-base placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none"
                   />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <label htmlFor={phoneInputId} className="block font-label-caps text-[11px] text-text-muted uppercase mb-1 font-semibold">
                     Номер телефону
                   </label>
@@ -580,20 +581,25 @@ export function BookingCalculator({
                     onFocus={handlePhoneFocusOrClick}
                     onClick={handlePhoneFocusOrClick}
                     placeholder="+380 (98) 000-00-00"
-                    className="w-full bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-sm font-mono focus:border-border-active focus:ring-1 focus:ring-border-active outline-none"
+                    className="w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-base font-mono placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none"
                   />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <label htmlFor={dateInputId} className="block font-label-caps text-[11px] text-text-muted uppercase mb-1 font-semibold">
                     Бажана дата заїзду
                   </label>
-                  <input
-                    id={dateInputId}
-                    type="date"
-                    value={preferredDate}
-                    onChange={(e) => setPreferredDate(e.target.value)}
-                    className="w-full bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-sm focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-text-muted"
-                  />
+                  <div className="relative min-w-0">
+                    <input
+                      id={dateInputId}
+                      type="date"
+                      min={todayDate}
+                      value={preferredDate}
+                      onChange={(e) => setPreferredDate(e.target.value)}
+                      className={`w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-base focus:border-border-active focus:ring-1 focus:ring-border-active outline-none appearance-none transition-colors ${
+                        preferredDate ? 'text-text-primary' : 'text-text-muted'
+                      }`}
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -894,7 +900,7 @@ export function BookingCalculator({
 
                   {/* Rider details */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
+                    <div className="min-w-0">
                       <label htmlFor={desktopNameInputId} className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
                         Ваше ім&apos;я:
                       </label>
@@ -906,10 +912,10 @@ export function BookingCalculator({
                         value={clientName}
                         onChange={(e) => setClientName(e.target.value)}
                         placeholder="Олександр"
-                        className="w-full bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-sm transition-colors"
+                        className="w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-base md:text-sm transition-colors"
                       />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <label htmlFor={desktopPhoneInputId} className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
                         Номер телефону:
                       </label>
@@ -924,27 +930,32 @@ export function BookingCalculator({
                         onFocus={handlePhoneFocusOrClick}
                         onClick={handlePhoneFocusOrClick}
                         placeholder="+380 (98) 000-00-00"
-                        className="w-full bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary font-mono placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-sm transition-colors"
+                        className="w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary font-mono placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-base md:text-sm transition-colors"
                       />
                     </div>
                   </div>
 
                   {/* Date and Cost Row - Balanced heights to prevent any vertical shift */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
+                    <div className="min-w-0">
                       <label htmlFor={desktopDateInputId} className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
                         Бажана дата:
                       </label>
-                      <input
-                        id={desktopDateInputId}
-                        type="date"
-                        aria-label="Бажана дата заїзду"
-                        value={preferredDate}
-                        onChange={(e) => setPreferredDate(e.target.value)}
-                        className="w-full bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-sm transition-colors"
-                      />
+                      <div className="relative min-w-0">
+                        <input
+                          id={desktopDateInputId}
+                          type="date"
+                          min={todayDate}
+                          aria-label="Бажана дата заїзду"
+                          value={preferredDate}
+                          onChange={(e) => setPreferredDate(e.target.value)}
+                          className={`w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-xl px-4 py-3 focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-base md:text-sm transition-colors appearance-none ${
+                            preferredDate ? 'text-text-primary' : 'text-text-muted'
+                          }`}
+                        />
+                      </div>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <label className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
                         Розрахована сума:
                       </label>
