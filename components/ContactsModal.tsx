@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import {
   X,
   Phone,
@@ -303,30 +302,23 @@ export function ContactsModal({
         </div>
 
         {/* Footer Quick Actions */}
-        <div className="px-5 py-3.5 sm:px-7 sm:py-4 border-t border-border-subtle bg-surface-panel/80 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
-          {onOpenOneClick ? (
+        {onOpenOneClick ? (
+          <div className="px-5 py-3.5 sm:px-7 sm:py-4 border-t border-border-subtle bg-surface-panel/80 flex items-center justify-center shrink-0">
             <button
               type="button"
               onClick={() => {
                 onClose()
                 onOpenOneClick()
               }}
-              className="w-full sm:w-auto flex-1 py-3 px-5 rounded-xl bg-gradient-to-r from-border-active to-brand-amber hover:brightness-110 text-white font-headline-sm text-xs sm:text-sm uppercase font-bold flex items-center justify-center gap-2 ignition-glow transition-all active:scale-98 cursor-pointer"
+              className="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-border-active to-brand-amber hover:brightness-110 text-white font-headline-sm text-xs sm:text-sm uppercase font-bold flex items-center justify-center gap-2 ignition-glow transition-all active:scale-98 cursor-pointer"
             >
               <Sparkles className="w-4 h-4" />
               <span>Замовити зворотний дзвінок (за 15 сек)</span>
             </button>
-          ) : null}
-
-          <button
-            type="button"
-            onClick={onClose}
-            className="w-full sm:w-auto py-3 px-5 rounded-xl bg-surface-base hover:bg-surface-panel-elevated border border-border-subtle text-text-muted hover:text-white font-label-caps text-xs uppercase font-bold transition-all cursor-pointer"
-          >
-            Закрити вікно
-          </button>
-        </div>
+          </div>
+        ) : null}
       </div>
     </div>
   )
 }
+
