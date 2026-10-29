@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 
 interface BookingNotification {
   id: string | number
@@ -14,6 +15,16 @@ interface BookingNotification {
 }
 
 export function LiveBookingNotifications() {
+  const pathname = usePathname()
+  const isLoginPage = Boolean(
+    pathname && (
+      pathname.includes('/login') ||
+      pathname.includes('/logout') ||
+      pathname.includes('/create-first-user')
+    )
+  )
+
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [newCount, setNewCount] = useState<number>(0)
   const [bookingsList, setBookingsList] = useState<BookingNotification[]>([])
   const [activeToast, setActiveToast] = useState<BookingNotification | null>(null)
@@ -100,12 +111,33 @@ export function LiveBookingNotifications() {
     let isMounted = true
 
     const checkNotifications = async () => {
+      if (isLoginPage) {
+        if (isMounted) setIsAuthenticated(false)
+        return
+      }
+
       try {
         const res = await fetch('/api/admin/notifications', { cache: 'no-store' })
-        if (!res.ok) return
+        if (res.status === 401 || !res.ok) {
+          if (isMounted) {
+            setIsAuthenticated(false)
+            setNewCount(0)
+            setBookingsList([])
+          }
+          return
+        }
+
         const data = await res.json()
         if (!isMounted) return
 
+        if (!data.authenticated) {
+          setIsAuthenticated(false)
+          setNewCount(0)
+          setBookingsList([])
+          return
+        }
+
+        setIsAuthenticated(true)
         const count: number = data.count || 0
         const bookings: BookingNotification[] = data.bookings || []
         setNewCount(count)
@@ -147,7 +179,12 @@ export function LiveBookingNotifications() {
       clearInterval(interval)
       if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current)
     }
-  }, [isMuted])
+  }, [isMuted, isLoginPage])
+
+  // Completely invisible when logged out or on the login page
+  if (isLoginPage || !isAuthenticated) {
+    return null
+  }
 
   return (
     <div
