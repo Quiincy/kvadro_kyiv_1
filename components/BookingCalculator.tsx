@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useId, useRef, useEffect, useMemo } from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { Check, Send, Phone, Calendar, User, Sparkles, CheckCircle2, ChevronDown } from 'lucide-react'
 import { defaultSettings, defaultFleet, FleetItem } from '@/lib/defaultData'
 import {
@@ -632,7 +633,7 @@ export function BookingCalculator({
                     onClick={() => onOpenOneClick(currentVehicle.name)}
                     className="w-full py-3 bg-surface-base hover:bg-surface-panel-elevated border border-border-active/60 hover:border-border-active text-border-active font-label-caps text-xs uppercase font-extrabold rounded-lg flex items-center justify-center gap-2 transition-all active:scale-98 shadow-sm"
                   >
-                    <span className="material-symbols-outlined text-base">bolt</span>
+                    <MaterialIcon className="text-base">bolt</MaterialIcon>
                     <span>Забронювати в 1 клік (тільки телефон)</span>
                   </button>
                 </div>
@@ -652,7 +653,7 @@ export function BookingCalculator({
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <span className="material-symbols-outlined text-sm text-[#2AABEE]">send</span>
+                <MaterialIcon className="text-sm text-[#2AABEE]">send</MaterialIcon>
                 <span>Telegram ({currentSettings.telegramUsername})</span>
               </a>
               <a
@@ -661,7 +662,7 @@ export function BookingCalculator({
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <span className="material-symbols-outlined text-sm text-[#E1306C]">photo_camera</span>
+                <MaterialIcon className="text-sm text-[#E1306C]">photo_camera</MaterialIcon>
                 <span>Instagram</span>
               </a>
             </div>
@@ -676,7 +677,7 @@ export function BookingCalculator({
             {/* Left: Context & Booking Guidelines */}
             <div className="lg:col-span-5 flex flex-col space-y-6">
               <span className="font-label-caps text-label-caps text-border-active uppercase tracking-widest font-extrabold flex items-center gap-2">
-                <span className="material-symbols-outlined text-sm">event_available</span>
+                <MaterialIcon className="text-sm">event_available</MaterialIcon>
                 Бронювання онлайн
               </span>
               <h2 className="font-headline-xl text-3xl md:text-headline-xl text-text-primary font-black uppercase">
@@ -700,7 +701,7 @@ export function BookingCalculator({
                     className="w-full flex items-center gap-3 p-3.5 rounded-lg bg-border-active/10 border border-border-active/40 hover:border-border-active text-left transition-all group cursor-pointer"
                   >
                     <div className="w-10 h-10 rounded bg-border-active/20 flex items-center justify-center text-border-active group-hover:scale-110 transition-transform shrink-0">
-                      <span className="material-symbols-outlined text-xl">bolt</span>
+                      <MaterialIcon className="text-xl">bolt</MaterialIcon>
                     </div>
                     <div className="flex flex-col">
                       <span className="font-headline-sm text-sm text-text-primary font-bold group-hover:text-border-active flex items-center gap-2">
@@ -721,7 +722,7 @@ export function BookingCalculator({
                   href={`tel:${currentSettings.phoneRaw}`}
                 >
                   <div className="w-10 h-10 rounded bg-surface-panel flex items-center justify-center text-border-active">
-                    <span className="material-symbols-outlined">call</span>
+                    <MaterialIcon className="">call</MaterialIcon>
                   </div>
                   <div className="flex flex-col">
                     <span className="font-body-sm text-xs text-text-dim">Телефон / Viber:</span>
@@ -738,7 +739,7 @@ export function BookingCalculator({
                   target="_blank"
                 >
                   <div className="w-10 h-10 rounded bg-surface-panel flex items-center justify-center text-border-active">
-                    <span className="material-symbols-outlined">send</span>
+                    <MaterialIcon className="">send</MaterialIcon>
                   </div>
                   <div className="flex flex-col">
                     <span className="font-body-sm text-xs text-text-dim">Наш Телеграм:</span>
@@ -755,7 +756,7 @@ export function BookingCalculator({
                   target="_blank"
                 >
                   <div className="w-10 h-10 rounded bg-surface-panel flex items-center justify-center text-border-active">
-                    <span className="material-symbols-outlined">photo_camera</span>
+                    <MaterialIcon className="">photo_camera</MaterialIcon>
                   </div>
                   <div className="flex flex-col">
                     <span className="font-body-sm text-xs text-text-dim">Наш Інстаграм (фото &amp; відео):</span>
@@ -768,7 +769,7 @@ export function BookingCalculator({
 
               {/* Quick Notice */}
               <div className="flex items-center gap-3 text-xs text-text-dim">
-                <span className="material-symbols-outlined text-brand-amber text-base">info</span>
+                <MaterialIcon className="text-brand-amber text-base">info</MaterialIcon>
                 <span>Для оренди права категорії А або В не є обов&apos;язковими для закритих лісових трас.</span>
               </div>
             </div>
@@ -778,7 +779,7 @@ export function BookingCalculator({
               {submitted ? (
                 <div className="text-center py-8 space-y-4">
                   <div className="w-16 h-16 rounded-full bg-success-emerald/20 border border-success-emerald/40 flex items-center justify-center mx-auto text-success-emerald">
-                    <span className="material-symbols-outlined text-3xl">task_alt</span>
+                    <MaterialIcon className="text-3xl">task_alt</MaterialIcon>
                   </div>
                   <h3 className="font-headline-lg text-2xl font-black text-text-primary uppercase">
                     Дякуємо! Ваша заявка прийнята
@@ -807,7 +808,7 @@ export function BookingCalculator({
                       rel="noopener noreferrer"
                       className="px-6 py-3 rounded-lg bg-[#2AABEE] text-white font-headline-sm text-xs uppercase font-bold flex items-center gap-2 hover:brightness-110"
                     >
-                      <span className="material-symbols-outlined text-base">send</span>
+                      <MaterialIcon className="text-base">send</MaterialIcon>
                       <span>Відкрити в Telegram</span>
                     </a>
                     <button
@@ -966,7 +967,7 @@ export function BookingCalculator({
                     disabled={isSubmitting}
                     className="w-full bg-border-active hover:bg-brand-amber text-white font-headline-sm text-base uppercase font-bold py-4 rounded-xl transition-all ignition-glow flex items-center justify-center gap-2 disabled:opacity-50 select-none shadow-lg shadow-border-active/20 cursor-pointer"
                   >
-                    <span className="material-symbols-outlined">check</span>
+                    <MaterialIcon className="">check</MaterialIcon>
                     <span>{isSubmitting ? 'Відправка...' : 'Підтвердити та забронювати'}</span>
                   </button>
 
@@ -985,9 +986,9 @@ export function BookingCalculator({
                         onClick={() => onOpenOneClick(currentVehicle.name)}
                         className="w-full py-3.5 bg-surface-panel hover:bg-surface-panel-elevated border border-border-active/50 hover:border-border-active text-border-active hover:text-brand-amber font-headline-sm text-sm uppercase font-bold rounded-xl flex items-center justify-center gap-2 transition-all active:scale-98 shadow-sm group cursor-pointer"
                       >
-                        <span className="material-symbols-outlined text-lg group-hover:scale-110 transition-transform text-border-active">
+                        <MaterialIcon className="text-lg group-hover:scale-110 transition-transform text-border-active">
                           bolt
-                        </span>
+                        </MaterialIcon>
                         <span>Забронювати в 1 клік (тільки телефон)</span>
                       </button>
                     </div>

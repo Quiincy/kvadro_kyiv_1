@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { defaultFleet, defaultSettings, FleetItem, formatPrice } from '@/lib/defaultData'
 
 interface FleetPricingProps {
@@ -116,9 +117,9 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                 {/* Passenger Info */}
                 <div className="flex items-center justify-between text-xs text-text-muted pb-3 mb-3 border-b border-border-subtle">
                   <span className="flex items-center gap-1">
-                    <span className="material-symbols-outlined text-border-active text-sm">
+                    <MaterialIcon className="text-border-active text-sm">
                       {item.passengerPrice ? 'person_add' : 'person'}
-                    </span>
+                    </MaterialIcon>
                     {item.passengerPrice ? 'Пасажир на техніці:' : 'Формат:'}
                   </span>
                   <span className="font-bold text-text-primary">
@@ -131,9 +132,9 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                   <ul className="space-y-1.5 text-xs text-text-muted mb-4">
                     {item.features.slice(0, 3).map((feat, idx) => (
                       <li key={idx} className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-border-active text-sm">
+                        <MaterialIcon className="text-border-active text-sm">
                           check_circle
-                        </span>
+                        </MaterialIcon>
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -159,7 +160,7 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                       onClick={() => onOpenOneClick(item.title)}
                       className="w-full h-10 bg-surface-base hover:bg-surface-panel-elevated border border-border-active/40 text-border-active text-xs font-label-caps uppercase font-bold rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                     >
-                      <span className="material-symbols-outlined text-sm">bolt</span>
+                      <MaterialIcon className="text-sm">bolt</MaterialIcon>
                       <span>В 1 клік</span>
                     </button>
                   )}
@@ -176,7 +177,7 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="font-label-caps text-label-caps text-border-active uppercase tracking-widest font-extrabold flex items-center justify-center gap-2">
-              <span className="material-symbols-outlined text-sm">price_change</span>
+              <MaterialIcon className="text-sm">price_change</MaterialIcon>
               Прозорий прайс без прихованих платежів
             </span>
             <h2 className="font-headline-xl text-3xl md:text-headline-xl text-text-primary font-black uppercase mt-2">
@@ -212,9 +213,9 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                       <span className="font-label-caps text-[11px] uppercase tracking-wider px-2.5 py-1 rounded bg-surface-panel-elevated text-brand-amber border border-border-subtle font-bold">
                         {item.badge || 'ПОВНИЙ ПРИВІД 4X4'}
                       </span>
-                      <span className="material-symbols-outlined text-border-active text-2xl shrink-0">
+                      <MaterialIcon className="text-border-active text-2xl shrink-0">
                         {iconName}
-                      </span>
+                      </MaterialIcon>
                     </div>
 
                     {/* 2. Title: fixed height h-8 */}
@@ -282,9 +283,9 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                       <ul className="mt-6 space-y-2.5 font-body-sm text-xs text-text-muted min-h-[120px]">
                         {item.features.map((feat, idx) => (
                           <li key={idx} className="flex items-center gap-2">
-                            <span className="material-symbols-outlined text-border-active text-sm shrink-0">
+                            <MaterialIcon className="text-border-active text-sm shrink-0">
                               check_circle
-                            </span>
+                            </MaterialIcon>
                             <span>{feat}</span>
                           </li>
                         ))}
@@ -312,7 +313,7 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                         onClick={() => onOpenOneClick(item.title)}
                         className="w-full h-10 bg-surface-base hover:bg-surface-panel-elevated border border-border-active/40 hover:border-border-active text-border-active hover:text-white text-xs font-label-caps uppercase font-bold rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                       >
-                        <span className="material-symbols-outlined text-sm">bolt</span>
+                        <MaterialIcon className="text-sm">bolt</MaterialIcon>
                         <span>В 1 клік</span>
                       </button>
                     )}
@@ -326,7 +327,7 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
           <div className="mt-10 p-6 rounded-xl bg-surface-panel border border-border-subtle flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-lg bg-border-active/10 border border-border-active/30 flex items-center justify-center text-border-active shrink-0">
-                <span className="material-symbols-outlined text-2xl">groups</span>
+                <MaterialIcon className="text-2xl">groups</MaterialIcon>
               </div>
               <div>
                 <p className="font-headline-sm text-base text-text-primary font-bold uppercase">
@@ -346,7 +347,7 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                 className="px-4 py-2.5 rounded-lg bg-surface-panel-elevated border border-border-subtle text-text-primary text-xs font-headline-sm font-bold uppercase hover:border-border-active flex items-center gap-2 transition-all"
                 href={`tel:${s.phoneRaw}`}
               >
-                <span className="material-symbols-outlined text-border-active text-base">call</span>
+                <MaterialIcon className="text-border-active text-base">call</MaterialIcon>
                 <span>Уточнити деталі</span>
               </a>
             </div>

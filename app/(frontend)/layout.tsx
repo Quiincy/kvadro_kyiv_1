@@ -134,14 +134,6 @@ export default function RootLayout({
   return (
     <html lang="uk" className="dark scroll-smooth">
       <head>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          rel="preload"
-          as="image"
-          href="/assets/gallery/6j.webp"
-          type="image/webp"
-          fetchPriority="high"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

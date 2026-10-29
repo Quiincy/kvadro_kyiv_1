@@ -1,4 +1,5 @@
 import React from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { defaultReviews, ReviewItem } from '@/lib/defaultData'
 
 function getInitials(name: string): string {
@@ -42,7 +43,7 @@ export function ReviewsSection({ reviews }: ReviewsSectionProps) {
                   </div>
                   <div className="flex text-border-active">
                     {[...Array(rev.rating || 5)].map((_, idx) => (
-                      <span key={idx} className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                      <MaterialIcon key={idx} className="text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</MaterialIcon>
                     ))}
                   </div>
                 </div>
@@ -61,7 +62,7 @@ export function ReviewsSection({ reviews }: ReviewsSectionProps) {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="font-label-caps text-label-caps text-border-active uppercase tracking-widest font-extrabold flex items-center justify-center gap-2">
-              <span className="material-symbols-outlined text-sm">stars</span>
+              <MaterialIcon className="text-sm">stars</MaterialIcon>
               Реальні враження
             </span>
             <h2 className="font-headline-xl text-3xl md:text-headline-xl text-text-primary font-black uppercase mt-2">
@@ -82,9 +83,9 @@ export function ReviewsSection({ reviews }: ReviewsSectionProps) {
                 <div>
                   <div className="flex items-center gap-1 text-warning-caution mb-4">
                     {[...Array(rev.rating || 5)].map((_, idx) => (
-                      <span key={idx} className="material-symbols-outlined text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>
+                      <MaterialIcon key={idx} className="text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>
                         star
-                      </span>
+                      </MaterialIcon>
                     ))}
                   </div>
                   <p className="font-body-md text-text-primary text-sm leading-relaxed mb-6 italic">

@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { defaultSettings } from '@/lib/defaultData'
 
 interface MobileBottomBarProps {
@@ -24,7 +25,7 @@ export function MobileBottomBar({ settings }: MobileBottomBarProps) {
         href="#tours"
         className="flex flex-col items-center justify-center text-[#94A3B8] py-1 px-2 hover:text-[#FF3208] transition-colors active:scale-95"
       >
-        <span className="material-symbols-outlined text-xl">sports_motorsports</span>
+        <MaterialIcon className="text-xl">sports_motorsports</MaterialIcon>
         <span className="font-label-caps text-[10px] uppercase mt-0.5 tracking-wider font-semibold">Маршрути</span>
       </a>
 
@@ -34,7 +35,7 @@ export function MobileBottomBar({ settings }: MobileBottomBarProps) {
         onClick={scrollToBooking}
         className="flex flex-col items-center justify-center bg-[#FF3208] text-white rounded-lg py-1.5 px-4 font-bold shadow-md shadow-[#FF3208]/30 ignition-glow active:scale-95 transition-transform"
       >
-        <span className="material-symbols-outlined text-xl">calendar_today</span>
+        <MaterialIcon className="text-xl">calendar_today</MaterialIcon>
         <span className="font-label-caps text-[10px] uppercase mt-0.5 tracking-wider font-bold">Бронювання</span>
       </a>
 
@@ -43,7 +44,7 @@ export function MobileBottomBar({ settings }: MobileBottomBarProps) {
         href="#prices"
         className="flex flex-col items-center justify-center text-[#94A3B8] py-1 px-2 hover:text-[#FF3208] transition-colors active:scale-95"
       >
-        <span className="material-symbols-outlined text-xl">payments</span>
+        <MaterialIcon className="text-xl">payments</MaterialIcon>
         <span className="font-label-caps text-[10px] uppercase mt-0.5 tracking-wider font-semibold">Ціни</span>
       </a>
 
@@ -52,7 +53,7 @@ export function MobileBottomBar({ settings }: MobileBottomBarProps) {
         href={`tel:${currentSettings.phoneRaw}`}
         className="flex flex-col items-center justify-center text-[#94A3B8] py-1 px-2 hover:text-[#FF3208] transition-colors active:scale-95"
       >
-        <span className="material-symbols-outlined text-xl">call</span>
+        <MaterialIcon className="text-xl">call</MaterialIcon>
         <span className="font-label-caps text-[10px] uppercase mt-0.5 tracking-wider font-semibold">Контакти</span>
       </a>
     </nav>

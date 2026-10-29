@@ -1,4 +1,5 @@
 import React from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import Image from 'next/image'
 import { ArrowRight, MapPin } from 'lucide-react'
 import { defaultSettings } from '@/lib/defaultData'
@@ -52,19 +53,19 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
           {/* Trust Badges Bar */}
           <div className="grid grid-cols-3 gap-2 pt-1">
             <div className="bg-surface-panel p-2.5 rounded-lg border border-border-subtle text-center flex flex-col items-center justify-center">
-              <span className="material-symbols-outlined text-border-active text-xl mb-1">timer</span>
+              <MaterialIcon className="text-border-active text-xl mb-1">timer</MaterialIcon>
               <span className="font-label-caps text-[10px] text-text-primary leading-tight font-bold">
                 10 хв навчання
               </span>
             </div>
             <div className="bg-surface-panel p-2.5 rounded-lg border border-border-subtle text-center flex flex-col items-center justify-center">
-              <span className="material-symbols-outlined text-border-active text-xl mb-1">dry_cleaning</span>
+              <MaterialIcon className="text-border-active text-xl mb-1">dry_cleaning</MaterialIcon>
               <span className="font-label-caps text-[10px] text-text-primary leading-tight font-bold">
                 Чисте екіпо
               </span>
             </div>
             <div className="bg-surface-panel p-2.5 rounded-lg border border-border-subtle text-center flex flex-col items-center justify-center">
-              <span className="material-symbols-outlined text-border-active text-xl mb-1">local_cafe</span>
+              <MaterialIcon className="text-border-active text-xl mb-1">local_cafe</MaterialIcon>
               <span className="font-label-caps text-[10px] text-text-primary leading-tight font-bold">
                 Безкоштовні напої
               </span>
@@ -77,9 +78,9 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
               <Image
                 src="/assets/gallery/6j.webp"
                 alt="Прокат квадроциклів у лісі Бортничі"
-                width={600}
-                height={338}
-                sizes="(max-width: 768px) 100vw, 500px"
+                width={480}
+                height={270}
+                sizes="(max-width: 768px) 448px, 600px"
                 className="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
                 priority
                 fetchPriority="high"
@@ -140,14 +141,14 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
                   href="#booking"
                 >
                   <span>Забронювати заїзд</span>
-                  <span className="material-symbols-outlined">arrow_forward</span>
+                  <MaterialIcon className="">arrow_forward</MaterialIcon>
                 </a>
 
                 <a
                   className="w-full sm:w-auto bg-surface-panel hover:bg-surface-panel-elevated border border-border-subtle hover:border-border-active text-text-primary font-headline-sm text-base px-6 py-4 rounded-lg transition-all flex items-center justify-center gap-2"
                   href="#pricing"
                 >
-                  <span className="material-symbols-outlined text-border-active">payments</span>
+                  <MaterialIcon className="text-border-active">payments</MaterialIcon>
                   <span>Прайс-лист</span>
                 </a>
 
@@ -157,7 +158,7 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <span className="material-symbols-outlined text-border-active">photo_camera</span>
+                  <MaterialIcon className="text-border-active">photo_camera</MaterialIcon>
                   <span className="font-headline-sm text-sm">@{s.instagramUsername || 'kvadro_kyiv1'}</span>
                 </a>
               </div>
@@ -166,7 +167,7 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border-subtle w-full">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-surface-panel border border-border-subtle flex items-center justify-center text-border-active">
-                    <span className="material-symbols-outlined text-xl">timer</span>
+                    <MaterialIcon className="text-xl">timer</MaterialIcon>
                   </div>
                   <div className="flex flex-col">
                     <span className="font-headline-sm text-sm font-bold text-text-primary">10 хв</span>
@@ -176,7 +177,7 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
 
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-surface-panel border border-border-subtle flex items-center justify-center text-border-active">
-                    <span className="material-symbols-outlined text-xl">sports_motorsports</span>
+                    <MaterialIcon className="text-xl">sports_motorsports</MaterialIcon>
                   </div>
                   <div className="flex flex-col">
                     <span className="font-headline-sm text-sm font-bold text-text-primary">Чисте екіпірування</span>
@@ -186,7 +187,7 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
 
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-surface-panel border border-border-subtle flex items-center justify-center text-border-active">
-                    <span className="material-symbols-outlined text-xl">local_cafe</span>
+                    <MaterialIcon className="text-xl">local_cafe</MaterialIcon>
                   </div>
                   <div className="flex flex-col">
                     <span className="font-headline-sm text-sm font-bold text-text-primary">Бонус</span>
@@ -207,8 +208,6 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
                     height={420}
                     sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 45vw, 520px"
                     className="w-full h-[420px] object-cover transform group-hover:scale-105 transition-transform duration-700"
-                    priority
-                    fetchPriority="high"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-base via-transparent to-transparent pointer-events-none" />
 

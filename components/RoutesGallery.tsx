@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import Image from 'next/image'
 import { X } from 'lucide-react'
 import { defaultRoutes, RouteItem, defaultSettings } from '@/lib/defaultData'
@@ -50,7 +51,7 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               rel="noopener noreferrer"
             >
               <span>@{currentSettings.instagramUsername}</span>
-              <span className="material-symbols-outlined text-sm">arrow_outward</span>
+              <MaterialIcon className="text-sm">arrow_outward</MaterialIcon>
             </a>
           </div>
 
@@ -91,7 +92,7 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
               <span className="font-label-caps text-label-caps text-border-active uppercase tracking-widest font-extrabold flex items-center gap-2">
-                <span className="material-symbols-outlined text-sm">photo_library</span>
+                <MaterialIcon className="text-sm">photo_library</MaterialIcon>
                 Живі емоції та драйв
               </span>
               <h2 className="font-headline-xl text-3xl md:text-headline-xl text-text-primary font-black uppercase mt-2">
@@ -105,7 +106,7 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               target="_blank"
             >
               <span>Більше фото в Instagram @{currentSettings.instagramUsername}</span>
-              <span className="material-symbols-outlined text-base">open_in_new</span>
+              <MaterialIcon className="text-base">open_in_new</MaterialIcon>
             </a>
           </div>
 

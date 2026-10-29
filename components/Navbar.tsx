@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import Image from 'next/image'
 import { Send, MapPin } from 'lucide-react'
 import { defaultSettings } from '@/lib/defaultData'
@@ -21,7 +22,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
               onClick={() => setDrawerOpen(true)}
               className="p-1 rounded-lg text-text-muted hover:text-border-active hover:bg-surface-panel active:scale-95 transition-all"
             >
-              <span className="material-symbols-outlined text-2xl">menu</span>
+              <MaterialIcon className="text-2xl">menu</MaterialIcon>
             </button>
             <a className="flex items-center gap-2" href="#">
               <div className="relative w-8 h-8 rounded-full border border-border-active overflow-hidden">
@@ -46,7 +47,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
               className="flex items-center gap-1.5 px-3 py-1.5 bg-border-active text-text-primary rounded-lg font-label-caps text-[11px] uppercase ignition-glow active:scale-95 transition-transform font-bold"
               href={`tel:${s.phoneRaw}`}
             >
-              <span className="material-symbols-outlined text-sm">call</span>
+              <MaterialIcon className="text-sm">call</MaterialIcon>
               <span>Дзвінок</span>
             </a>
           </div>
@@ -84,7 +85,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
                   onClick={() => setDrawerOpen(false)}
                   aria-label="Закрити меню"
                 >
-                  <span className="material-symbols-outlined text-2xl">close</span>
+                  <MaterialIcon className="text-2xl">close</MaterialIcon>
                 </button>
               </div>
 
@@ -94,7 +95,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
                   href="#steps"
                   onClick={() => setDrawerOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-xl">route</span>
+                  <MaterialIcon className="text-xl">route</MaterialIcon>
                   <span>Маршрути та тури</span>
                 </a>
                 <a
@@ -102,7 +103,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
                   href="#price"
                   onClick={() => setDrawerOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-xl">sell</span>
+                  <MaterialIcon className="text-xl">sell</MaterialIcon>
                   <span>Техпарк та ціни</span>
                 </a>
                 <a
@@ -110,7 +111,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
                   href="#booking"
                   onClick={() => setDrawerOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-xl">calendar_today</span>
+                  <MaterialIcon className="text-xl">calendar_today</MaterialIcon>
                   <span>Онлайн-бронювання</span>
                 </a>
                 <a
@@ -118,7 +119,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
                   href="#location"
                   onClick={() => setDrawerOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-xl">pin_drop</span>
+                  <MaterialIcon className="text-xl">pin_drop</MaterialIcon>
                   <span>Локація та маршрути</span>
                 </a>
                 <a
@@ -126,7 +127,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
                   href="#faq"
                   onClick={() => setDrawerOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-xl">shield</span>
+                  <MaterialIcon className="text-xl">shield</MaterialIcon>
                   <span>Безпека та правила</span>
                 </a>
               </nav>
@@ -157,7 +158,6 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
                 width={44}
                 height={44}
                 className="object-contain p-1"
-                priority
               />
             </div>
             <div className="flex flex-col">
@@ -223,7 +223,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
               className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-surface-panel hover:bg-surface-panel-elevated border border-border-subtle hover:border-border-active text-text-primary transition-all group whitespace-nowrap shadow-sm"
               href={`tel:${s.phoneRaw}`}
             >
-              <span className="material-symbols-outlined text-border-active text-[19px]">call</span>
+              <MaterialIcon className="text-border-active text-[19px]">call</MaterialIcon>
               <span className="font-headline-sm text-xs xl:text-sm font-semibold tracking-tight group-hover:text-border-active transition-colors whitespace-nowrap">
                 {s.phone}
               </span>
@@ -237,7 +237,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
               target="_blank"
               title={`Телеграм ${s.telegramUsername || '@Kvadro_kyiv1'}`}
             >
-              <span className="material-symbols-outlined text-[20px]">send</span>
+              <MaterialIcon className="text-[20px]">send</MaterialIcon>
             </a>
 
             {/* Primary CTA Anchor Button */}
@@ -246,7 +246,7 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
               href="#booking"
             >
               <span>Забронювати</span>
-              <span className="material-symbols-outlined text-[19px]">sports_score</span>
+              <MaterialIcon className="text-[19px]">sports_score</MaterialIcon>
             </a>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { MapPin, Navigation, Coffee, Phone, Compass, Trees } from 'lucide-react'
 import { defaultSettings } from '@/lib/defaultData'
 
@@ -32,7 +33,7 @@ export function LocationSection({ settings }: LocationSectionProps) {
               Лісова місцевість. Ліс великий та безпечний! По дорозі на Вас чекають: гірки, схили, піски, підйоми та чудові фотозони.
             </p>
             <div className="flex items-center gap-2 text-border-active font-semibold pt-1">
-              <span className="material-symbols-outlined text-base">local_bar</span>
+              <MaterialIcon className="text-base">local_bar</MaterialIcon>
               <span>Бонус після поїздки: {currentSettings.freeDrinksText}</span>
             </div>
           </div>
@@ -56,7 +57,7 @@ export function LocationSection({ settings }: LocationSectionProps) {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <span className="material-symbols-outlined text-border-active text-sm">near_me</span>
+                <MaterialIcon className="text-border-active text-sm">near_me</MaterialIcon>
                 <span>Відкрити на карті Google</span>
               </a>
             </div>
@@ -83,7 +84,7 @@ export function LocationSection({ settings }: LocationSectionProps) {
             {/* Left: Pine Forest Description */}
             <div className="lg:col-span-6 space-y-6">
               <span className="font-label-caps text-label-caps text-border-active uppercase tracking-widest font-extrabold flex items-center gap-2">
-                <span className="material-symbols-outlined text-sm">navigation</span>
+                <MaterialIcon className="text-sm">navigation</MaterialIcon>
                 Локація та траса
               </span>
               <h2 className="font-headline-xl text-3xl md:text-headline-xl text-text-primary font-black uppercase">
@@ -99,7 +100,7 @@ export function LocationSection({ settings }: LocationSectionProps) {
               {/* Free Drinks Card Callout */}
               <div className="p-5 rounded-xl bg-surface-panel-elevated border border-border-subtle flex items-center gap-4">
                 <div className="w-12 h-12 rounded-lg bg-brand-amber/20 text-brand-amber flex items-center justify-center shrink-0">
-                  <span className="material-symbols-outlined text-2xl">local_bar</span>
+                  <MaterialIcon className="text-2xl">local_bar</MaterialIcon>
                 </div>
                 <div>
                   <p className="font-headline-sm text-sm text-text-primary font-bold uppercase">
@@ -119,14 +120,14 @@ export function LocationSection({ settings }: LocationSectionProps) {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <span className="material-symbols-outlined text-base">near_me</span>
+                  <MaterialIcon className="text-base">near_me</MaterialIcon>
                   <span>Відкрити в Google Maps</span>
                 </a>
                 <a
                   className="p-3 rounded-lg bg-surface-panel border border-border-subtle hover:border-border-active text-text-primary flex items-center gap-2 font-headline-sm text-xs uppercase font-bold transition-all"
                   href={`tel:${currentSettings.phoneRaw}`}
                 >
-                  <span className="material-symbols-outlined text-border-active">call</span>
+                  <MaterialIcon className="text-border-active">call</MaterialIcon>
                   <span>Запитати маршрут</span>
                 </a>
               </div>
@@ -153,7 +154,7 @@ export function LocationSection({ settings }: LocationSectionProps) {
                   {/* Pin Marker Card */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 rounded-xl bg-surface-base/95 backdrop-blur-md border border-border-active shadow-2xl flex items-center gap-3 pointer-events-none">
                     <div className="w-10 h-10 rounded-lg bg-border-active flex items-center justify-center text-white shrink-0">
-                      <span className="material-symbols-outlined">sports_motorsports</span>
+                      <MaterialIcon className="">sports_motorsports</MaterialIcon>
                     </div>
                     <div>
                       <div className="flex items-center gap-2">

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { X, Phone, CheckCircle2, Send, Sparkles, ShieldCheck, Clock, Check } from 'lucide-react'
 import { defaultSettings } from '@/lib/defaultData'
 import {
@@ -331,7 +332,7 @@ export function OneClickModal({
                   </>
                 ) : (
                   <>
-                    <span className="material-symbols-outlined text-lg">bolt</span>
+                    <MaterialIcon className="text-lg">bolt</MaterialIcon>
                     <span>Підтвердити та забронювати</span>
                   </>
                 )}

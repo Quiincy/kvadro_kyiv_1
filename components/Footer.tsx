@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Phone, Send, MapPin, Clock, Lock } from 'lucide-react'
@@ -111,7 +112,7 @@ export function Footer({ settings, onOpenSafety, onOpenOffer }: FooterProps) {
                 target="_blank"
                 title="Інстаграм"
               >
-                <span className="material-symbols-outlined text-lg">photo_camera</span>
+                <MaterialIcon className="text-lg">photo_camera</MaterialIcon>
               </a>
               <a
                 className="p-2.5 rounded-lg bg-surface-panel border border-border-subtle hover:border-border-active text-text-primary hover:text-brand-amber transition-all flex items-center justify-center"
@@ -120,14 +121,14 @@ export function Footer({ settings, onOpenSafety, onOpenOffer }: FooterProps) {
                 target="_blank"
                 title="Телеграм"
               >
-                <span className="material-symbols-outlined text-lg">send</span>
+                <MaterialIcon className="text-lg">send</MaterialIcon>
               </a>
               <a
                 className="p-2.5 rounded-lg bg-surface-panel border border-border-subtle hover:border-border-active text-text-primary hover:text-brand-amber transition-all flex items-center justify-center"
                 href={`tel:${currentSettings.phoneRaw}`}
                 title="Зателефонувати"
               >
-                <span className="material-symbols-outlined text-lg">call</span>
+                <MaterialIcon className="text-lg">call</MaterialIcon>
               </a>
             </div>
           </div>
@@ -178,7 +179,7 @@ export function Footer({ settings, onOpenSafety, onOpenOffer }: FooterProps) {
               </span>
               <ul className="space-y-2 font-body-sm text-text-muted">
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-border-active text-base mt-0.5">location_on</span>
+                  <MaterialIcon className="text-border-active text-base mt-0.5">location_on</MaterialIcon>
                   <a
                     className="hover:text-text-primary transition-colors"
                     href={currentSettings.googleMapsUrl}
@@ -189,13 +190,13 @@ export function Footer({ settings, onOpenSafety, onOpenOffer }: FooterProps) {
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-border-active text-base">call</span>
+                  <MaterialIcon className="text-border-active text-base">call</MaterialIcon>
                   <a className="hover:text-text-primary transition-colors" href={`tel:${currentSettings.phoneRaw}`}>
                     {currentSettings.phone}
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-border-active text-base">schedule</span>
+                  <MaterialIcon className="text-border-active text-base">schedule</MaterialIcon>
                   <span>{currentSettings.workingHours}</span>
                 </li>
                 <li className="pt-2">

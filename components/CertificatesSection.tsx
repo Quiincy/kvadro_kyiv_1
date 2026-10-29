@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { Gift, Check, Send, Sparkles, Truck, Download, ShieldCheck, ArrowRight } from 'lucide-react'
 import { defaultSettings, defaultFleet, FleetItem, formatPrice } from '@/lib/defaultData'
 import { GiftCard3D } from '@/components/GiftCard3D'
@@ -48,15 +49,15 @@ export function CertificatesSection({ fleet, settings, onOpenOneClick }: Certifi
           {/* Key Advantages */}
           <div className="p-4 rounded-xl bg-surface-panel border border-border-subtle space-y-2.5 text-xs text-text-muted">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-border-active text-base">loyalty</span>
+              <MaterialIcon className="text-border-active text-base">loyalty</MaterialIcon>
               <span>Довічна знижкова картка <strong className="text-text-primary">-10% на всі наступні заїзди</strong></span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-border-active text-base">local_shipping</span>
+              <MaterialIcon className="text-border-active text-base">local_shipping</MaterialIcon>
               <span>Фірмовий тубус + відправка у день замовлення</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-border-active text-base">verified</span>
+              <MaterialIcon className="text-border-active text-base">verified</MaterialIcon>
               <span>Можна обрати будь-яку техніку або індивідуальну суму</span>
             </div>
           </div>
@@ -73,7 +74,7 @@ export function CertificatesSection({ fleet, settings, onOpenOneClick }: Certifi
               {/* Left Voucher Highlights */}
               <div className="lg:col-span-7 space-y-6">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-border-active/15 border border-border-active/40 text-border-active text-xs font-label-caps uppercase font-bold">
-                  <span className="material-symbols-outlined text-sm">redeem</span>
+                  <MaterialIcon className="text-sm">redeem</MaterialIcon>
                   Ідеальний подарунок емоцій
                 </div>
                 <h2 className="font-headline-xl text-3xl md:text-headline-xl text-text-primary font-black uppercase">
@@ -86,7 +87,7 @@ export function CertificatesSection({ fleet, settings, onOpenOneClick }: Certifi
                 {/* Permanent Bonus Feature Box */}
                 <div className="p-4 rounded-xl bg-surface-base border border-border-subtle flex items-start gap-3">
                   <div className="p-2 rounded bg-brand-amber/20 text-brand-amber shrink-0">
-                    <span className="material-symbols-outlined text-xl">loyalty</span>
+                    <MaterialIcon className="text-xl">loyalty</MaterialIcon>
                   </div>
                   <div>
                     <p className="font-headline-sm text-sm text-text-primary font-bold">
@@ -132,11 +133,11 @@ export function CertificatesSection({ fleet, settings, onOpenOneClick }: Certifi
                 {/* Info Badges */}
                 <div className="flex flex-wrap items-center gap-4 pt-1">
                   <span className="flex items-center gap-1.5 text-xs text-text-dim font-label-caps uppercase">
-                    <span className="material-symbols-outlined text-border-active text-base">local_shipping</span>
+                    <MaterialIcon className="text-border-active text-base">local_shipping</MaterialIcon>
                     Відправка у день замовлення
                   </span>
                   <span className="flex items-center gap-1.5 text-xs text-text-dim font-label-caps uppercase">
-                    <span className="material-symbols-outlined text-emerald-400 text-base">verified</span>
+                    <MaterialIcon className="text-emerald-400 text-base">verified</MaterialIcon>
                     Дійсний 365 днів
                   </span>
                 </div>

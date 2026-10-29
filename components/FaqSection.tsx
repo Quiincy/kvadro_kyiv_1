@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { defaultFaqs, FaqItem } from '@/lib/defaultData'
 
 interface FaqSectionProps {
@@ -31,9 +32,9 @@ export function FaqSection({ faqs }: FaqSectionProps) {
               <details key={i} className="bg-surface-panel rounded-lg border border-border-subtle p-3 group" open={i === 0}>
                 <summary className="font-headline-sm text-xs font-bold text-text-primary cursor-pointer list-none flex justify-between items-center select-none">
                   <span>{faq.q}</span>
-                  <span className="material-symbols-outlined text-border-active text-base transition-transform group-open:rotate-180">
+                  <MaterialIcon className="text-border-active text-base transition-transform group-open:rotate-180">
                     expand_more
-                  </span>
+                  </MaterialIcon>
                 </summary>
                 <p className="text-xs text-text-muted mt-2 pt-2 border-t border-border-subtle leading-relaxed">
                   {faq.a}
@@ -51,7 +52,7 @@ export function FaqSection({ faqs }: FaqSectionProps) {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
               <span className="font-label-caps text-label-caps text-border-active uppercase tracking-widest font-extrabold flex items-center gap-2">
-                <span className="material-symbols-outlined text-sm">article</span>
+                <MaterialIcon className="text-sm">article</MaterialIcon>
                 Корисна інформація
               </span>
               <h2 className="font-headline-xl text-3xl md:text-headline-xl text-text-primary font-black uppercase mt-2">
@@ -86,7 +87,7 @@ export function FaqSection({ faqs }: FaqSectionProps) {
                   href={i === 2 ? '#booking' : '#stages'}
                 >
                   <span>{i === 2 ? 'Замовити заїзд' : 'Читати далі'}</span>
-                  <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                  <MaterialIcon className="text-xs">arrow_forward</MaterialIcon>
                 </a>
               </div>
             ))}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import Image from 'next/image'
 import { Calendar, MapPin, ShieldCheck, Award, Compass, Coffee, ArrowRight } from 'lucide-react'
 import { defaultSteps, StepItem } from '@/lib/defaultData'
@@ -75,7 +76,7 @@ export function StepsSection({ steps }: { steps?: StepItem[] }) {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
             <div>
               <span className="font-label-caps text-label-caps text-border-active uppercase tracking-widest font-extrabold flex items-center gap-2">
-                <span className="material-symbols-outlined text-sm">route</span>
+                <MaterialIcon className="text-sm">route</MaterialIcon>
                 Покроковий процес
               </span>
               <h2 className="font-headline-xl text-3xl md:text-headline-xl text-text-primary font-black uppercase mt-2">
@@ -106,7 +107,7 @@ export function StepsSection({ steps }: { steps?: StepItem[] }) {
                 >
                   <div className="flex items-start justify-between mb-6">
                     <div className="w-12 h-12 rounded-lg bg-surface-panel-elevated border border-border-subtle flex items-center justify-center text-border-active group-hover:border-border-active transition-colors">
-                      <span className="material-symbols-outlined text-2xl">{iconName}</span>
+                      <MaterialIcon className="text-2xl">{iconName}</MaterialIcon>
                     </div>
                     <span className="font-display-hero text-2xl font-black text-text-dim/40 group-hover:text-border-active transition-colors">
                       {step.number}
@@ -148,7 +149,7 @@ export function StepsSection({ steps }: { steps?: StepItem[] }) {
               href="#booking"
             >
               <span>Забронювати прогулянку</span>
-              <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              <MaterialIcon className="text-sm">arrow_forward</MaterialIcon>
             </a>
           </div>
         </div>
