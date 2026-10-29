@@ -18,18 +18,37 @@ export const Media: CollectionConfig = {
     staticDir: path.resolve(dirname, '../public/media'),
     mimeTypes: ['image/*'],
     adminThumbnail: 'thumbnail',
+    // Automatically convert any uploaded image (JPEG, PNG, etc.) to optimized WebP
+    formatOptions: {
+      format: 'webp',
+      options: {
+        quality: 85,
+      },
+    },
     imageSizes: [
       {
         name: 'thumbnail',
         width: 400,
         height: 300,
         position: 'centre',
+        formatOptions: {
+          format: 'webp',
+          options: {
+            quality: 80,
+          },
+        },
       },
       {
         name: 'card',
         width: 800,
         height: 600,
         position: 'centre',
+        formatOptions: {
+          format: 'webp',
+          options: {
+            quality: 85,
+          },
+        },
       },
     ],
   },
