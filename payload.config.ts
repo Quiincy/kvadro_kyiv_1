@@ -21,7 +21,14 @@ const dirname = path.dirname(filename)
 
 const rawDbUri = process.env.DATABASE_URI || 'postgresql://postgres:postgres@127.0.0.1:5432/kvadro'
 // Strip ?sslmode=require from query params to allow pg ssl config to handle self-signed Supabase pooler certificates
-const cleanDbUri = rawDbUri.replace(/[?&]sslmode=[^&]+/g, '').replace(/\?$/, '')
+let cleanDbUri = rawDbUri.replace(/[?&]sslmode=[^&]+/g, '').replace(/\?$/, '')
+
+// Automatically switch Supabase pooler from Session mode (:5432, max 15 clients) to Transaction mode (:6543)
+// for serverless environments (Vercel) to completely prevent EMAXCONNSESSION
+if (cleanDbUri.includes('pooler.supabase.com') && cleanDbUri.includes(':5432')) {
+  cleanDbUri = cleanDbUri.replace(':5432', ':6543')
+}
+
 const isRemoteDb = Boolean(
   cleanDbUri &&
   !cleanDbUri.includes('127.0.0.1') &&
@@ -54,6 +61,9 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: cleanDbUri,
+      max: isRemoteDb ? 2 : 10,
+      idleTimeoutMillis: 8000,
+      connectionTimeoutMillis: 6000,
       ...(isRemoteDb ? { ssl: { rejectUnauthorized: false } } : {}),
     },
     push: false,
