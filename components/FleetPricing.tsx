@@ -239,7 +239,7 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                             <span className="text-xs font-normal text-text-dim">грн</span>
                           </span>
                         ) : (
-                          <span className="text-xs font-semibold text-text-dim/80 uppercase tracking-wider px-2 py-0.5 rounded bg-surface-panel-elevated border border-border-subtle">
+                          <span className="text-xs font-semibold text-text-muted uppercase tracking-wider px-2 py-0.5 rounded bg-surface-panel-elevated border border-border-subtle">
                             від 2-х годин
                           </span>
                         )}
@@ -263,14 +263,14 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                             <span className="text-xs font-normal text-text-dim">грн</span>
                           </span>
                         ) : (
-                          <span className="text-xs font-semibold text-text-dim/80 uppercase tracking-wider px-2 py-0.5 rounded bg-surface-panel-elevated border border-border-subtle">
+                          <span className="text-xs font-semibold text-text-muted uppercase tracking-wider px-2 py-0.5 rounded bg-surface-panel-elevated border border-border-subtle">
                             за домовленістю
                           </span>
                         )}
                       </div>
 
                       {/* Row 4: Passenger */}
-                      <div className="flex justify-between items-baseline h-8 text-xs text-text-dim pt-2.5 border-t border-border-subtle/40">
+                      <div className="flex justify-between items-baseline h-8 text-xs text-text-muted pt-2.5 border-t border-border-subtle/40">
                         <span>Пасажир (другий вершник)</span>
                         <span className="font-semibold text-text-primary">
                           {item.passengerPrice ? `+${item.passengerPrice} грн/год` : 'Не передбачено'}

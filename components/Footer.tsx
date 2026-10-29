@@ -141,32 +141,32 @@ export function Footer({ settings, onOpenSafety, onOpenOffer }: FooterProps) {
               </span>
               <ul className="space-y-2 font-body-sm">
                 <li>
-                  <a className="text-text-dim hover:text-text-primary hover:translate-x-1 transition-all duration-200 block" href="#stages">
+                  <a className="text-text-muted hover:text-white hover:translate-x-1 transition-all duration-200 block" href="#stages">
                     Етапи прогулянки
                   </a>
                 </li>
                 <li>
-                  <a className="text-text-dim hover:text-text-primary hover:translate-x-1 transition-all duration-200 block" href="#pricing">
+                  <a className="text-text-muted hover:text-white hover:translate-x-1 transition-all duration-200 block" href="#pricing">
                     Техніка &amp; Прайс
                   </a>
                 </li>
                 <li>
-                  <a className="text-text-dim hover:text-text-primary hover:translate-x-1 transition-all duration-200 block" href="#location">
+                  <a className="text-text-muted hover:text-white hover:translate-x-1 transition-all duration-200 block" href="#location">
                     Локація в Бортничах
                   </a>
                 </li>
                 <li>
-                  <a className="text-text-dim hover:text-text-primary hover:translate-x-1 transition-all duration-200 block" href="#stages">
+                  <a className="text-text-muted hover:text-white hover:translate-x-1 transition-all duration-200 block" href="#stages">
                     Інструктаж та безпека
                   </a>
                 </li>
                 <li>
-                  <a className="text-text-dim hover:text-text-primary hover:translate-x-1 transition-all duration-200 block" href="#certificates">
+                  <a className="text-text-muted hover:text-white hover:translate-x-1 transition-all duration-200 block" href="#certificates">
                     Подарункові сертифікати
                   </a>
                 </li>
                 <li>
-                  <a className="text-border-active font-medium hover:translate-x-1 transition-all duration-200 block" href="#booking">
+                  <a className="text-border-active font-semibold hover:translate-x-1 transition-all duration-200 block" href="#booking">
                     Забронювати заїзд
                   </a>
                 </li>
@@ -215,7 +215,7 @@ export function Footer({ settings, onOpenSafety, onOpenOffer }: FooterProps) {
 
         {/* Bottom Copyright Shell Layout */}
         <div className="border-t border-border-subtle py-6 bg-surface-base">
-          <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-body-sm text-text-dim">
+          <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-body-sm text-text-muted">
             <p>© 2026 KVADRO KYIV 1. Всі права захищені. Екстремальний прокат квадроциклів, ендуро та баггі у Києві.</p>
             <div className="flex items-center gap-6">
               <button

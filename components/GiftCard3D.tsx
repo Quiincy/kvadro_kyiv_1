@@ -156,7 +156,7 @@ export function GiftCard3D({ onOrderCertificate }: GiftCard3DProps) {
                 className="text-right"
                 style={{ transform: 'translateZ(15px)' }}
               >
-                <span className="font-headline-xl text-lg sm:text-xl font-black text-white/40 tracking-widest uppercase">
+                <span className="font-headline-xl text-lg sm:text-xl font-black text-white/70 tracking-widest uppercase">
                   KVADRO 1
                 </span>
               </div>
@@ -244,14 +244,14 @@ export function GiftCard3D({ onOrderCertificate }: GiftCard3DProps) {
                 </span>
                 <span className="font-mono text-[9px] sm:text-[10px] font-bold text-border-active uppercase tracking-tight mt-1 flex items-center gap-1">
                   <span>KVADROKYIV1.COM.UA</span>
-                  <span className="text-white/40">&bull;</span>
+                  <span className="text-white/70">&bull;</span>
                   <span className="text-emerald-400 font-extrabold">-10% LIFETIME</span>
                 </span>
               </div>
 
               {/* Bottom Right: Nominal */}
               <div className="flex flex-col items-end">
-                <span className="font-label-caps text-[9px] sm:text-[10px] text-text-dim uppercase tracking-wider font-semibold">
+                <span className="font-label-caps text-[9px] sm:text-[10px] text-text-muted uppercase tracking-wider font-semibold">
                   Номінал сертифіката
                 </span>
                 <div className="flex items-baseline gap-1 mt-0.5">

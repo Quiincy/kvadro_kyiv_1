@@ -16,9 +16,9 @@ export default {
         "border-active": "#FF3208",
         "border-subtle": "#252F45",
         "brand-amber": "#FF6B00",
-        "text-primary": "#F7FAFC",
-        "text-muted": "#94A3B8",
-        "text-dim": "#64748B",
+        "text-primary": "#FFFFFF",
+        "text-muted": "#CBD5E1",
+        "text-dim": "#94A3B8",
         "warning-caution": "#F59E0B",
         "success-emerald": "#10B981",
         brand: {
@@ -29,7 +29,7 @@ export default {
           surface: "#111622",
           card: "#161D2B",
           border: "#252F45",
-          muted: "#94A3B8",
+          muted: "#CBD5E1",
         },
       },
       fontFamily: {

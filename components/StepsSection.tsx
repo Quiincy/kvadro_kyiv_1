@@ -109,7 +109,7 @@ export function StepsSection({ steps }: { steps?: StepItem[] }) {
                     <div className="w-12 h-12 rounded-lg bg-surface-panel-elevated border border-border-subtle flex items-center justify-center text-border-active group-hover:border-border-active transition-colors">
                       <MaterialIcon className="text-2xl">{iconName}</MaterialIcon>
                     </div>
-                    <span className="font-display-hero text-2xl font-black text-text-dim/40 group-hover:text-border-active transition-colors">
+                    <span className="font-display-hero text-2xl font-black text-text-muted/60 group-hover:text-border-active transition-colors">
                       {step.number}
                     </span>
                   </div>
