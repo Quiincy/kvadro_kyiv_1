@@ -39,9 +39,9 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               <span className="font-label-caps text-xs text-border-active uppercase font-bold tracking-wider">
                 Живі емоції
               </span>
-              <h2 className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
+              <p className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
                 Галерея райдерів
-              </h2>
+              </p>
             </div>
             <a
               className="text-border-active text-xs font-bold hover:underline flex items-center gap-0.5"
@@ -65,9 +65,10 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
                 <Image
                   src={bento.item.image}
                   alt={bento.item.title}
-                  fill
+                  width={300}
+                  height={300}
                   sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-2 left-2 bg-surface-base/80 px-2 py-0.5 rounded text-[10px] font-mono text-text-primary border border-white/10 font-bold">
@@ -118,9 +119,10 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               <Image
                 src={groupRoute?.image || '/assets/gallery/16j.webp'}
                 alt={groupRoute?.title || 'Групові заїзди'}
-                fill
+                width={600}
+                height={288}
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-base/90 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4">
@@ -141,9 +143,10 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               <Image
                 src={enduroRoute?.image || '/assets/gallery/6j.webp'}
                 alt={enduroRoute?.title || 'Ендуро мото треки'}
-                fill
+                width={300}
+                height={288}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-base/80 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4">
@@ -164,9 +167,10 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               <Image
                 src={buggyRoute?.image || '/assets/gallery/1p.webp'}
                 alt={buggyRoute?.title || 'Потужні заїзди на баггі'}
-                fill
+                width={300}
+                height={288}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-base/80 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4">
@@ -187,9 +191,10 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               <Image
                 src={photoRoute?.image || '/assets/gallery/5j.webp'}
                 alt={photoRoute?.title || 'Фотозони на схилах'}
-                fill
+                width={300}
+                height={288}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-base/80 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4">
@@ -210,9 +215,10 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               <Image
                 src={corporateRoute?.image || '/assets/gallery/img2.webp'}
                 alt={corporateRoute?.title || 'Корпоративи та дні народження'}
-                fill
+                width={600}
+                height={288}
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-base/90 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4">
@@ -233,9 +239,10 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               <Image
                 src={sunsetRoute?.image || '/assets/gallery/13j.webp'}
                 alt={sunsetRoute?.title || 'Вечірні прогулянки'}
-                fill
+                width={300}
+                height={288}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-base/80 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4">
@@ -269,13 +276,14 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               <X className="w-6 h-6" />
             </button>
 
-            <div className="relative w-full h-[50vh] sm:h-[65vh] rounded-2xl overflow-hidden">
+            <div className="relative w-full h-[50vh] sm:h-[65vh] rounded-2xl overflow-hidden flex items-center justify-center">
               <Image
                 src={activeModalImage.image}
                 alt={activeModalImage.title}
-                fill
+                width={1200}
+                height={800}
                 sizes="(max-width: 1024px) 95vw, 1200px"
-                className="object-contain"
+                className="w-full h-full object-contain"
               />
             </div>
 
@@ -284,9 +292,9 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#FF5722]">
                   {activeModalImage.categoryLabel}
                 </span>
-                <h4 className="font-display font-bold text-lg sm:text-xl text-white mt-0.5">
+                <p className="font-display font-bold text-lg sm:text-xl text-white mt-0.5">
                   {activeModalImage.title}
-                </h4>
+                </p>
                 <p className="text-sm text-slate-300 mt-1">
                   {activeModalImage.description}
                 </p>

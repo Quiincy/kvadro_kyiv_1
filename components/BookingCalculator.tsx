@@ -426,9 +426,9 @@ export function BookingCalculator({
             <span className="font-label-caps text-xs text-border-active uppercase font-bold tracking-wider">
               Швидка бронь
             </span>
-            <h2 className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
+            <p className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
               Забронювати прогулянку
-            </h2>
+            </p>
             <p className="font-body-sm text-xs text-text-muted mt-1">
               Заповніть форму — менеджер зв&apos;яжеться з вами за 5 хвилин для підтвердження часу
             </p>
@@ -439,9 +439,9 @@ export function BookingCalculator({
               <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mx-auto text-emerald-400">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="font-headline-sm text-lg font-bold text-text-primary">
+              <p className="font-headline-sm text-lg font-bold text-text-primary">
                 Дякуємо! Вашу заявку прийнято
-              </h3>
+              </p>
               <p className="text-xs text-text-muted">
                 Менеджер KVADRO KYIV 1 зв&apos;яжеться з вами за номером <strong className="text-text-primary">{clientPhone}</strong> протягом 10 хвилин.
               </p>
@@ -685,9 +685,9 @@ export function BookingCalculator({
 
               {/* Direct Channels Box */}
               <div className="p-6 rounded-xl bg-surface-panel border border-border-subtle space-y-4">
-                <h3 className="font-headline-sm text-sm uppercase text-text-primary font-bold tracking-wider">
+                <p className="font-headline-sm text-sm uppercase text-text-primary font-bold tracking-wider">
                   Швидкий зв&apos;язок без заповнення форми:
-                </h3>
+                </p>
 
                 {/* 1-Click Quick Action */}
                 {onOpenOneClick && (

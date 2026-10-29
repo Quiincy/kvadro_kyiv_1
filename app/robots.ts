@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://kvadrokyiv1-lake.vercel.app'
   return {
     rules: [
       {
@@ -9,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: 'https://kvadrokyiv1.com.ua/sitemap.xml',
+    sitemap: `${baseUrl}/sitemap.xml`,
   }
 }

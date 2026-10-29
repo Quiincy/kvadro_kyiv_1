@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { Calendar, MapPin, ShieldCheck, Award, Compass, Coffee, ArrowRight } from 'lucide-react'
 import { defaultSteps, StepItem } from '@/lib/defaultData'
 
@@ -24,9 +25,9 @@ export function StepsSection({ steps }: { steps?: StepItem[] }) {
             <span className="font-label-caps text-xs text-border-active uppercase font-bold tracking-wider">
               Маршрут & Організація
             </span>
-            <h2 className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
+            <p className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
               Як проходить прогулянка в KVADRO_KYIV1
-            </h2>
+            </p>
             <p className="font-body-sm text-xs text-text-muted mt-1">
               6 простих кроків до яскравих вражень на лісових трасах
             </p>
@@ -43,9 +44,9 @@ export function StepsSection({ steps }: { steps?: StepItem[] }) {
                 </div>
                 <div className="bg-surface-panel p-3.5 rounded-lg border border-border-subtle w-full">
                   <div className="flex items-center justify-between mb-1">
-                    <h3 className="font-headline-sm text-sm font-bold text-text-primary">
+                    <p className="font-headline-sm text-sm font-bold text-text-primary">
                       {step.title}
-                    </h3>
+                    </p>
                     <span className="text-[10px] font-bold text-border-active uppercase">
                       {step.badge}
                     </span>
@@ -131,12 +132,12 @@ export function StepsSection({ steps }: { steps?: StepItem[] }) {
           <div className="mt-12 p-6 rounded-xl bg-surface-panel-elevated border border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 relative overflow-hidden hidden sm:block shrink-0">
-                <img alt="Логотип" className="w-12 h-12 object-contain" src="/assets/logo.png" />
+                <Image alt="Логотип" className="w-12 h-12 object-contain" src="/assets/logo.webp" width={48} height={48} />
               </div>
               <div>
-                <h4 className="font-headline-sm text-base text-text-primary font-bold">
+                <p className="font-headline-sm text-base text-text-primary font-bold">
                   Готові відчути потужність мотору?
-                </h4>
+                </p>
                 <p className="font-body-sm text-text-muted text-sm">
                   Оберіть зручний час сьогодні та забронюйте індивідуальний або груповий заїзд.
                 </p>

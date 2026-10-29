@@ -25,9 +25,9 @@ export function ReviewsSection({ reviews }: ReviewsSectionProps) {
             <span className="font-label-caps text-xs text-border-active uppercase font-bold tracking-wider">
               Реальні враження
             </span>
-            <h2 className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
+            <p className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
               Відгуки клієнтів
-            </h2>
+            </p>
           </div>
 
           <div className="space-y-3">

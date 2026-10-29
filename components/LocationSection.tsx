@@ -18,9 +18,9 @@ export function LocationSection({ settings }: LocationSectionProps) {
             <span className="font-label-caps text-xs text-border-active uppercase font-bold tracking-wider">
               Зручний доїзд
             </span>
-            <h2 className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
+            <p className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
               Ми знаходимось у Києві
-            </h2>
+            </p>
             <p className="font-body-sm text-xs text-text-muted mt-1">
               {currentSettings.addressShort}
             </p>
@@ -102,9 +102,9 @@ export function LocationSection({ settings }: LocationSectionProps) {
                   <span className="material-symbols-outlined text-2xl">local_bar</span>
                 </div>
                 <div>
-                  <h4 className="font-headline-sm text-sm text-text-primary font-bold uppercase">
+                  <p className="font-headline-sm text-sm text-text-primary font-bold uppercase">
                     Бонус від нашої компанії:
-                  </h4>
+                  </p>
                   <p className="font-body-sm text-text-muted text-xs mt-0.5">
                     {currentSettings.freeDrinksText}
                   </p>

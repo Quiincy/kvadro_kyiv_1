@@ -14,11 +14,16 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || "https://kvadrokyiv1-lake.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kvadrokyiv1.com.ua"),
-  title: "KVADRO KYIV 1 — Прокат квадроциклів, ендуро та баггі у Києві | Бортничі",
+  metadataBase: new URL(siteUrl),
+  title: "Прокат квадроциклів, мото та баггі у Києві | KVADRO KYIV 1",
   description:
-    "Екстремальний та сімейний прокат квадроциклів, ендуро мотоциклів і баггі в Києві (Бортничі). Мальовничі лісові траси, піщані схили, нове захисне екіпірування, інструктаж. Бронюйте заїзд онлайн або за тел: +380 (98) 432-71-79.",
+    "Прокат квадроциклів, ендуро та баггі у лісових трасах Києва. Нове екіпірування, навчання та напої безкоштовно. Бронюйте драйвовий відпочинок онлайн!",
+  alternates: {
+    canonical: siteUrl,
+  },
   keywords: [
     "прокат квадроциклів київ",
     "оренда квадроцикла київ",

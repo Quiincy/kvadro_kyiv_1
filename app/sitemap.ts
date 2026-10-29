@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://kvadrokyiv1.com.ua'
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://kvadrokyiv1-lake.vercel.app'
   return [
     {
       url: baseUrl,

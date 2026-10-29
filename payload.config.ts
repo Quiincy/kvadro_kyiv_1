@@ -19,6 +19,15 @@ import { SiteSettings } from './globals/SiteSettings'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const rawDbUri = process.env.DATABASE_URI || 'postgresql://postgres:postgres@127.0.0.1:5432/kvadro'
+// Strip ?sslmode=require from query params to allow pg ssl config to handle self-signed Supabase pooler certificates
+const cleanDbUri = rawDbUri.replace(/[?&]sslmode=[^&]+/g, '').replace(/\?$/, '')
+const isRemoteDb = Boolean(
+  cleanDbUri &&
+  !cleanDbUri.includes('127.0.0.1') &&
+  !cleanDbUri.includes('localhost')
+)
+
 export default buildConfig({
   admin: {
     user: 'users',
@@ -44,9 +53,10 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || 'postgresql://postgres:postgres@127.0.0.1:5432/kvadro',
+      connectionString: cleanDbUri,
+      ...(isRemoteDb ? { ssl: { rejectUnauthorized: false } } : {}),
     },
-    push: true,
+    push: false,
   }),
 })
 

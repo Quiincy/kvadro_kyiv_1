@@ -28,8 +28,8 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
                 <Image
                   src="/assets/logo.webp"
                   alt="KVADRO KYIV 1"
-                  fill
-                  sizes="32px"
+                  width={32}
+                  height={32}
                   className="object-contain"
                   priority
                 />
@@ -70,8 +70,8 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
                     <Image
                       src="/assets/logo.webp"
                       alt="Logo"
-                      fill
-                      sizes="36px"
+                      width={36}
+                      height={36}
                       className="object-contain"
                     />
                   </div>
@@ -154,8 +154,8 @@ export function Navbar({ settings }: { settings?: typeof defaultSettings }) {
               <Image
                 src="/assets/logo.webp"
                 alt="KVADRO KYIV 1"
-                fill
-                sizes="44px"
+                width={44}
+                height={44}
                 className="object-contain p-1"
                 priority
               />

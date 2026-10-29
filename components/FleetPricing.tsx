@@ -45,9 +45,9 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
             <span className="font-label-caps text-xs text-border-active uppercase font-bold tracking-wider">
               Техпарк та тарифи
             </span>
-            <h2 className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
+            <p className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
               Ціни та техніка в Києві
-            </h2>
+            </p>
             <p className="font-body-sm text-xs text-text-muted mt-1">
               Прозорі тарифи без прихованих платежів з повним супроводом
             </p>
@@ -75,9 +75,9 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                         {item.badge}
                       </span>
                     )}
-                    <h3 className="font-headline-md text-base text-text-primary font-bold">
+                    <p className="font-headline-md text-base text-text-primary font-bold">
                       {item.title}
-                    </h3>
+                    </p>
                   </div>
                   {item.specs && item.specs[0] && (
                     <span className="bg-surface-panel-elevated text-xs font-mono px-2 py-0.5 rounded border border-border-subtle text-text-muted">
@@ -329,9 +329,9 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                 <span className="material-symbols-outlined text-2xl">groups</span>
               </div>
               <div>
-                <h4 className="font-headline-sm text-base text-text-primary font-bold uppercase">
+                <p className="font-headline-sm text-base text-text-primary font-bold uppercase">
                   Індивідуальний VIP-формат без сторонніх
-                </h4>
+                </p>
                 <p className="font-body-sm text-text-muted">
                   За індивідуальну прогулянку без сторонньої групи доплачується{' '}
                   <span className="text-text-primary font-bold">

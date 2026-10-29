@@ -25,9 +25,9 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
 
           {/* Main Headline */}
           <div className="space-y-2">
-            <h1 className="font-display font-black text-3xl text-text-primary uppercase tracking-tight leading-tight">
+            <p className="font-display font-black text-3xl text-text-primary uppercase tracking-tight leading-tight">
               Прокат квадро, мото, баггі в Києві
-            </h1>
+            </p>
             <p className="font-body-md text-xs sm:text-sm text-text-muted leading-relaxed">
               Прогулянки сімейні, групові, індивідуальні лісовими трасами Бортничів. Драйв, яскраві емоції та повна безпека.
             </p>
@@ -77,9 +77,10 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
               <Image
                 src="/assets/gallery/6j.webp"
                 alt="Прокат квадроциклів у лісі Бортничі"
-                fill
+                width={600}
+                height={338}
                 sizes="(max-width: 768px) 100vw, 500px"
-                className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
                 priority
               />
             </div>
@@ -201,9 +202,10 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
                   <Image
                     src="/assets/gallery/6j.webp"
                     alt="Прокат квадроциклів у лісі Бортничі"
-                    fill
+                    width={600}
+                    height={420}
                     sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 45vw, 520px"
-                    className="object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-[420px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                     priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-base via-transparent to-transparent pointer-events-none" />
@@ -211,7 +213,7 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
                   {/* Brand Badge Overlay */}
                   <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-base/80 backdrop-blur-md border border-border-subtle">
                     <div className="w-6 h-6 relative overflow-hidden">
-                      <Image src="/assets/logo.webp" alt="Логотип" fill sizes="24px" className="object-contain" />
+                      <Image src="/assets/logo.webp" alt="Логотип" width={24} height={24} className="object-contain" />
                     </div>
                     <span className="font-headline-sm text-xs font-bold uppercase tracking-wider text-text-primary">
                       KVADRO_KYIV1

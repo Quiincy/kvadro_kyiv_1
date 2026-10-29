@@ -34,9 +34,9 @@ export function CertificatesSection({ fleet, settings, onOpenOneClick }: Certifi
             <span className="font-label-caps text-xs text-border-active uppercase font-bold tracking-wider">
               Ідеальний подарунок
             </span>
-            <h2 className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
+            <p className="font-headline-xl-mobile text-2xl font-black text-text-primary uppercase mt-1 leading-tight">
               Подарункові сертифікати 🎁
-            </h2>
+            </p>
             <p className="font-body-sm text-xs text-text-muted mt-1">
               Дійсний 1 рік. Щоденна доставка «Новою поштою» або миттєвий електронний PDF.
             </p>
@@ -89,9 +89,9 @@ export function CertificatesSection({ fleet, settings, onOpenOneClick }: Certifi
                     <span className="material-symbols-outlined text-xl">loyalty</span>
                   </div>
                   <div>
-                    <h4 className="font-headline-sm text-sm text-text-primary font-bold">
+                    <p className="font-headline-sm text-sm text-text-primary font-bold">
                       Постійний бонус у кожному сертифікаті:
-                    </h4>
+                    </p>
                     <p className="font-body-sm text-text-muted text-xs mt-0.5">
                       У кожному сертифікаті на Вас чекає приємний бонус —{' '}
                       <span className="text-border-active font-bold">знижкова картка -10%</span> на всі наступні прогулянки, яка діє на постійній основі без терміну дії!

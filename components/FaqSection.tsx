@@ -21,9 +21,9 @@ export function FaqSection({ faqs }: FaqSectionProps) {
             <span className="font-label-caps text-label-caps text-border-active uppercase font-bold tracking-wider">
               Часті питання
             </span>
-            <h2 className="font-headline-xl-mobile text-headline-xl-mobile font-black text-text-primary uppercase mt-1 leading-tight">
+            <p className="font-headline-xl-mobile text-headline-xl-mobile font-black text-text-primary uppercase mt-1 leading-tight">
               Корисні поради
-            </h2>
+            </p>
           </div>
 
           <div className="space-y-2.5">
