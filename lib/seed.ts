@@ -7,50 +7,19 @@ import {
   defaultRoutes,
   defaultReviews,
   defaultSettings,
+  defaultFaqs,
 } from './defaultData'
+import { safeRevalidateSite } from './revalidate'
 
-export const defaultFaqItems = [
-  {
-    question: 'Чи можна орендувати квадроцикл без водійських прав?',
-    answer:
-      'Так, на наших закритих лісових трасах посвідчення водія не обов’язкове. Маршрути проходять лісовими спецтрасами. Перед виїздом інструктор навчає безпечному керуванню за 10 хвилин, чого достатньо для легкого старту.',
-    order: 1,
-    isArticle: true,
-    articleBadge: 'Гід для початківців',
-  },
-  {
-    question: 'Що одягнути на заїзд лісовими трасами?',
-    answer:
-      'Одягайте зручний закритий одяг та кросівки. Ми безкоштовно надаємо чисте фірмове захисне джерсі, шолом, підшоломник, захисні окуляри та рукавички.',
-    order: 2,
-    isArticle: true,
-    articleBadge: 'Безпека та екіп',
-  },
-  {
-    question: 'Чи можна кататися вдвох на одному квадроциклі?',
-    answer:
-      'Так, наші квадроцикли та баггі розраховані на двох пасажирів (загальна вага до 160-180 кг). Доплата за пасажира становить від 400 до 500 грн/година залежно від техніки.',
-    order: 3,
-    isArticle: true,
-    articleBadge: 'Двомісні тури',
-  },
-  {
-    question: 'Чи проводите ви заїзди під час дощу?',
-    answer:
-      'Дощ робить трасу ще більш екстремальною та веселою! У дощову погоду ми безкоштовно надаємо спеціальні водонепроникні дощовики та бахіли.',
-    order: 4,
-    isArticle: false,
-    articleBadge: '',
-  },
-  {
-    question: 'Як працює знижка -10% у подарункових сертифікатах?',
-    answer:
-      'У кожному нашому подарунковому сертифікаті міститься персональна картка з довічною знижкою -10% на всі наступні заїзди для власника та його компанії!',
-    order: 5,
-    isArticle: false,
-    articleBadge: '',
-  },
-]
+export const defaultFaqItems = defaultFaqs.map((item, idx) => ({
+  question: item.q,
+  answer: item.a,
+  order: idx + 1,
+  isArticle: Boolean(item.isArticle),
+  articleBadge: item.articleBadge || '',
+}))
+
+const SEED_CONTEXT = { disableRevalidate: true }
 
 export async function seedDatabase(payload: Payload, force = false) {
   const results = {
@@ -92,6 +61,7 @@ export async function seedDatabase(payload: Payload, force = false) {
             equals: item.file,
           },
         },
+        overrideAccess: true,
       })
 
       if (existing.totalDocs === 0) {
@@ -102,6 +72,8 @@ export async function seedDatabase(payload: Payload, force = false) {
             caption: item.caption,
           },
           filePath,
+          context: SEED_CONTEXT,
+          overrideAccess: true,
         })
         results.media++
       }
@@ -114,6 +86,7 @@ export async function seedDatabase(payload: Payload, force = false) {
   try {
     const existingSettings = await payload.findGlobal({
       slug: 'site-settings',
+      overrideAccess: true,
     })
     if (!existingSettings || !existingSettings.phone || force) {
       await payload.updateGlobal({
@@ -132,6 +105,8 @@ export async function seedDatabase(payload: Payload, force = false) {
           individualSurchargePerHour: defaultSettings.individualSurchargePerHour,
           freeDrinksText: defaultSettings.freeDrinksText,
         },
+        context: SEED_CONTEXT,
+        overrideAccess: true,
       })
       results.settings = true
     }
@@ -147,9 +122,9 @@ export async function seedDatabase(payload: Payload, force = false) {
         collection: 'fleet',
         where: { slug: { equals: item.id } },
         limit: 1,
+        overrideAccess: true,
       })
       if (existing.totalDocs > 0) {
-        // Always sync price2h for buggy or if force
         if (force || item.id === 'buggy') {
           await payload.update({
             collection: 'fleet',
@@ -160,6 +135,8 @@ export async function seedDatabase(payload: Payload, force = false) {
               price3h: item.price3h || null,
               passengerPrice: item.passengerPrice || null,
             },
+            context: SEED_CONTEXT,
+            overrideAccess: true,
           })
           results.fleet++
         }
@@ -181,6 +158,8 @@ export async function seedDatabase(payload: Payload, force = false) {
             features: item.features.map((f) => ({ text: f })),
             specs: item.specs.map((s) => ({ text: s })),
           },
+          context: SEED_CONTEXT,
+          overrideAccess: true,
         })
         results.fleet++
       }
@@ -191,6 +170,8 @@ export async function seedDatabase(payload: Payload, force = false) {
       await payload.delete({
         collection: 'payload-locked-documents',
         where: { id: { exists: true } },
+        context: SEED_CONTEXT,
+        overrideAccess: true,
       })
     }
   } catch (err) {
@@ -201,12 +182,15 @@ export async function seedDatabase(payload: Payload, force = false) {
   try {
     const { totalDocs: stepsCount } = await payload.count({
       collection: 'steps',
+      overrideAccess: true,
     })
     if (stepsCount === 0 || force) {
       if (force && stepsCount > 0) {
         await payload.delete({
           collection: 'steps',
           where: { id: { exists: true } },
+          context: SEED_CONTEXT,
+          overrideAccess: true,
         })
       }
       for (const step of defaultSteps) {
@@ -219,6 +203,8 @@ export async function seedDatabase(payload: Payload, force = false) {
             description: step.description,
             icon: step.icon,
           },
+          context: SEED_CONTEXT,
+          overrideAccess: true,
         })
         results.steps++
       }
@@ -231,12 +217,15 @@ export async function seedDatabase(payload: Payload, force = false) {
   try {
     const { totalDocs: routesCount } = await payload.count({
       collection: 'routes',
+      overrideAccess: true,
     })
     if (routesCount === 0 || force) {
       if (force && routesCount > 0) {
         await payload.delete({
           collection: 'routes',
           where: { id: { exists: true } },
+          context: SEED_CONTEXT,
+          overrideAccess: true,
         })
       }
       for (let i = 0; i < defaultRoutes.length; i++) {
@@ -246,6 +235,7 @@ export async function seedDatabase(payload: Payload, force = false) {
         const foundMedia = await payload.find({
           collection: 'media',
           where: { filename: { equals: filename } },
+          overrideAccess: true,
         })
         if (foundMedia.docs.length > 0) {
           mediaId = foundMedia.docs[0].id as number
@@ -262,6 +252,8 @@ export async function seedDatabase(payload: Payload, force = false) {
             ...(mediaId ? { imageMedia: mediaId } : {}),
             order: i + 1,
           },
+          context: SEED_CONTEXT,
+          overrideAccess: true,
         })
         results.routes++
       }
@@ -274,12 +266,15 @@ export async function seedDatabase(payload: Payload, force = false) {
   try {
     const { totalDocs: reviewsCount } = await payload.count({
       collection: 'reviews',
+      overrideAccess: true,
     })
     if (reviewsCount === 0 || force) {
       if (force && reviewsCount > 0) {
         await payload.delete({
           collection: 'reviews',
           where: { id: { exists: true } },
+          context: SEED_CONTEXT,
+          overrideAccess: true,
         })
       }
       for (const rev of defaultReviews) {
@@ -292,6 +287,8 @@ export async function seedDatabase(payload: Payload, force = false) {
             verified: rev.verified,
             date: rev.date,
           },
+          context: SEED_CONTEXT,
+          overrideAccess: true,
         })
         results.reviews++
       }
@@ -304,12 +301,15 @@ export async function seedDatabase(payload: Payload, force = false) {
   try {
     const { totalDocs: faqsCount } = await payload.count({
       collection: 'faqs',
+      overrideAccess: true,
     })
     if (faqsCount === 0 || force) {
       if (force && faqsCount > 0) {
         await payload.delete({
           collection: 'faqs',
           where: { id: { exists: true } },
+          context: SEED_CONTEXT,
+          overrideAccess: true,
         })
       }
       for (const faq of defaultFaqItems) {
@@ -322,6 +322,8 @@ export async function seedDatabase(payload: Payload, force = false) {
             isArticle: faq.isArticle,
             articleBadge: faq.articleBadge,
           },
+          context: SEED_CONTEXT,
+          overrideAccess: true,
         })
         results.faqs++
       }
@@ -330,5 +332,6 @@ export async function seedDatabase(payload: Payload, force = false) {
     console.error('Error seeding faqs:', err)
   }
 
+  safeRevalidateSite()
   return results
 }

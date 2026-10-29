@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { headers as getHeaders } from 'next/headers'
 import { revalidatePath } from 'next/cache'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,12 +19,24 @@ async function handleRevalidate(req: NextRequest) {
   const secret = searchParams.get('secret')
   const redirect = searchParams.get('redirect')
 
-  const validSecret = process.env.PAYLOAD_SECRET || 'kvadro2026'
+  const validSecret = process.env.PAYLOAD_SECRET
+  const hasValidSecret = Boolean(validSecret && secret === validSecret)
 
-  // Allow with secret token or fallback token
-  if (secret !== validSecret && secret !== 'kvadro2026') {
+  let isAuthenticatedAdmin = false
+  if (!hasValidSecret) {
+    try {
+      const payload = await getPayload({ config })
+      const headers = await getHeaders()
+      const { user } = await payload.auth({ headers })
+      isAuthenticatedAdmin = Boolean(user)
+    } catch {
+      isAuthenticatedAdmin = false
+    }
+  }
+
+  if (!hasValidSecret && !isAuthenticatedAdmin) {
     return NextResponse.json(
-      { error: 'Invalid secret token. Provide ?secret=...' },
+      { error: 'Unauthorized. Необхідна авторизація адміністратора або валідний токен.' },
       { status: 401 }
     )
   }
@@ -30,7 +45,8 @@ async function handleRevalidate(req: NextRequest) {
     revalidatePath('/')
     revalidatePath('/', 'layout')
 
-    if (redirect) {
+    // Only allow safe internal relative redirects (prevent Open Redirect vulnerability)
+    if (redirect && redirect.startsWith('/') && !redirect.startsWith('//')) {
       return NextResponse.redirect(new URL(redirect, req.url))
     }
 

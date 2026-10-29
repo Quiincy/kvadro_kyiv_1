@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { defaultFleet, defaultSettings, FleetItem, formatPrice } from '@/lib/defaultData'
 
@@ -65,8 +66,20 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                 }`}
               >
                 {item.isPopular && (
-                  <div className="absolute top-0 right-0 bg-border-active text-white text-[9px] font-bold px-2.5 py-0.5 rounded-bl uppercase font-label-caps tracking-wider">
+                  <div className="absolute top-0 right-0 z-10 bg-border-active text-white text-[9px] font-bold px-2.5 py-0.5 rounded-bl uppercase font-label-caps tracking-wider">
                     {item.badge || 'Популярний вибір'}
+                  </div>
+                )}
+                {item.image && (
+                  <div className="relative w-full h-40 mb-3 rounded-lg overflow-hidden border border-border-subtle">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={400}
+                      height={220}
+                      sizes="(max-width: 768px) 100vw, 320px"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 )}
                 <div className="flex justify-between items-start mb-2">
@@ -208,6 +221,18 @@ export function FleetPricing({ fleet, settings, onSelectVehicle, onOpenOneClick 
                   )}
 
                   <div className="flex flex-col">
+                    {item.image && (
+                      <div className="relative w-full h-36 mb-4 rounded-lg overflow-hidden border border-border-subtle">
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          width={400}
+                          height={220}
+                          sizes="(max-width: 1024px) 50vw, 25vw"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    )}
                     {/* 1. Badge & Icon row: fixed height h-7 */}
                     <div className="flex items-center justify-between mb-4 h-7">
                       <span className="font-label-caps text-[11px] uppercase tracking-wider px-2.5 py-1 rounded bg-surface-panel-elevated text-brand-amber border border-border-subtle font-bold">

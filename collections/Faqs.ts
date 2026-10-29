@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateAfterChange, revalidateAfterDelete } from '../lib/revalidate'
 
 export const Faqs: CollectionConfig = {
   slug: 'faqs',
@@ -9,9 +10,13 @@ export const Faqs: CollectionConfig = {
   lockDocuments: false,
   access: {
     read: () => true,
-    create: () => true,
-    update: () => true,
-    delete: () => true,
+    create: ({ req: { user } }) => Boolean(user),
+    update: ({ req: { user } }) => Boolean(user),
+    delete: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
   admin: {
     useAsTitle: 'question',

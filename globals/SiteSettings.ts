@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateGlobalAfterChange } from '../lib/revalidate'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
@@ -6,7 +7,10 @@ export const SiteSettings: GlobalConfig = {
   lockDocuments: false,
   access: {
     read: () => true,
-    update: () => true,
+    update: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
   },
   fields: [
     {
@@ -84,6 +88,10 @@ export const SiteSettings: GlobalConfig = {
     {
       name: 'telegramBotToken',
       type: 'text',
+      access: {
+        read: ({ req: { user } }) => Boolean(user),
+        update: ({ req: { user } }) => Boolean(user),
+      },
       admin: {
         description: 'Токен бота від @BotFather для миттєвих сповіщень про нові заявки (напр. 7123456789:AAH...)',
       },
@@ -92,6 +100,10 @@ export const SiteSettings: GlobalConfig = {
     {
       name: 'telegramChatId',
       type: 'text',
+      access: {
+        read: ({ req: { user } }) => Boolean(user),
+        update: ({ req: { user } }) => Boolean(user),
+      },
       admin: {
         description: 'ID чату або групи (отримати через @userinfobot або додати бота в групу та надіслати повідомлення)',
       },

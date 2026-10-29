@@ -74,11 +74,15 @@ export function ReviewsSection({ reviews }: ReviewsSectionProps) {
           </div>
 
           {/* Real Testimonial Cards from Payload CMS */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {activeReviews.slice(0, 3).map((rev, i) => (
+          <div
+            className={`grid grid-cols-1 gap-6 ${
+              activeReviews.length === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'
+            }`}
+          >
+            {activeReviews.map((rev, i) => (
               <div
                 key={i}
-                className="bg-surface-panel border border-border-subtle rounded-xl p-8 flex flex-col justify-between hover:border-border-active/60 transition-all relative"
+                className="bg-surface-panel border border-border-subtle rounded-xl p-6 lg:p-8 flex flex-col justify-between hover:border-border-active/60 transition-all relative"
               >
                 <div>
                   <div className="flex items-center gap-1 text-warning-caution mb-4">

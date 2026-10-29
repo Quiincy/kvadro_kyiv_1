@@ -9,6 +9,7 @@ export interface FleetItem {
   badge: string
   badgeColor?: string
   description: string
+  image?: string
   price1h?: number
   price2h: number
   price3h?: number

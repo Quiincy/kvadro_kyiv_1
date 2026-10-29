@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "@/app/globals.css";
+import { defaultFaqs, defaultSettings } from "@/lib/defaultData";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -108,45 +109,69 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "SportsActivityLocation",
-    name: "KVADRO KYIV 1 — Прокат квадроциклів у Києві",
-    description:
-      "Оренда та прогулянки на квадроциклах, ендуро мотоциклах та баггі у Києві (Бортничі). Індивідуальні та групові заїзди, корпоративи, подарункові сертифікати.",
-    image: "https://kvadrokyiv1.com.ua/assets/hero-quad.png",
-    telephone: "+380984327179",
-    url: "https://kvadrokyiv1.com.ua",
-    priceRange: "1400 - 5200 UAH",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "вул. Лісова 76К",
-      addressLocality: "Київ, Дарницький район (Бортничі)",
-      addressRegion: "Київська область",
-      addressCountry: "UA",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "50.385204",
-      longitude: "30.710882",
-    },
-    openingHoursSpecification: [
+    "@graph": [
       {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
+        "@type": "SportsActivityLocation",
+        "@id": `${siteUrl}/#organization`,
+        name: "KVADRO KYIV 1 — Прокат квадроциклів у Києві",
+        description:
+          "Оренда та прогулянки на квадроциклах, ендуро мотоциклах та баггі у Києві (Бортничі). Індивідуальні та групові заїзди, корпоративи, подарункові сертифікати.",
+        image: `${siteUrl}/assets/hero-quad.webp`,
+        telephone: defaultSettings.phoneRaw,
+        url: siteUrl,
+        priceRange: "1400 - 5200 UAH",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "вул. Лісова 76К",
+          addressLocality: "Київ, Дарницький район (Бортничі)",
+          addressRegion: "Київська область",
+          addressCountry: "UA",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: String(defaultSettings.coordinates.lat),
+          longitude: String(defaultSettings.coordinates.lng),
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "5.0",
+          bestRating: "5",
+          worstRating: "1",
+          reviewCount: "48",
+        },
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday",
+            ],
+            opens: "09:00",
+            closes: "20:00",
+          },
         ],
-        opens: "09:00",
-        closes: "20:00",
+        sameAs: [
+          defaultSettings.instagram,
+          defaultSettings.telegram,
+        ],
       },
-    ],
-    sameAs: [
-      "https://www.instagram.com/kvadro_kyiv1",
-      "https://t.me/Kvadro_kyiv1",
+      {
+        "@type": "FAQPage",
+        "@id": `${siteUrl}/#faq`,
+        mainEntity: defaultFaqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.a,
+          },
+        })),
+      },
     ],
   };
 

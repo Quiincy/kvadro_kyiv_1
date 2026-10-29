@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useId } from 'react'
 import { Sparkles, Check, Send } from 'lucide-react'
 
 interface GiftCard3DProps {
@@ -10,6 +10,9 @@ interface GiftCard3DProps {
 export function GiftCard3D({ onOrderCertificate }: GiftCard3DProps) {
   const [selectedNominal, setSelectedNominal] = useState<number>(3000)
   const cardRef = useRef<HTMLDivElement>(null)
+  const rawUid = useId().replace(/[^a-zA-Z0-9_-]/g, '')
+  const chipGradId = `goldChipGrad-${rawUid}`
+  const neonGlowId = `neonOrangeGlow-${rawUid}`
 
   // 3D Tilt State
   const [rotX, setRotX] = useState(0)
@@ -131,14 +134,14 @@ export function GiftCard3D({ onOrderCertificate }: GiftCard3DProps) {
                   className="w-11 sm:w-13 h-8 sm:h-9 rounded-md overflow-hidden shadow-md border border-amber-600/50"
                 >
                   <defs>
-                    <linearGradient id="goldChipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient id={chipGradId} x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" stopColor="#FFE082" />
                       <stop offset="35%" stopColor="#FFC107" />
                       <stop offset="70%" stopColor="#FFA000" />
                       <stop offset="100%" stopColor="#FFD54F" />
                     </linearGradient>
                   </defs>
-                  <rect width="54" height="42" rx="4" fill="url(#goldChipGrad)" />
+                  <rect width="54" height="42" rx="4" fill={`url(#${chipGradId})`} />
                   {/* Micro-Circuit Contact Pads */}
                   <path
                     d="M 0,14 L 18,14 L 18,28 L 0,28 M 36,14 L 54,14 M 36,28 L 54,28 M 18,21 L 36,21 M 27,0 L 27,14 M 27,28 L 27,42 M 18,14 A 9,9 0 0,1 36,14 M 18,28 A 9,9 0 0,0 36,28"
@@ -180,7 +183,7 @@ export function GiftCard3D({ onOrderCertificate }: GiftCard3DProps) {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <defs>
-                    <filter id="neonOrangeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <filter id={neonGlowId} x="-50%" y="-50%" width="200%" height="200%">
                       <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
                       <feMerge>
                         <feMergeNode in="coloredBlur" />
@@ -190,7 +193,7 @@ export function GiftCard3D({ onOrderCertificate }: GiftCard3DProps) {
                   </defs>
 
                   {/* Quad Bike Cyber Line-art */}
-                  <g filter="url(#neonOrangeGlow)" stroke="#FF6B00" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                  <g filter={`url(#${neonGlowId})`} stroke="#FF6B00" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
                     {/* Front Wheel */}
                     <circle cx="24" cy="36" r="11" />
                     <circle cx="24" cy="36" r="4.5" fill="#FF8533" />

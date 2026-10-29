@@ -12,6 +12,7 @@ export function FaqSection({ faqs }: FaqSectionProps) {
   const activeFaqs = faqs && faqs.length > 0 ? faqs : defaultFaqs
   const articles = activeFaqs.filter((f) => f.isArticle)
   const displayArticles = articles.length >= 3 ? articles.slice(0, 3) : activeFaqs.slice(0, 3)
+  const remainingFaqs = activeFaqs.filter((f) => !displayArticles.includes(f))
 
   return (
     <section id="faq" className="scroll-mt-20 lg:scroll-mt-24 border-b border-border-subtle relative bg-surface-base">
@@ -92,6 +93,28 @@ export function FaqSection({ faqs }: FaqSectionProps) {
               </div>
             ))}
           </div>
+
+          {/* Additional FAQ Accordion Items on Desktop */}
+          {remainingFaqs.length > 0 && (
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+              {remainingFaqs.map((faq, idx) => (
+                <div
+                  key={idx}
+                  className="bg-surface-panel/70 border border-border-subtle rounded-xl p-6 hover:border-border-active/60 transition-all"
+                >
+                  <span className="font-label-caps text-[10px] uppercase text-border-active font-bold block mb-2">
+                    Часте питання
+                  </span>
+                  <h3 className="font-headline-sm text-sm text-text-primary font-bold">
+                    {faq.q}
+                  </h3>
+                  <p className="font-body-sm text-text-muted text-xs mt-2 leading-relaxed">
+                    {faq.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -110,7 +110,7 @@ export function HomePageClient({ data }: HomePageClientProps) {
         initialType={legalModalType || 'safety'}
         onOpenBooking={() => {
           setLegalModalType(null)
-          setIsOneClickOpen(true)
+          handleOpenOneClick(selectedVehicle)
         }}
         settings={data.settings}
       />

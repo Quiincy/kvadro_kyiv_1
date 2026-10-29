@@ -1,4 +1,4 @@
-import { getPayload } from 'payload'
+import { getPayload, Payload } from 'payload'
 import config from '@payload-config'
 import {
   defaultSettings,
@@ -26,61 +26,69 @@ export interface SiteData {
   faqs: FaqItem[]
 }
 
+let activeSeedPromise: Promise<any> | null = null
+
+async function queryAllCollections(payload: Payload) {
+  return Promise.allSettled([
+    payload.findGlobal({
+      slug: 'site-settings',
+      overrideAccess: true,
+    }),
+    payload.find({
+      collection: 'fleet',
+      sort: 'order',
+      limit: 100,
+      overrideAccess: true,
+    }),
+    payload.find({
+      collection: 'steps',
+      sort: 'stepNumber',
+      limit: 100,
+      overrideAccess: true,
+    }),
+    payload.find({
+      collection: 'routes',
+      sort: 'order',
+      limit: 100,
+      overrideAccess: true,
+    }),
+    payload.find({
+      collection: 'reviews',
+      sort: '-createdAt',
+      limit: 100,
+      overrideAccess: true,
+    }),
+    payload.find({
+      collection: 'faqs',
+      sort: 'order',
+      limit: 100,
+      overrideAccess: true,
+    }),
+  ])
+}
+
 export async function getSiteData(): Promise<SiteData> {
   try {
     const payload = await getPayload({ config })
 
-    // Auto-seed if fleet is empty
-    try {
-      const { totalDocs: fleetCount } = await payload.count({
-        collection: 'fleet',
-        overrideAccess: true,
-      })
-      if (fleetCount === 0) {
-        await seedDatabase(payload)
-      }
-    } catch (seedErr) {
-      console.warn('Auto-seed check error:', seedErr)
-    }
+    let [settingsRes, fleetRes, stepsRes, routesRes, reviewsRes, faqsRes] =
+      await queryAllCollections(payload)
 
-    // Run all queries in parallel with overrideAccess: true for maximum performance and reliability
-    const [settingsRes, fleetRes, stepsRes, routesRes, reviewsRes, faqsRes] =
-      await Promise.allSettled([
-        payload.findGlobal({
-          slug: 'site-settings',
-          overrideAccess: true,
-        }),
-        payload.find({
-          collection: 'fleet',
-          sort: 'order',
-          limit: 100,
-          overrideAccess: true,
-        }),
-        payload.find({
-          collection: 'steps',
-          sort: 'stepNumber',
-          limit: 100,
-          overrideAccess: true,
-        }),
-        payload.find({
-          collection: 'routes',
-          sort: 'order',
-          limit: 100,
-          overrideAccess: true,
-        }),
-        payload.find({
-          collection: 'reviews',
-          sort: '-createdAt',
-          limit: 100,
-          overrideAccess: true,
-        }),
-        payload.find({
-          collection: 'faqs',
-          sort: 'order',
-          limit: 100,
-          overrideAccess: true,
-        }),
-      ])
+    // Auto-seed only if fleet is confirmed empty (eliminates extra count query on every request)
+    if (fleetRes.status === 'fulfilled' && fleetRes.value.totalDocs === 0) {
+      try {
+        if (!activeSeedPromise) {
+          activeSeedPromise = seedDatabase(payload).finally(() => {
+            activeSeedPromise = null
+          })
+        }
+        await activeSeedPromise
+        ;[settingsRes, fleetRes, stepsRes, routesRes, reviewsRes, faqsRes] =
+          await queryAllCollections(payload)
+      } catch (seedErr) {
+        console.warn('Auto-seed error:', seedErr)
+      }
+    }
 
     // 1. Settings
     let settings = defaultSettings
@@ -107,24 +115,31 @@ export async function getSiteData(): Promise<SiteData> {
     // 2. Fleet
     let fleet: FleetItem[] = defaultFleet
     if (fleetRes.status === 'fulfilled' && fleetRes.value && fleetRes.value.docs.length > 0) {
-      fleet = fleetRes.value.docs.map((doc: any) => ({
-        id: doc.slug || String(doc.id),
-        title: doc.title,
-        badge: doc.badge || '',
-        description: doc.description || '',
-        price1h: doc.price1h ?? undefined,
-        price2h: doc.price2h,
-        price3h: doc.price3h ?? undefined,
-        passengerPrice: doc.passengerPrice ?? undefined,
-        isPopular: Boolean(doc.isPopular),
-        icon: doc.icon || 'Compass',
-        features: Array.isArray(doc.features)
-          ? doc.features.map((f: any) => (typeof f === 'string' ? f : f.text)).filter(Boolean)
-          : [],
-        specs: Array.isArray(doc.specs)
-          ? doc.specs.map((s: any) => (typeof s === 'string' ? s : s.text)).filter(Boolean)
-          : [],
-      }))
+      fleet = fleetRes.value.docs.map((doc: any) => {
+        let image: string | undefined = doc.imageUrl || undefined
+        if (doc.imageMedia && typeof doc.imageMedia === 'object' && doc.imageMedia.url) {
+          image = doc.imageMedia.url
+        }
+        return {
+          id: doc.slug || String(doc.id),
+          title: doc.title,
+          badge: doc.badge || '',
+          description: doc.description || '',
+          image,
+          price1h: doc.price1h ?? undefined,
+          price2h: doc.price2h,
+          price3h: doc.price3h ?? undefined,
+          passengerPrice: doc.passengerPrice ?? undefined,
+          isPopular: Boolean(doc.isPopular),
+          icon: doc.icon || 'Compass',
+          features: Array.isArray(doc.features)
+            ? doc.features.map((f: any) => (typeof f === 'string' ? f : f.text)).filter(Boolean)
+            : [],
+          specs: Array.isArray(doc.specs)
+            ? doc.specs.map((s: any) => (typeof s === 'string' ? s : s.text)).filter(Boolean)
+            : [],
+        }
+      })
     }
 
     // 3. Steps

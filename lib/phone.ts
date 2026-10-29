@@ -6,30 +6,39 @@ export const UKRAINE_PHONE_PREFIX = '+380 ('
 
 /**
  * Formats any input string into the Ukrainian format: +380 (XX) XXX-XX-XX
- * Keeps the '+380 (' prefix permanent.
+ * Keeps the '+380 (' prefix permanent and handles pasted/autofilled numbers of all formats.
  */
 export function formatUkrainianPhone(val: string): string {
   if (!val) return UKRAINE_PHONE_PREFIX
 
-  // Extract all digits
-  const raw = val.replace(/\D/g, '')
+  // Extract all digits and collapse duplicate '380' prefixes caused by pasting +380... into '+380 ('
+  const raw = val.replace(/\D/g, '').replace(/^(380)+/, '380')
 
   // Extract subscriber digits (up to 9 digits)
   let sub = ''
   if (raw.startsWith('380')) {
-    sub = raw.slice(3, 12)
+    sub = raw.slice(3)
   } else if (raw.startsWith('38')) {
-    sub = raw.slice(2, 11)
+    sub = raw.slice(2)
+  } else if (raw.startsWith('80') && raw.length >= 11) {
+    sub = raw.slice(2)
   } else if (raw.startsWith('0')) {
-    sub = raw.slice(1, 10)
+    sub = raw.slice(1)
   } else {
-    sub = raw.slice(0, 9)
+    sub = raw
+  }
+
+  // Handle pasted '80XX...' inside '+380 (' prefix
+  if (sub.startsWith('80') && sub.length >= 10) {
+    sub = sub.slice(2)
   }
 
   // If user entered a leading 0 into the subscriber part (e.g. 098 instead of 98), strip it
-  if (sub.startsWith('0')) {
+  while (sub.startsWith('0')) {
     sub = sub.slice(1)
   }
+
+  sub = sub.slice(0, 9)
 
   let res = UKRAINE_PHONE_PREFIX + sub.slice(0, 2)
   if (sub.length > 2) {
@@ -122,6 +131,7 @@ export function handlePhoneFocusOrClick(e: React.SyntheticEvent<HTMLInputElement
  * Checks if the phone number has all required 12 digits (+380 + 9 subscriber digits)
  */
 export function isCompleteUkrainianPhone(val: string): boolean {
-  const cleanDigits = val.replace(/\D/g, '')
-  return cleanDigits.length >= 12
+  const formatted = formatUkrainianPhone(val)
+  const cleanDigits = formatted.replace(/\D/g, '')
+  return cleanDigits.length === 12 && cleanDigits.startsWith('380')
 }

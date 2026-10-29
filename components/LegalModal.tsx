@@ -58,10 +58,10 @@ export function LegalModal({
       />
 
       {/* Modal Shell */}
-      <div className="relative w-full max-w-3xl max-h-[90vh] bg-surface-elevated/95 border border-border-subtle rounded-2xl md:rounded-3xl shadow-2xl flex flex-col overflow-hidden z-10 animate-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-3xl max-h-[90vh] bg-surface-panel-elevated/95 border border-border-subtle rounded-2xl md:rounded-3xl shadow-2xl flex flex-col overflow-hidden z-10 animate-in zoom-in-95 duration-200">
         
         {/* Header */}
-        <div className="p-4 sm:p-6 border-b border-border-subtle bg-surface-card/60 flex items-center justify-between gap-4">
+        <div className="p-4 sm:p-6 border-b border-border-subtle bg-surface-panel/80 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
               activeTab === 'safety' 
@@ -90,7 +90,7 @@ export function LegalModal({
             type="button"
             onClick={onClose}
             aria-label="Закрити"
-            className="w-9 h-9 rounded-xl bg-surface-panel hover:bg-surface-subtle text-text-muted hover:text-text-primary flex items-center justify-center transition-colors border border-border-subtle shrink-0 cursor-pointer"
+            className="w-9 h-9 rounded-xl bg-surface-panel hover:bg-surface-panel-elevated text-text-muted hover:text-text-primary flex items-center justify-center transition-colors border border-border-subtle shrink-0 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -104,7 +104,7 @@ export function LegalModal({
             className={`flex-1 py-2.5 px-3 rounded-xl font-headline-sm text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeTab === 'safety'
                 ? 'bg-brand-amber text-white shadow-lg shadow-brand-amber/20'
-                : 'bg-surface-panel hover:bg-surface-subtle text-text-muted hover:text-text-primary border border-border-subtle'
+                : 'bg-surface-panel hover:bg-surface-panel-elevated text-text-muted hover:text-text-primary border border-border-subtle'
             }`}
           >
             <ShieldAlert className="w-4 h-4" />
@@ -117,7 +117,7 @@ export function LegalModal({
             className={`flex-1 py-2.5 px-3 rounded-xl font-headline-sm text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeTab === 'offer'
                 ? 'bg-brand-amber text-white shadow-lg shadow-brand-amber/20'
-                : 'bg-surface-panel hover:bg-surface-subtle text-text-muted hover:text-text-primary border border-border-subtle'
+                : 'bg-surface-panel hover:bg-surface-panel-elevated text-text-muted hover:text-text-primary border border-border-subtle'
             }`}
           >
             <FileText className="w-4 h-4" />
@@ -141,7 +141,7 @@ export function LegalModal({
               </div>
 
               {/* Section 1 */}
-              <div className="bg-surface-card/50 border border-border-subtle rounded-xl p-4 sm:p-5 space-y-2">
+              <div className="bg-surface-panel/60 border border-border-subtle rounded-xl p-4 sm:p-5 space-y-2">
                 <h3 className="text-sm sm:text-base font-bold text-text-primary flex items-center gap-2">
                   <span className="w-6 h-6 rounded-lg bg-brand-amber/20 text-brand-amber flex items-center justify-center text-xs font-mono">1</span>
                   Вимоги до водіїв та пасажирів
@@ -155,7 +155,7 @@ export function LegalModal({
               </div>
 
               {/* Section 2 */}
-              <div className="bg-surface-card/50 border border-border-subtle rounded-xl p-4 sm:p-5 space-y-2">
+              <div className="bg-surface-panel/60 border border-border-subtle rounded-xl p-4 sm:p-5 space-y-2">
                 <h3 className="text-sm sm:text-base font-bold text-text-primary flex items-center gap-2">
                   <span className="w-6 h-6 rounded-lg bg-brand-amber/20 text-brand-amber flex items-center justify-center text-xs font-mono">2</span>
                   Обов&apos;язкова захисна екіпіровка (надається безкоштовно)
@@ -184,7 +184,7 @@ export function LegalModal({
               </div>
 
               {/* Section 3 */}
-              <div className="bg-surface-card/50 border border-border-subtle rounded-xl p-4 sm:p-5 space-y-2">
+              <div className="bg-surface-panel/60 border border-border-subtle rounded-xl p-4 sm:p-5 space-y-2">
                 <h3 className="text-sm sm:text-base font-bold text-text-primary flex items-center gap-2">
                   <span className="w-6 h-6 rounded-lg bg-brand-amber/20 text-brand-amber flex items-center justify-center text-xs font-mono">3</span>
                   Рух у колоні та дистанція
@@ -198,7 +198,7 @@ export function LegalModal({
               </div>
 
               {/* Section 4 */}
-              <div className="bg-surface-card/50 border border-border-subtle rounded-xl p-4 sm:p-5 space-y-2">
+              <div className="bg-surface-panel/60 border border-border-subtle rounded-xl p-4 sm:p-5 space-y-2">
                 <h3 className="text-sm sm:text-base font-bold text-text-primary flex items-center gap-2">
                   <span className="w-6 h-6 rounded-lg bg-brand-amber/20 text-brand-amber flex items-center justify-center text-xs font-mono">4</span>
                   Заборонені маневри та безпека кінцівок
@@ -211,7 +211,7 @@ export function LegalModal({
               </div>
 
               {/* Section 5 */}
-              <div className="bg-surface-card/50 border border-border-subtle rounded-xl p-4 sm:p-5 space-y-2">
+              <div className="bg-surface-panel/60 border border-border-subtle rounded-xl p-4 sm:p-5 space-y-2">
                 <h3 className="text-sm sm:text-base font-bold text-text-primary flex items-center gap-2">
                   <span className="w-6 h-6 rounded-lg bg-brand-amber/20 text-brand-amber flex items-center justify-center text-xs font-mono">5</span>
                   Дії в разі зупинки або застрягання в піску
@@ -294,7 +294,7 @@ export function LegalModal({
               </div>
 
               {/* 7. Contacts & Requisites */}
-              <div className="p-3.5 rounded-xl bg-surface-card border border-border-subtle text-xs space-y-1 font-mono text-text-dim">
+              <div className="p-3.5 rounded-xl bg-surface-panel border border-border-subtle text-xs space-y-1 font-mono text-text-dim">
                 <div className="text-text-primary font-bold">KVADRO KYIV 1 — Прокат квадроциклів, ендуро та баггі</div>
                 <div>Локація: {currentSettings.address}</div>
                 <div>Телефон: {currentSettings.phone}</div>
@@ -306,7 +306,7 @@ export function LegalModal({
         </div>
 
         {/* Footer Actions */}
-        <div className="p-4 sm:p-5 border-t border-border-subtle bg-surface-card/60 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-4 sm:p-5 border-t border-border-subtle bg-surface-panel/80 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-xs text-text-dim flex items-center gap-2 self-start sm:self-auto">
             <Check className="w-4 h-4 text-emerald-400 shrink-0" />
             <span>Безпека та якість сервісу на першому місці</span>
@@ -330,7 +330,7 @@ export function LegalModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 sm:flex-initial h-11 sm:h-10 px-3.5 sm:px-5 bg-surface-panel hover:bg-surface-subtle text-text-primary text-xs sm:text-sm font-headline-sm font-semibold rounded-xl border border-border-subtle transition-colors flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap active:scale-98"
+              className="flex-1 sm:flex-initial h-11 sm:h-10 px-3.5 sm:px-5 bg-surface-panel hover:bg-surface-panel-elevated text-text-primary text-xs sm:text-sm font-headline-sm font-semibold rounded-xl border border-border-subtle transition-colors flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap active:scale-98"
             >
               <Check className="w-4 h-4 shrink-0 text-text-dim" />
               <span>Зрозуміло</span>

@@ -10,6 +10,7 @@ export interface BookingNotificationData {
   notes?: string
   hasPassenger?: boolean
   isIndividual?: boolean
+  dbFallback?: boolean
 }
 
 /**
@@ -24,53 +25,70 @@ export async function sendTelegramBookingNotification(
     const token = customToken || process.env.TELEGRAM_BOT_TOKEN
     const chatId = customChatId || process.env.TELEGRAM_CHAT_ID
 
-  if (!token || !chatId) {
-    console.log('[Telegram Bot] Skipped: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured in .env')
-    return { success: false, reason: 'unconfigured' }
-  }
+    if (!token || !chatId) {
+      console.log('[Telegram Bot] Skipped: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured in .env')
+      return { success: false, reason: 'unconfigured' }
+    }
 
-  const isOneClick = data.bookingType === 'one_click'
-  const title = isOneClick ? '⚡️ ШВИДКА ЗАЯВКА В 1 КЛІК' : '🏍 НОВА БРОНЬ НА ПРОКАТ'
-  const cleanPhone = data.clientPhone.replace(/\D/g, '')
-  const fullInternationalPhone = cleanPhone.startsWith('380')
-    ? cleanPhone
-    : cleanPhone.startsWith('0')
-    ? '38' + cleanPhone
-    : '380' + cleanPhone
-  const directPhone = fullInternationalPhone.length >= 10 ? `+${fullInternationalPhone}` : data.clientPhone
+    const isOneClick = data.bookingType === 'one_click'
+    const title = isOneClick ? '⚡️ ШВИДКА ЗАЯВКА В 1 КЛІК' : '🏍 НОВА БРОНЬ НА ПРОКАТ'
+    const cleanPhone = data.clientPhone.replace(/\D/g, '').replace(/^(380)+/, '380')
+    const fullInternationalPhone = cleanPhone.startsWith('380')
+      ? cleanPhone.slice(0, 12)
+      : cleanPhone.startsWith('80')
+      ? ('3' + cleanPhone).slice(0, 12)
+      : cleanPhone.startsWith('0')
+      ? ('38' + cleanPhone).slice(0, 12)
+      : ('380' + cleanPhone).slice(0, 12)
+    const directPhone = fullInternationalPhone.length >= 10 ? `+${fullInternationalPhone}` : data.clientPhone
 
-  const lines = [
-    `<b>${title}</b>`,
-    `━━━━━━━━━━━━━━━━━━━━`,
-    `👤 <b>Клієнт:</b> ${escapeHtml(data.clientName || 'Без імені')}`,
-    `📞 <b>Телефон:</b> ${directPhone}`,
-    `🛵 <b>Техніка:</b> ${escapeHtml(data.vehicleType)}`,
-    `⏱ <b>Тривалість:</b> ${escapeHtml(data.duration)}`,
-    data.calculatedTotal ? `💰 <b>Розрахункова вартість:</b> <b>${data.calculatedTotal.toLocaleString('uk-UA')} ₴</b>` : null,
-    data.hasPassenger ? `👥 <b>Пасажир:</b> Так (+ доплата)` : null,
-    data.isIndividual ? `👑 <b>Формат:</b> VIP Індивідуальний тур` : null,
-    data.preferredDate ? `📅 <b>Бажаний час:</b> ${escapeHtml(data.preferredDate)}` : null,
-    data.notes ? `💬 <b>Коментар:</b> <i>${escapeHtml(data.notes)}</i>` : null,
-    `━━━━━━━━━━━━━━━━━━━━`,
-    `🕒 <i>Час: ${new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' })} • KVADRO KYIV 1</i>`,
-  ].filter(Boolean)
+    const kyivTime = new Date().toLocaleString('uk-UA', {
+      timeZone: 'Europe/Kyiv',
+      day: '2-digit',
+      month: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
 
-  const messageText = lines.join('\n')
+    const lines = [
+      `<b>${title}</b>`,
+      `━━━━━━━━━━━━━━━━━━━━`,
+      data.id ? `🔢 <b>Заявка:</b> #${escapeHtml(String(data.id))}` : null,
+      `👤 <b>Клієнт:</b> ${escapeHtml(data.clientName || 'Без імені')}`,
+      `📞 <b>Телефон:</b> ${escapeHtml(directPhone)}`,
+      `🛵 <b>Техніка:</b> ${escapeHtml(data.vehicleType)}`,
+      `⏱ <b>Тривалість:</b> ${escapeHtml(data.duration)}`,
+      data.calculatedTotal
+        ? `💰 <b>Розрахункова вартість:</b> <b>${data.calculatedTotal.toLocaleString('uk-UA')} ₴</b>`
+        : null,
+      data.hasPassenger ? `👥 <b>Пасажир:</b> Так (+ доплата)` : null,
+      data.isIndividual ? `👑 <b>Формат:</b> VIP Індивідуальний тур` : null,
+      data.preferredDate ? `📅 <b>Бажаний час:</b> ${escapeHtml(data.preferredDate)}` : null,
+      data.notes ? `💬 <b>Коментар:</b> <i>${escapeHtml(data.notes)}</i>` : null,
+      data.dbFallback ? `⚠️ <i>Доставлено резервним каналом (БД тимчасово оновлюється)</i>` : null,
+      `━━━━━━━━━━━━━━━━━━━━`,
+      `🕒 <i>Київ: ${kyivTime} • KVADRO KYIV 1</i>`,
+    ].filter(Boolean)
 
-  const replyMarkup = fullInternationalPhone.length >= 10 ? {
-    inline_keyboard: [
-      [
-        {
-          text: `💬 Написати в Telegram`,
-          url: `https://t.me/+${fullInternationalPhone}`,
-        },
-        {
-          text: `📞 Дзвінок в Telegram`,
-          url: `tg://call?phone=+${fullInternationalPhone}`,
-        },
-      ],
-    ],
-  } : undefined
+    const messageText = lines.join('\n')
+
+    const replyMarkup =
+      fullInternationalPhone.length >= 10
+        ? {
+            inline_keyboard: [
+              [
+                {
+                  text: `💬 Написати в Telegram`,
+                  url: `https://t.me/+${fullInternationalPhone}`,
+                },
+                {
+                  text: `📞 Дзвінок в Telegram`,
+                  url: `tg://call?phone=+${fullInternationalPhone}`,
+                },
+              ],
+            ],
+          }
+        : undefined
 
     const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: 'POST',

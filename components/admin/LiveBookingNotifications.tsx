@@ -34,6 +34,7 @@ export function LiveBookingNotifications() {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const seenIdsRef = useRef<Set<string | number>>(new Set())
   const isInitialLoadRef = useRef<boolean>(true)
+  const isMutedRef = useRef<boolean>(false)
   const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Initialize sound mute preference
@@ -42,6 +43,7 @@ export function LiveBookingNotifications() {
       const savedMute = localStorage.getItem('kvadro_admin_muted')
       if (savedMute === 'true') {
         setIsMuted(true)
+        isMutedRef.current = true
       }
     }
   }, [])
@@ -63,7 +65,7 @@ export function LiveBookingNotifications() {
 
   // Web Audio synthesizer chime (pleasant two-tone crystal doorbell chime)
   const playChime = () => {
-    if (isMuted) return
+    if (isMutedRef.current) return
     try {
       const AudioCtx = window.AudioContext || (window as any).webkitAudioContext
       if (!AudioCtx) return
@@ -92,6 +94,13 @@ export function LiveBookingNotifications() {
       gain2.connect(ctx.destination)
       osc2.start(ctx.currentTime + 0.12)
       osc2.stop(ctx.currentTime + 0.8)
+
+      // Close AudioContext after chime completes to prevent browser AudioContext limit exhaustion
+      setTimeout(() => {
+        if (ctx.state !== 'closed') {
+          ctx.close().catch(() => {})
+        }
+      }, 1000)
     } catch (e) {
       console.warn('AudioContext notice:', e)
     }
@@ -101,6 +110,7 @@ export function LiveBookingNotifications() {
     e.stopPropagation()
     const nextState = !isMuted
     setIsMuted(nextState)
+    isMutedRef.current = nextState
     if (typeof window !== 'undefined') {
       localStorage.setItem('kvadro_admin_muted', String(nextState))
     }
@@ -179,7 +189,7 @@ export function LiveBookingNotifications() {
       clearInterval(interval)
       if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current)
     }
-  }, [isMuted, isLoginPage])
+  }, [isLoginPage])
 
   // Completely invisible when logged out or on the login page
   if (isLoginPage || !isAuthenticated) {

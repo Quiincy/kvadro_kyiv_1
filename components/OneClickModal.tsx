@@ -97,6 +97,7 @@ export function OneClickModal({
     setErrorMsg('')
 
     try {
+      const isCert = selectedVehicle.toLowerCase().includes('сертифікат')
       const res = await fetch('/api/book', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -104,10 +105,10 @@ export function OneClickModal({
           clientName: name.trim() || 'Швидке замовлення (1-клік)',
           clientPhone: phone,
           vehicleType: selectedVehicle,
-          duration: '1 година (базово)',
+          duration: isCert ? 'Сертифікат (дійсний 1 рік)' : '1 година (базово)',
           isOneClick: true,
           bookingType: 'one_click',
-          notes: `Швидке бронювання в 1 клік з попапу сайту. Техніка: ${selectedVehicle}`,
+          notes: `Швидке бронювання в 1 клік з попапу сайту. Обрано: ${selectedVehicle}`,
         }),
       })
 
@@ -118,8 +119,9 @@ export function OneClickModal({
         setErrorMsg(data.error || 'Не вдалося відправити заявку. Спробуйте ще раз.')
       }
     } catch {
-      // In case of network glitch, keep smooth UX
-      setIsSuccess(true)
+      setErrorMsg(
+        "Не вдалося з'єднатися з сервером. Перевірте інтернет або напишіть нам у Telegram / зателефонуйте."
+      )
     } finally {
       setIsSubmitting(false)
     }

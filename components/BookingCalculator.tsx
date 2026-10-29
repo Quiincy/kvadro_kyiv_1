@@ -169,10 +169,17 @@ function CustomCheckbox({
           onChange(!checked)
         }
       }}
+      onKeyDown={(e) => {
+        if (!disabled && (e.key === ' ' || e.key === 'Enter')) {
+          e.preventDefault()
+          onChange(!checked)
+        }
+      }}
+      tabIndex={disabled ? -1 : 0}
       role="checkbox"
       aria-checked={checked}
       aria-disabled={disabled}
-      className={`w-full p-3.5 rounded-xl border transition-all duration-150 flex items-center justify-between min-h-[52px] select-none ${
+      className={`w-full p-3.5 rounded-xl border transition-all duration-150 flex items-center justify-between min-h-[52px] select-none outline-none focus-visible:ring-2 focus-visible:ring-border-active ${
         disabled
           ? 'bg-surface-base/40 border-border-subtle/40 opacity-40 cursor-not-allowed'
           : checked
@@ -321,7 +328,8 @@ export function BookingCalculator({
   const desktopNameInputId = useId()
   const desktopPhoneInputId = useId()
   const desktopDateInputId = useId()
-  const todayDate = new Date().toLocaleDateString('en-CA')
+  const desktopNotesInputId = useId()
+  const todayDate = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Kyiv' }).format(new Date())
 
   // Phone input formatting helper: +380 (XX) XXX-XX-XX
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -391,8 +399,9 @@ export function BookingCalculator({
         setErrorMsg(data.error || 'Помилка при відправці. Спробуйте ще раз.')
       }
     } catch {
-      // In case of offline/network glitch, still mark as success for the client
-      setSubmitted(true)
+      setErrorMsg(
+        "Не вдалося з'єднатися з сервером. Перевірте інтернет або напишіть нам напряму в Telegram чи зателефонуйте."
+      )
     } finally {
       setIsSubmitting(false)
     }
@@ -403,11 +412,13 @@ export function BookingCalculator({
     `Привіт! Хочу забронювати прогулянку в KVADRO KYIV 1:\n` +
     `• Техніка: ${currentVehicle.name}\n` +
     `• Тривалість: ${validHours} год\n` +
-    `• Пасажир: ${withPassenger ? 'Так' : 'Ні'}\n` +
+    `• Пасажир: ${withPassenger && currentVehicle.passengerRate ? 'Так' : 'Ні'}\n` +
     `• Формат: ${isIndividual ? 'Індивідуальний VIP' : 'Груповий'}\n` +
+    (preferredDate ? `• Бажана дата: ${preferredDate}\n` : '') +
     `• Орієнтовна сума: ${totalPrice} грн\n` +
     `• Ім'я: ${clientName || 'Гість'}\n` +
-    `• Телефон: ${clientPhone || 'Вказано в чаті'}`
+    `• Телефон: ${clientPhone || 'Вказано в чаті'}` +
+    (notes.trim() ? `\n• Коментар: ${notes.trim()}` : '')
   )
 
   // Duration dropdown options
@@ -551,6 +562,15 @@ export function BookingCalculator({
                 disabledMessage="Поїздка з пасажиром (недоступно для одномісного мото)"
               />
 
+              {/* Custom Non-Jumping Checkbox for Individual VIP Format on Mobile */}
+              <CustomCheckbox
+                checked={isIndividual}
+                onChange={setIsIndividual}
+                label={`Індивідуальний тур без групи (+${currentSettings.individualSurchargePerHour} грн/год)`}
+                sublabel="Тільки ваша компанія та інструктор"
+                badge={`+${currentSettings.individualSurchargePerHour * validHours} грн`}
+              />
+
               {/* Personal Data Inputs */}
               <div className="space-y-3 pt-1 min-w-0">
                 <div className="min-w-0">
@@ -600,6 +620,19 @@ export function BookingCalculator({
                       }`}
                     />
                   </div>
+                </div>
+                <div className="min-w-0">
+                  <label htmlFor={notesInputId} className="block font-label-caps text-[11px] text-text-muted uppercase mb-1 font-semibold">
+                    Побажання або час (необов&apos;язково)
+                  </label>
+                  <input
+                    id={notesInputId}
+                    type="text"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    placeholder="Наприклад: 2 квадроцикли на 14:00"
+                    className="w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-base placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none"
+                  />
                 </div>
               </div>
 
@@ -843,9 +876,16 @@ export function BookingCalculator({
                           <div
                             key={v.id}
                             onClick={() => handleSelectVehicle(v.id)}
+                            onKeyDown={(e) => {
+                              if (e.key === ' ' || e.key === 'Enter') {
+                                e.preventDefault()
+                                handleSelectVehicle(v.id)
+                              }
+                            }}
+                            tabIndex={0}
                             role="radio"
                             aria-checked={isSelected}
-                            className={`flex items-center gap-3 p-3 rounded-xl bg-surface-base cursor-pointer transition-all duration-150 border select-none min-h-[48px] ${
+                            className={`flex items-center gap-3 p-3 rounded-xl bg-surface-base cursor-pointer transition-all duration-150 border select-none min-h-[48px] outline-none focus-visible:ring-2 focus-visible:ring-border-active ${
                               isSelected
                                 ? 'border-border-active bg-surface-panel-elevated/70 shadow-sm shadow-border-active/10 ring-1 ring-border-active'
                                 : 'border-border-subtle hover:border-border-active/60'
@@ -966,6 +1006,22 @@ export function BookingCalculator({
                         </span>
                       </div>
                     </div>
+                  </div>
+
+                  {/* Optional Comment / Preferred Time Row */}
+                  <div className="min-w-0">
+                    <label htmlFor={desktopNotesInputId} className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
+                      Побажання або зручний час (необов&apos;язково):
+                    </label>
+                    <input
+                      id={desktopNotesInputId}
+                      type="text"
+                      aria-label="Побажання або зручний час"
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                      placeholder="Наприклад: бажано на 15:00, будемо компанією з 4-х осіб"
+                      className="w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-base md:text-sm transition-colors"
+                    />
                   </div>
 
                   {errorMsg && (

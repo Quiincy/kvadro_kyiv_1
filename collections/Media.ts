@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { revalidateAfterChange, revalidateAfterDelete } from '../lib/revalidate'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -13,8 +14,11 @@ export const Media: CollectionConfig = {
   },
   access: {
     read: () => true,
+    create: ({ req: { user } }) => Boolean(user),
+    update: ({ req: { user } }) => Boolean(user),
+    delete: ({ req: { user } }) => Boolean(user),
   },
-  upload: {
+   upload: {
     staticDir: path.resolve(dirname, '../public/media'),
     mimeTypes: ['image/*'],
     adminThumbnail: 'thumbnail',
@@ -65,6 +69,8 @@ export const Media: CollectionConfig = {
     },
   ],
   hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
     afterRead: [
       ({ doc }) => {
         if (doc && doc.filename) {
