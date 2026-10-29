@@ -153,12 +153,12 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
                 </a>
 
                 <a
-                  className="w-full sm:w-auto p-4 rounded-lg bg-surface-panel border border-border-subtle hover:border-border-active text-text-primary hover:text-brand-amber transition-all flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto p-4 rounded-lg bg-surface-panel border border-border-subtle hover:border-[#E1306C] text-text-primary hover:text-[#E1306C] transition-all flex items-center justify-center gap-2.5 group"
                   href={s.instagram}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <MaterialIcon className="text-border-active">photo_camera</MaterialIcon>
+                  <InstagramIcon className="w-5 h-5 text-[#E1306C] group-hover:scale-110 transition-transform" />
                   <span className="font-headline-sm text-sm">@{s.instagramUsername || 'kvadro_kyiv1'}</span>
                 </a>
               </div>

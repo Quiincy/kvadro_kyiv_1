@@ -43,10 +43,32 @@ export function Footer({ settings, onOpenSafety, onOpenOffer }: FooterProps) {
         </p>
 
         {/* Fast Contact Links */}
-        <div className="flex flex-wrap justify-center gap-4 text-xs font-semibold text-text-muted">
-          <a className="hover:text-border-active transition-colors" href={`tel:${currentSettings.phoneRaw}`}>{currentSettings.phone}</a>
-          <a className="hover:text-border-active transition-colors" href={currentSettings.telegram} target="_blank" rel="noopener noreferrer">Telegram {currentSettings.telegramUsername}</a>
-          <a className="hover:text-border-active transition-colors" href={currentSettings.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+        <div className="flex flex-wrap justify-center gap-3 text-xs font-semibold text-text-muted">
+          <a
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-panel border border-border-subtle hover:border-border-active hover:text-border-active transition-all"
+            href={`tel:${currentSettings.phoneRaw}`}
+          >
+            <Phone className="w-3.5 h-3.5 text-border-active" />
+            <span>{currentSettings.phone}</span>
+          </a>
+          <a
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-panel border border-border-subtle hover:border-[#2AABEE] hover:text-[#2AABEE] transition-all"
+            href={currentSettings.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Send className="w-3.5 h-3.5 text-[#2AABEE]" />
+            <span>{currentSettings.telegramUsername}</span>
+          </a>
+          <a
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-panel border border-border-subtle hover:border-[#E1306C] hover:text-[#E1306C] transition-all"
+            href={currentSettings.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <InstagramIcon className="w-3.5 h-3.5 text-[#E1306C]" />
+            <span>@{currentSettings.instagramUsername}</span>
+          </a>
         </div>
 
         {/* Footer Policy Links */}
@@ -106,29 +128,29 @@ export function Footer({ settings, onOpenSafety, onOpenOffer }: FooterProps) {
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
-                className="p-2.5 rounded-lg bg-surface-panel border border-border-subtle hover:border-border-active text-text-primary hover:text-brand-amber transition-all flex items-center justify-center"
+                className="w-10 h-10 rounded-xl bg-[#E1306C]/15 border border-[#E1306C]/40 hover:border-[#E1306C] hover:bg-[#E1306C] text-[#E1306C] hover:text-white transition-all flex items-center justify-center"
                 href={currentSettings.instagram}
                 rel="noopener noreferrer"
                 target="_blank"
-                title="Інстаграм"
+                title={`Інстаграм @${currentSettings.instagramUsername}`}
               >
-                <MaterialIcon className="text-lg">photo_camera</MaterialIcon>
+                <InstagramIcon className="w-4 h-4" />
               </a>
               <a
-                className="p-2.5 rounded-lg bg-surface-panel border border-border-subtle hover:border-border-active text-text-primary hover:text-brand-amber transition-all flex items-center justify-center"
+                className="w-10 h-10 rounded-xl bg-[#2AABEE]/15 border border-[#2AABEE]/40 hover:border-[#2AABEE] hover:bg-[#2AABEE] text-[#2AABEE] hover:text-white transition-all flex items-center justify-center"
                 href={currentSettings.telegram}
                 rel="noopener noreferrer"
                 target="_blank"
-                title="Телеграм"
+                title={`Телеграм ${currentSettings.telegramUsername}`}
               >
-                <MaterialIcon className="text-lg">send</MaterialIcon>
+                <Send className="w-4 h-4" />
               </a>
               <a
-                className="p-2.5 rounded-lg bg-surface-panel border border-border-subtle hover:border-border-active text-text-primary hover:text-brand-amber transition-all flex items-center justify-center"
+                className="w-10 h-10 rounded-xl bg-border-active/15 border border-border-active/40 hover:border-border-active hover:bg-border-active text-border-active hover:text-white transition-all flex items-center justify-center"
                 href={`tel:${currentSettings.phoneRaw}`}
                 title="Зателефонувати"
               >
-                <MaterialIcon className="text-lg">call</MaterialIcon>
+                <Phone className="w-4 h-4" />
               </a>
             </div>
           </div>

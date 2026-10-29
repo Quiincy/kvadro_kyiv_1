@@ -4,6 +4,7 @@ import React, { useState, useId, useRef, useEffect, useMemo } from 'react'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import { FormFieldTooltip, FormAlertBanner } from '@/components/ui/FormFieldTooltip'
 import { Check, Send, Phone, Calendar, User, Sparkles, CheckCircle2, ChevronDown } from 'lucide-react'
+import { InstagramIcon } from '@/components/InstagramIcon'
 import { defaultSettings, defaultFleet, FleetItem } from '@/lib/defaultData'
 import {
   formatUkrainianPhone,
@@ -732,21 +733,21 @@ export function BookingCalculator({
             </p>
             <div className="grid grid-cols-2 gap-3">
               <a
-                className="flex items-center justify-center gap-2 p-2.5 bg-surface-panel rounded-lg border border-border-subtle hover:border-[#2AABEE] text-text-primary text-xs font-semibold"
+                className="flex items-center justify-center gap-2 p-2.5 bg-surface-panel rounded-lg border border-border-subtle hover:border-[#2AABEE] text-text-primary hover:text-[#2AABEE] text-xs font-semibold transition-all"
                 href={currentSettings.telegram}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <MaterialIcon className="text-sm text-[#2AABEE]">send</MaterialIcon>
+                <Send className="w-4 h-4 text-[#2AABEE] shrink-0" />
                 <span>Telegram ({currentSettings.telegramUsername})</span>
               </a>
               <a
-                className="flex items-center justify-center gap-2 p-2.5 bg-surface-panel rounded-lg border border-border-subtle hover:border-[#E1306C] text-text-primary text-xs font-semibold"
+                className="flex items-center justify-center gap-2 p-2.5 bg-surface-panel rounded-lg border border-border-subtle hover:border-[#E1306C] text-text-primary hover:text-[#E1306C] text-xs font-semibold transition-all"
                 href={currentSettings.instagram}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <MaterialIcon className="text-sm text-[#E1306C]">photo_camera</MaterialIcon>
+                <InstagramIcon className="w-4 h-4 text-[#E1306C] shrink-0" />
                 <span>Instagram</span>
               </a>
             </div>
@@ -805,47 +806,47 @@ export function BookingCalculator({
                   className="flex items-center gap-3 p-3 rounded-lg bg-surface-base border border-border-subtle hover:border-border-active transition-all group"
                   href={`tel:${currentSettings.phoneRaw}`}
                 >
-                  <div className="w-10 h-10 rounded bg-surface-panel flex items-center justify-center text-border-active">
-                    <MaterialIcon className="">call</MaterialIcon>
+                  <div className="w-10 h-10 rounded-xl bg-border-active/15 border border-border-active/40 flex items-center justify-center text-border-active group-hover:bg-border-active group-hover:text-white transition-all shrink-0">
+                    <Phone className="w-4 h-4" />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-body-sm text-xs text-text-dim">Телефон / Viber:</span>
-                    <span className="font-headline-sm text-base text-text-primary font-bold group-hover:text-border-active">
+                    <span className="font-headline-sm text-base text-text-primary font-bold group-hover:text-border-active transition-colors">
                       {currentSettings.phone}
                     </span>
                   </div>
                 </a>
 
                 <a
-                  className="flex items-center gap-3 p-3 rounded-lg bg-surface-base border border-border-subtle hover:border-border-active transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-lg bg-surface-base border border-border-subtle hover:border-[#2AABEE] transition-all group"
                   href={currentSettings.telegram}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <div className="w-10 h-10 rounded bg-surface-panel flex items-center justify-center text-border-active">
-                    <MaterialIcon className="">send</MaterialIcon>
+                  <div className="w-10 h-10 rounded-xl bg-[#2AABEE]/15 border border-[#2AABEE]/40 flex items-center justify-center text-[#2AABEE] group-hover:bg-[#2AABEE] group-hover:text-white transition-all shrink-0">
+                    <Send className="w-4 h-4" />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-body-sm text-xs text-text-dim">Наш Телеграм:</span>
-                    <span className="font-headline-sm text-base text-text-primary font-bold group-hover:text-border-active">
+                    <span className="font-headline-sm text-base text-text-primary font-bold group-hover:text-[#2AABEE] transition-colors">
                       {currentSettings.telegramUsername}
                     </span>
                   </div>
                 </a>
 
                 <a
-                  className="flex items-center gap-3 p-3 rounded-lg bg-surface-base border border-border-subtle hover:border-border-active transition-all group"
+                  className="flex items-center gap-3 p-3 rounded-lg bg-surface-base border border-border-subtle hover:border-[#E1306C] transition-all group"
                   href={currentSettings.instagram}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <div className="w-10 h-10 rounded bg-surface-panel flex items-center justify-center text-border-active">
-                    <MaterialIcon className="">photo_camera</MaterialIcon>
+                  <div className="w-10 h-10 rounded-xl bg-[#E1306C]/15 border border-[#E1306C]/40 flex items-center justify-center text-[#E1306C] group-hover:bg-[#E1306C] group-hover:text-white transition-all shrink-0">
+                    <InstagramIcon className="w-4 h-4" />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-body-sm text-xs text-text-dim">Наш Інстаграм (фото &amp; відео):</span>
-                    <span className="font-headline-sm text-base text-text-primary font-bold group-hover:text-border-active">
-                      {currentSettings.instagramUsername}
+                    <span className="font-headline-sm text-base text-text-primary font-bold group-hover:text-[#E1306C] transition-colors">
+                      @{currentSettings.instagramUsername}
                     </span>
                   </div>
                 </a>
@@ -892,7 +893,7 @@ export function BookingCalculator({
                       rel="noopener noreferrer"
                       className="px-6 py-3 rounded-lg bg-[#2AABEE] text-white font-headline-sm text-xs uppercase font-bold flex items-center gap-2 hover:brightness-110"
                     >
-                      <MaterialIcon className="text-base">send</MaterialIcon>
+                      <Send className="w-4 h-4" />
                       <span>Відкрити в Telegram</span>
                     </a>
                     <button

@@ -3,7 +3,8 @@
 import React, { useState } from 'react'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import Image from 'next/image'
-import { Send, MapPin } from 'lucide-react'
+import { Send, MapPin, Phone } from 'lucide-react'
+import { InstagramIcon } from '@/components/InstagramIcon'
 import { defaultSettings } from '@/lib/defaultData'
 
 interface NavbarProps {
@@ -151,14 +152,37 @@ export function Navbar({ settings, onOpenContacts }: NavbarProps) {
               </nav>
             </div>
 
-            <div className="pt-4 border-t border-border-subtle">
-              <p className="font-body-sm text-text-dim text-xs mb-1">{s.addressShort || s.address}</p>
-              <a
-                className="block font-headline-sm font-bold text-text-primary hover:text-border-active text-base"
-                href={`tel:${s.phoneRaw}`}
-              >
-                {s.phone}
-              </a>
+            <div className="pt-4 border-t border-border-subtle space-y-3">
+              <div>
+                <p className="font-body-sm text-text-dim text-xs mb-1">{s.addressShort || s.address}</p>
+                <a
+                  className="inline-flex items-center gap-2 font-headline-sm font-bold text-text-primary hover:text-border-active text-base transition-colors"
+                  href={`tel:${s.phoneRaw}`}
+                >
+                  <Phone className="w-4 h-4 text-border-active" />
+                  <span>{s.phone}</span>
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <a
+                  href={s.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2 px-3 rounded-lg bg-[#2AABEE]/15 border border-[#2AABEE]/40 hover:bg-[#2AABEE] text-[#2AABEE] hover:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Telegram</span>
+                </a>
+                <a
+                  href={s.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2 px-3 rounded-lg bg-[#E1306C]/15 border border-[#E1306C]/40 hover:bg-[#E1306C] text-[#E1306C] hover:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all"
+                >
+                  <InstagramIcon className="w-3.5 h-3.5" />
+                  <span>Instagram</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -241,13 +265,13 @@ export function Navbar({ settings, onOpenContacts }: NavbarProps) {
           </nav>
 
           {/* Trailing Action Cluster */}
-          <div className="flex items-center gap-3 xl:gap-4 shrink-0">
+          <div className="flex items-center gap-2.5 xl:gap-3.5 shrink-0">
             {/* Direct Quick Call */}
             <a
               className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-surface-panel hover:bg-surface-panel-elevated border border-border-subtle hover:border-border-active text-text-primary transition-all group whitespace-nowrap shadow-sm"
               href={`tel:${s.phoneRaw}`}
             >
-              <MaterialIcon className="text-border-active text-[19px]">call</MaterialIcon>
+              <Phone className="w-4 h-4 text-border-active" />
               <span className="font-headline-sm text-xs xl:text-sm font-semibold tracking-tight group-hover:text-border-active transition-colors whitespace-nowrap">
                 {s.phone}
               </span>
@@ -255,13 +279,24 @@ export function Navbar({ settings, onOpenContacts }: NavbarProps) {
 
             {/* Telegram Shortcut */}
             <a
-              className="w-10 h-10 rounded-xl bg-surface-panel hover:bg-surface-panel-elevated border border-border-subtle text-text-muted hover:text-border-active hover:border-border-active transition-all flex items-center justify-center shadow-sm"
+              className="w-10 h-10 rounded-xl bg-[#2AABEE]/15 border border-[#2AABEE]/40 hover:border-[#2AABEE] hover:bg-[#2AABEE] text-[#2AABEE] hover:text-white transition-all flex items-center justify-center shadow-sm"
               href={s.telegram}
               rel="noopener noreferrer"
               target="_blank"
               title={`Телеграм ${s.telegramUsername || '@Kvadro_kyiv1'}`}
             >
-              <MaterialIcon className="text-[20px]">send</MaterialIcon>
+              <Send className="w-4 h-4" />
+            </a>
+
+            {/* Instagram Shortcut */}
+            <a
+              className="w-10 h-10 rounded-xl bg-[#E1306C]/15 border border-[#E1306C]/40 hover:border-[#E1306C] hover:bg-[#E1306C] text-[#E1306C] hover:text-white transition-all flex items-center justify-center shadow-sm"
+              href={s.instagram}
+              rel="noopener noreferrer"
+              target="_blank"
+              title={`Інстаграм @${s.instagramUsername || 'kvadro_kyiv1'}`}
+            >
+              <InstagramIcon className="w-4 h-4" />
             </a>
 
             {/* Primary CTA Anchor Button */}

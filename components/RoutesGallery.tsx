@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
 import Image from 'next/image'
 import { X } from 'lucide-react'
+import { InstagramIcon } from '@/components/InstagramIcon'
 import { defaultRoutes, RouteItem, defaultSettings } from '@/lib/defaultData'
 
 interface RoutesGalleryProps {
@@ -45,11 +46,12 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               </p>
             </div>
             <a
-              className="text-border-active text-xs font-bold hover:underline flex items-center gap-0.5"
+              className="text-border-active text-xs font-bold hover:underline flex items-center gap-1.5"
               href={currentSettings.instagram}
               target="_blank"
               rel="noopener noreferrer"
             >
+              <InstagramIcon className="w-3.5 h-3.5 text-[#E1306C]" />
               <span>@{currentSettings.instagramUsername}</span>
               <MaterialIcon className="text-sm">arrow_outward</MaterialIcon>
             </a>
@@ -105,6 +107,7 @@ export function RoutesGallery({ routes, settings }: RoutesGalleryProps) {
               rel="noopener noreferrer"
               target="_blank"
             >
+              <InstagramIcon className="w-4 h-4 text-[#E1306C]" />
               <span>Більше фото в Instagram @{currentSettings.instagramUsername}</span>
               <MaterialIcon className="text-base">open_in_new</MaterialIcon>
             </a>
