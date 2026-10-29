@@ -141,18 +141,29 @@ export async function seedDatabase(payload: Payload, force = false) {
 
   // 2. Fleet Collection
   try {
-    const { totalDocs: fleetCount } = await payload.count({
-      collection: 'fleet',
-    })
-    if (fleetCount === 0 || force) {
-      if (force && fleetCount > 0) {
-        await payload.delete({
-          collection: 'fleet',
-          where: { id: { exists: true } },
-        })
-      }
-      for (let i = 0; i < defaultFleet.length; i++) {
-        const item = defaultFleet[i]
+    for (let i = 0; i < defaultFleet.length; i++) {
+      const item = defaultFleet[i]
+      const existing = await payload.find({
+        collection: 'fleet',
+        where: { slug: { equals: item.id } },
+        limit: 1,
+      })
+      if (existing.totalDocs > 0) {
+        // Always sync price2h for buggy or if force
+        if (force || item.id === 'buggy') {
+          await payload.update({
+            collection: 'fleet',
+            id: existing.docs[0].id,
+            data: {
+              price1h: item.price1h || null,
+              price2h: item.price2h,
+              price3h: item.price3h || null,
+              passengerPrice: item.passengerPrice || null,
+            },
+          })
+          results.fleet++
+        }
+      } else {
         await payload.create({
           collection: 'fleet',
           data: {
@@ -173,6 +184,14 @@ export async function seedDatabase(payload: Payload, force = false) {
         })
         results.fleet++
       }
+    }
+
+    // Clear any stale locks from the database
+    if (payload.collections?.['payload-locked-documents']) {
+      await payload.delete({
+        collection: 'payload-locked-documents',
+        where: { id: { exists: true } },
+      })
     }
   } catch (err) {
     console.error('Error seeding fleet:', err)
