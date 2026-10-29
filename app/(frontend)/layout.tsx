@@ -14,7 +14,13 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || "https://kvadrokyiv1-lake.vercel.app";
+const rawUrl = process.env.NEXT_PUBLIC_SERVER_URL || "";
+const siteUrl =
+  rawUrl && !rawUrl.includes("localhost") && !rawUrl.includes("kvadro-kyiv-1.vercel.app")
+    ? rawUrl
+    : "https://kvadrokyiv1-lake.vercel.app";
+
+const ogImageUrl = `${siteUrl}/assets/og-image.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -45,13 +51,14 @@ export const metadata: Metadata = {
     title: "KVADRO KYIV 1 — Прокат квадроциклів, ендуро та баггі у Києві",
     description:
       "Драйвові прогулянки лісовими трасами Бортничів. Потужні квадроцикли 250-500сс, ендуро мотоцикли, безпечні баггі. Безкоштовне екіпірування та напої на фініші!",
-    url: "https://kvadrokyiv1.com.ua",
+    url: siteUrl,
     siteName: "KVADRO KYIV 1",
     images: [
       {
-        url: "/assets/hero-quad.png",
+        url: ogImageUrl,
         width: 1200,
         height: 630,
+        type: "image/jpeg",
         alt: "Прокат квадроциклів у Києві KVADRO KYIV 1",
       },
     ],
@@ -63,7 +70,7 @@ export const metadata: Metadata = {
     title: "KVADRO KYIV 1 — Прокат квадроциклів у Києві",
     description:
       "Драйвові прогулянки на квадроциклах, мото та баггі у лісі біля Києва. Замовляйте онлайн!",
-    images: ["/assets/hero-quad.png"],
+    images: [ogImageUrl],
   },
   robots: {
     index: true,
