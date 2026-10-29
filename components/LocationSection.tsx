@@ -39,28 +39,36 @@ export function LocationSection({ settings }: LocationSectionProps) {
           </div>
 
           {/* Map Container */}
-          <div className="relative rounded-xl overflow-hidden border border-border-subtle min-h-[220px]">
+          <div className="relative rounded-xl overflow-hidden border border-border-subtle h-[260px]">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2543.9996874877015!2d30.71088247655339!3d50.38520437157981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTDCsDIzJzA2LjciTiAzMMKwNDInNDguNSJF!5e0!3m2!1suk!2sua!4v1699540795012!5m2!1suk!2sua"
               width="100%"
-              height="220"
-              style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(90%)' }}
+              height="100%"
+              style={{ border: 0 }}
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Локація на карті"
             />
-            <div className="absolute inset-0 bg-surface-base/30 backdrop-blur-[1px] flex items-center justify-center p-4 pointer-events-none">
-              <a
-                className="px-4 py-2.5 bg-surface-panel-elevated/95 border border-border-active rounded-lg text-text-primary font-label-caps text-xs uppercase flex items-center gap-2 ignition-glow hover:bg-border-active transition-all pointer-events-auto"
-                href={currentSettings.googleMapsUrl}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <MaterialIcon className="text-border-active text-sm">near_me</MaterialIcon>
-                <span>Відкрити на карті Google</span>
-              </a>
-            </div>
+            <a
+              className="absolute top-3 left-3 px-3 py-2 bg-surface-base/95 hover:bg-surface-panel-elevated backdrop-blur-md border border-border-active hover:border-brand-amber rounded-xl text-text-primary flex items-center gap-2.5 shadow-xl ignition-glow transition-all active:scale-95"
+              href={currentSettings.googleMapsUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+              title="Відкрити в Google Maps"
+            >
+              <div className="w-7 h-7 rounded-lg bg-border-active flex items-center justify-center text-white shrink-0">
+                <MaterialIcon className="text-sm">near_me</MaterialIcon>
+              </div>
+              <div className="pr-1">
+                <span className="font-headline-sm text-xs font-bold text-text-primary block leading-tight">
+                  KVADRO KYIV 1
+                </span>
+                <span className="text-[10px] text-brand-amber font-semibold block leading-tight">
+                  Відкрити Google Maps →
+                </span>
+              </div>
+            </a>
           </div>
 
           {/* 2 Stats Cards */}
@@ -136,37 +144,45 @@ export function LocationSection({ settings }: LocationSectionProps) {
             {/* Right: Styled Interactive Map Canvas */}
             <div className="lg:col-span-6">
               <div className="bg-surface-panel border border-border-subtle rounded-2xl p-4 shadow-2xl relative overflow-hidden">
-                {/* Simulated GPS Radar Map Visual */}
+                {/* Interactive Map Canvas */}
                 <div className="relative h-96 w-full rounded-xl overflow-hidden bg-surface-base">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2543.9996874877015!2d30.71088247655339!3d50.38520437157981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTDCsDIzJzA2LjciTiAzMMKwNDInNDguNSJF!5e0!3m2!1suk!2sua!4v1699540795012!5m2!1suk!2sua"
                     width="100%"
                     height="100%"
-                    style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(90%)' }}
+                    style={{ border: 0 }}
                     allowFullScreen={true}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Локація KVADRO KYIV 1"
                   />
-                  {/* Map Radar Grid Accent */}
-                  <div className="absolute inset-0 bg-surface-base/30 technical-grid pointer-events-none" />
 
-                  {/* Pin Marker Card */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 rounded-xl bg-surface-base/95 backdrop-blur-md border border-border-active shadow-2xl flex items-center gap-3 pointer-events-none">
-                    <div className="w-10 h-10 rounded-lg bg-border-active flex items-center justify-center text-white shrink-0">
-                      <MaterialIcon className="">sports_motorsports</MaterialIcon>
+                  {/* Clickable Top-Left Pin Marker Badge (opens Google Maps) */}
+                  <a
+                    href={currentSettings.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Відкрити локацію в Google Maps"
+                    className="absolute top-3.5 left-3.5 p-3 rounded-xl bg-surface-base/95 hover:bg-surface-panel-elevated backdrop-blur-md border border-border-active hover:border-brand-amber shadow-2xl flex items-center gap-3 transition-all hover:scale-[1.02] group cursor-pointer"
+                  >
+                    <div className="w-9 h-9 rounded-lg bg-border-active group-hover:bg-brand-amber flex items-center justify-center text-white shrink-0 transition-colors">
+                      <MaterialIcon className="text-lg">near_me</MaterialIcon>
                     </div>
-                    <div>
+                    <div className="pr-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-headline-sm text-sm font-bold text-text-primary">KVADRO KYIV 1</span>
+                        <span className="font-headline-sm text-xs sm:text-sm font-bold text-text-primary group-hover:text-brand-amber transition-colors">
+                          KVADRO KYIV 1
+                        </span>
                         <span className="w-2 h-2 rounded-full bg-success-emerald animate-ping" />
                       </div>
-                      <span className="font-body-sm text-xs text-text-muted block">{currentSettings.addressShort}</span>
+                      <span className="font-body-sm text-[11px] text-text-muted block">
+                        {currentSettings.addressShort} • <span className="text-border-active font-semibold">Маршрут →</span>
+                      </span>
                     </div>
-                  </div>
+                  </a>
 
                   {/* Map Bottom Bar */}
-                  <div className="absolute bottom-4 left-4 right-4 p-3 rounded-lg bg-surface-panel-elevated/90 backdrop-blur-md border border-border-subtle flex justify-between items-center text-xs pointer-events-none">
+                  <div className="absolute bottom-3 left-3 right-3 px-3 py-2 rounded-lg bg-surface-base/90 backdrop-blur-md border border-border-subtle flex justify-between items-center text-xs pointer-events-none">
                     <span className="text-text-muted">
                       Координати: <strong className="text-text-primary font-mono">50°23&apos;06.7&quot;N 30°42&apos;48.5&quot;E</strong>
                     </span>

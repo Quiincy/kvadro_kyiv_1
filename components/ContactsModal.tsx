@@ -274,25 +274,30 @@ export function ContactsModal({
               src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2543.9996874877015!2d30.71088247655339!3d50.38520437157981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTDCsDIzJzA2LjciTiAzMMKwNDInNDguNSJF!5e0!3m2!1suk!2sua!4v1699540795012!5m2!1suk!2sua"
               width="100%"
               height="100%"
-              style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(90%)' }}
+              style={{ border: 0 }}
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Карта проїзду KVADRO KYIV 1"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0E121A] via-transparent to-transparent pointer-events-none" />
 
-            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2">
-              <div className="px-3 py-1.5 rounded-lg bg-surface-base/90 backdrop-blur-md border border-border-subtle text-[11px] text-text-primary font-semibold hidden sm:flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-border-active" />
-                <span>Київ, Бортничі (вул. Лісова 76К)</span>
-              </div>
+            <a
+              href={s.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Відкрити в Google Maps"
+              className="absolute top-3 left-3 px-3 py-1.5 rounded-lg bg-surface-base/95 hover:bg-surface-panel-elevated backdrop-blur-md border border-border-active hover:border-brand-amber text-[11px] text-text-primary font-semibold flex items-center gap-1.5 shadow-lg transition-all"
+            >
+              <span className="w-2 h-2 rounded-full bg-border-active" />
+              <span>Київ, Бортничі (вул. Лісова 76К)</span>
+            </a>
 
+            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-end gap-2 pointer-events-none">
               <a
                 href={s.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-border-active hover:bg-brand-amber text-white font-label-caps text-xs uppercase font-bold flex items-center justify-center gap-2 ignition-glow transition-all shadow-lg"
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-border-active hover:bg-brand-amber text-white font-label-caps text-xs uppercase font-bold flex items-center justify-center gap-2 ignition-glow transition-all shadow-lg pointer-events-auto"
               >
                 <Navigation className="w-4 h-4" />
                 <span>Прокласти маршрут у Google Maps</span>
