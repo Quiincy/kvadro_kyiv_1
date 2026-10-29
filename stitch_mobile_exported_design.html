@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+
+<html class="dark scroll-smooth" lang="uk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KVADRO KYIV 1 | Прокат квадроциклів, ендуро мото та баггі у Києві</title>
+<!-- Google Fonts: Montserrat & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Montserrat:wght@600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS Play CDN with Container Queries & Forms -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "brand-amber": "#FF6B00",
+            "secondary-fixed": "#dbe1ff",
+            "tertiary-container": "#2a92ff",
+            "tertiary-fixed-dim": "#a6c8ff",
+            "surface-container-high": "#2a2a2a",
+            "outline": "#af887f",
+            "secondary-fixed-dim": "#bec5e5",
+            "warning-caution": "#F59E0B",
+            "primary-container": "#ff5636",
+            "on-secondary-fixed": "#131a33",
+            "on-primary-fixed-variant": "#8e1500",
+            "surface-container-lowest": "#0e0e0e",
+            "tertiary": "#a6c8ff",
+            "inverse-on-surface": "#313030",
+            "on-primary-container": "#580900",
+            "on-surface": "#e5e2e1",
+            "on-error-container": "#ffdad6",
+            "surface": "#131313",
+            "surface-tint": "#ffb4a5",
+            "text-primary": "#F7FAFC",
+            "on-secondary-fixed-variant": "#3e4660",
+            "border-active": "#FF3208",
+            "primary-fixed": "#ffdad3",
+            "success-emerald": "#10B981",
+            "surface-variant": "#353534",
+            "outline-variant": "#5e3f39",
+            "secondary": "#bec5e5",
+            "inverse-primary": "#b91e00",
+            "primary-fixed-dim": "#ffb4a5",
+            "inverse-surface": "#e5e2e1",
+            "background": "#131313",
+            "on-tertiary-fixed-variant": "#004786",
+            "surface-container-low": "#1c1b1b",
+            "surface-base": "#0B0E14",
+            "on-tertiary-container": "#002a53",
+            "surface-dim": "#131313",
+            "surface-panel-elevated": "#1C2333",
+            "surface-container-highest": "#353534",
+            "on-tertiary": "#00315f",
+            "text-muted": "#94A3B8",
+            "error-container": "#93000a",
+            "on-primary": "#640c00",
+            "on-secondary-container": "#b0b7d7",
+            "primary": "#ffb4a5",
+            "on-tertiary-fixed": "#001c3b",
+            "surface-panel": "#141923",
+            "error": "#ffb4ab",
+            "on-error": "#690005",
+            "on-secondary": "#282f49",
+            "surface-container": "#201f1f",
+            "text-dim": "#64748B",
+            "border-subtle": "#252F45",
+            "tertiary-fixed": "#d5e3ff",
+            "on-surface-variant": "#e8bcb3",
+            "on-primary-fixed": "#3e0400",
+            "surface-bright": "#3a3939",
+            "on-background": "#e5e2e1",
+            "secondary-container": "#414863"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "margin": "3rem",
+            "gutter-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.5rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["Montserrat", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "headline-sm": ["Montserrat", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"],
+            "price-val": ["Montserrat", "sans-serif"],
+            "headline-xl": ["Montserrat", "sans-serif"],
+            "label-caps": ["Montserrat", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "headline-lg": ["Montserrat", "sans-serif"],
+            "display-hero-mobile": ["Montserrat", "sans-serif"],
+            "display-hero": ["Montserrat", "sans-serif"],
+            "headline-md": ["Montserrat", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-xl-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "price-val": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "800" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-hero-mobile": ["36px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+            "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "900" }],
+            "headline-md": ["22px", { "lineHeight": "30px", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .ignition-glow {
+      box-shadow: 0px 4px 24px rgba(255, 50, 8, 0.4);
+    }
+    .technical-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(37, 47, 69, 0.25) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(37, 47, 69, 0.25) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-surface-base text-text-primary font-body-md antialiased selection:bg-border-active selection:text-text-primary pb-24 overflow-x-hidden">
+<!-- Mobile Top App Bar (Shared Components Anchor) -->
+<header class="bg-surface-panel-elevated dark:bg-surface-panel-elevated docked full-width top-0 sticky z-50 shadow-md">
+<div class="flex items-center justify-between px-space-md py-space-sm w-full max-w-7xl mx-auto">
+<!-- Leading Menu Button & Brand -->
+<div class="flex items-center gap-space-sm">
+<button aria-label="Відкрити меню" class="p-1 rounded-lg text-text-muted hover:text-border-active hover:bg-surface-panel active:scale-95 transition-all" id="menu-btn">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<a class="flex items-center gap-2" href="#">
+<img alt="KVADRO KYIV 1" class="w-8 h-8 rounded-full border border-border-active object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Wd6Djfr1bFqVtpMjUN7ZrjFOkf_addVjvkgKH2mgGwfjgXAt2Z07tltf9tPQNBjxbeaEcBEpx-abOMMWiy3iZJ0qy3M_0UobkMAxvjJlSfznMJyTh0vsSHWzcPLqwgn8_rzt94cQNVHDYdCaLLIjqe334CzG92ibwnYQDW-YwN0Nh19t6CtzjZKGFnDKmsqEl3MYs55Wy6DzUnGxzJKc9DUSipMdVMXz1JieeYJDhiC00GAZKdcv-x1UZn"/>
+<span class="font-headline-sm text-headline-sm font-bold uppercase tracking-wider text-text-primary dark:text-text-primary">
+            KVADRO KYIV 1
+          </span>
+</a>
+</div>
+<!-- Quick Action / Call Button -->
+<div class="flex items-center gap-2">
+<a class="flex items-center gap-1.5 px-3 py-1.5 bg-border-active text-text-primary rounded-lg font-label-caps text-label-caps uppercase ignition-glow active:scale-95 transition-transform" href="tel:+380984327179">
+<span class="material-symbols-outlined text-sm">call</span>
+<span>Дзвінок</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Slide-out Drawer Navigation Overlay (Mooted for Mobile Menu) -->
+<div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden transition-opacity" id="nav-drawer">
+<div class="fixed inset-y-0 left-0 w-80 max-w-full bg-surface-panel dark:bg-surface-panel flex flex-col h-full p-space-md justify-between shadow-2xl border-r border-border-subtle">
+<div>
+<div class="flex items-center justify-between pb-space-md border-b border-border-subtle mb-space-md">
+<div class="flex items-center gap-2">
+<img alt="Logo" class="w-9 h-9 rounded-full border border-border-active" src="https://lh3.googleusercontent.com/aida/AEtjO1Wd6Djfr1bFqVtpMjUN7ZrjFOkf_addVjvkgKH2mgGwfjgXAt2Z07tltf9tPQNBjxbeaEcBEpx-abOMMWiy3iZJ0qy3M_0UobkMAxvjJlSfznMJyTh0vsSHWzcPLqwgn8_rzt94cQNVHDYdCaLLIjqe334CzG92ibwnYQDW-YwN0Nh19t6CtzjZKGFnDKmsqEl3MYs55Wy6DzUnGxzJKc9DUSipMdVMXz1JieeYJDhiC00GAZKdcv-x1UZn"/>
+<span class="font-headline-md text-headline-md font-bold text-text-primary uppercase tracking-tight">KVADRO KYIV 1</span>
+</div>
+<button class="text-text-muted hover:text-border-active p-1" id="close-drawer">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<nav class="space-y-2">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg bg-surface-panel-elevated text-border-active border-l-2 border-border-active font-headline-sm font-bold" href="#tours">
+<span class="material-symbols-outlined text-xl">route</span>
+<span>Маршрути та тури</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-panel-elevated transition-colors font-headline-sm" href="#prices">
+<span class="material-symbols-outlined text-xl">sell</span>
+<span>Техпарк та ціни</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-panel-elevated transition-colors font-headline-sm" href="#booking">
+<span class="material-symbols-outlined text-xl">calendar_today</span>
+<span>Онлайн-бронювання</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-panel-elevated transition-colors font-headline-sm" href="#location">
+<span class="material-symbols-outlined text-xl">pin_drop</span>
+<span>Локація та маршрути</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-panel-elevated transition-colors font-headline-sm" href="#faq">
+<span class="material-symbols-outlined text-xl">shield</span>
+<span>Безпека та правила</span>
+</a>
+</nav>
+</div>
+<div class="pt-4 border-t border-border-subtle">
+<p class="font-body-sm text-text-dim mb-2">Бортничі, вул. Лісова 76К</p>
+<a class="block font-headline-sm font-bold text-text-primary hover:text-border-active" href="tel:+380984327179">+380 (98) 432-71-79</a>
+</div>
+</div>
+</div>
+<main>
+<!-- HERO SECTION -->
+<section class="relative pt-6 pb-10 px-margin-mobile technical-grid overflow-hidden border-b border-border-subtle">
+<!-- Glow ambient backdrop -->
+<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 bg-border-active/15 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-md mx-auto relative z-10 flex flex-col gap-5">
+<!-- Trailhead Badge -->
+<div class="inline-flex items-center gap-2 self-start bg-surface-panel px-3 py-1.5 rounded-lg border border-border-subtle">
+<span class="flex h-2 w-2 rounded-full bg-border-active animate-ping"></span>
+<span class="font-label-caps text-label-caps text-border-active uppercase">Локація: Київ, вул. Лісова 76К</span>
+</div>
+<!-- Main Headline -->
+<div class="space-y-2">
+<h1 class="font-display-hero-mobile text-display-hero-mobile text-text-primary uppercase tracking-tight">
+            Прокат квадро, мото, баггі в Києві
+          </h1>
+<p class="font-body-md text-body-md text-text-muted">
+            Прогулянки сімейні, групові, індивідуальні лісовими трасами Бортничів. Драйв, яскраві емоції та повна безпека.
+          </p>
+</div>
+<!-- Hero Action Buttons -->
+<div class="flex flex-col gap-3 pt-1">
+<a class="w-full text-center py-3.5 px-6 rounded-lg bg-border-active hover:bg-brand-amber text-text-primary font-label-caps text-label-caps uppercase tracking-wider ignition-glow active:scale-98 transition-all" href="#booking">
+            Забронювати заїзд
+          </a>
+<a class="w-full text-center py-3 px-6 rounded-lg bg-surface-panel border border-border-subtle text-text-primary hover:border-border-active font-label-caps text-label-caps uppercase tracking-wider transition-all" href="#prices">
+            Прайс-лист
+          </a>
+</div>
+<!-- Trust Badges Bar -->
+<div class="grid grid-cols-3 gap-2 pt-2">
+<div class="bg-surface-panel p-2.5 rounded-lg border border-border-subtle text-center flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-border-active text-lg mb-1">timer</span>
+<span class="font-label-caps text-[10px] text-text-primary leading-tight">10 хв навчання</span>
+</div>
+<div class="bg-surface-panel p-2.5 rounded-lg border border-border-subtle text-center flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-border-active text-lg mb-1">dry_cleaning</span>
+<span class="font-label-caps text-[10px] text-text-primary leading-tight">Чисте екіпо</span>
+</div>
+<div class="bg-surface-panel p-2.5 rounded-lg border border-border-subtle text-center flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-border-active text-lg mb-1">local_cafe</span>
+<span class="font-label-caps text-[10px] text-text-primary leading-tight">Безкоштовні напої</span>
+</div>
+</div>
+<!-- Hero Feature Visual Card -->
+<div class="relative rounded-xl overflow-hidden border border-border-subtle shadow-xl mt-2 group">
+<img class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="A powerful all-terrain quad bike ATV conquering a sandy incline surrounded by tall pine trees in Bortnychi forest near Kyiv. Cinematic action shot with sand spraying from aggressive mud tires under dynamic moody overcast sunlight. Searing motorsport orange and dark carbon fiber finish on the vehicle. High contrast outdoor adventure photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4vRo2qLsyoLffwWcrFavbox_yTrp2nBUwnPWaxNgc51K57fmO3wfSD9dD_Hc5r9BurMxHOkL20QDKTncjuke5pSIzt0jH49zqJrbU8iPDpE0EMZYozUcTcR1Cew7Ht1TRK6xFarcOV5-8O8btMQkX_1uVskrCxMJ_8dvvMG8AjrlvfmuUuleXMbfKuTsYZPdzsv37f4Zm11z5VziVepZdSa6t8Bw8FfQTqJ8pBFpk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-base via-surface-base/30 to-transparent"></div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+<div>
+<span class="text-xs font-label-caps text-border-active uppercase block">Екстремальний відпочинок</span>
+<p class="font-headline-sm text-sm text-text-primary font-bold">Ліс, піщані бархани та схили</p>
+</div>
+<span class="bg-surface-panel-elevated/90 backdrop-blur px-2.5 py-1 rounded text-xs font-mono text-text-primary border border-border-subtle">
+              4x4 ПРИВІД
+            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: STEPS / PROCESS (Етапи прогулянки) -->
+<section class="py-10 px-margin-mobile bg-surface-panel/40 border-b border-border-subtle" id="tours">
+<div class="max-w-md mx-auto space-y-6">
+<div>
+<span class="font-label-caps text-label-caps text-border-active uppercase">Маршрут &amp; Організація</span>
+<h2 class="font-headline-xl-mobile text-headline-xl-mobile text-text-primary uppercase mt-1">
+            Як проходить прогулянка в KVADRO_KYIV1
+          </h2>
+<p class="font-body-sm text-text-muted mt-1">6 простих кроків до яскравих вражень на лісових трасах</p>
+</div>
+<!-- Vertical Stepper List -->
+<div class="relative pl-6 space-y-5 before:absolute before:left-3 before:top-3 before:bottom-3 before:w-0.5 before:bg-border-subtle">
+<!-- Step 1 -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-surface-panel-elevated border-2 border-border-active flex items-center justify-center">
+<span class="font-headline-sm text-[11px] font-bold text-border-active">01</span>
+</div>
+<div class="bg-surface-panel p-3.5 rounded-lg border border-border-subtle w-full">
+<h3 class="font-headline-sm text-sm font-bold text-text-primary">Попереднє бронювання</h3>
+<p class="font-body-sm text-text-muted mt-1 text-xs">Обираєте дату, час та вид техніки через сайт або телефоном.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-surface-panel-elevated border-2 border-border-active flex items-center justify-center">
+<span class="font-headline-sm text-[11px] font-bold text-border-active">02</span>
+</div>
+<div class="bg-surface-panel p-3.5 rounded-lg border border-border-subtle w-full">
+<h3 class="font-headline-sm text-sm font-bold text-text-primary">Приїзд на локацію</h3>
+<p class="font-body-sm text-text-muted mt-1 text-xs">Чекаємо Вас за адресою: <span class="text-text-primary font-semibold">м. Київ, вул. Лісова 76К</span> у заброньований час.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-surface-panel-elevated border-2 border-border-active flex items-center justify-center">
+<span class="font-headline-sm text-[11px] font-bold text-border-active">03</span>
+</div>
+<div class="bg-surface-panel p-3.5 rounded-lg border border-border-subtle w-full">
+<h3 class="font-headline-sm text-sm font-bold text-text-primary">Видача екіпірування</h3>
+<p class="font-body-sm text-text-muted mt-1 text-xs">Ми видаємо чисте захисне екіпірування: фірмові джерсі, окуляри та рукавички.</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-surface-panel-elevated border-2 border-border-active flex items-center justify-center">
+<span class="font-headline-sm text-[11px] font-bold text-border-active">04</span>
+</div>
+<div class="bg-surface-panel p-3.5 rounded-lg border border-border-subtle w-full">
+<h3 class="font-headline-sm text-sm font-bold text-text-primary">Навчання та інструктаж</h3>
+<p class="font-body-sm text-text-muted mt-1 text-xs">Наш інструктор навчає їзді приблизно за 10 хвилин (безкоштовно, входить у вартість).</p>
+</div>
+</div>
+<!-- Step 5 -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-surface-panel-elevated border-2 border-border-active flex items-center justify-center">
+<span class="font-headline-sm text-[11px] font-bold text-border-active">05</span>
+</div>
+<div class="bg-surface-panel p-3.5 rounded-lg border border-border-subtle w-full">
+<h3 class="font-headline-sm text-sm font-bold text-text-primary">Виїзд на лісовий маршрут</h3>
+<p class="font-body-sm text-text-muted mt-1 text-xs">Старт драйвової прогулянки: мальовничі гірки, лісові стежки, пісок та локації для яскравих фото.</p>
+</div>
+</div>
+<!-- Step 6 -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-surface-panel-elevated border-2 border-border-active flex items-center justify-center">
+<span class="font-headline-sm text-[11px] font-bold text-border-active">06</span>
+</div>
+<div class="bg-surface-panel p-3.5 rounded-lg border border-border-subtle w-full">
+<h3 class="font-headline-sm text-sm font-bold text-text-primary">Фініш &amp; безкоштовні напої</h3>
+<p class="font-body-sm text-text-muted mt-1 text-xs">Повертаємось на базу, ділимось емоціями та відпочиваємо з частуванням від клубу.</p>
+</div>
+</div>
+</div>
+<a class="block text-center py-3 bg-surface-panel border border-border-active text-border-active font-label-caps text-label-caps uppercase rounded-lg hover:bg-border-active hover:text-text-primary transition-all" href="#booking">
+          Забронювати заїзд
+        </a>
+</div>
+</section>
+<!-- SECTION: PRICING & FLEET (Ціни та техніка) -->
+<section class="py-10 px-margin-mobile border-b border-border-subtle" id="prices">
+<div class="max-w-md mx-auto space-y-6">
+<div>
+<span class="font-label-caps text-label-caps text-border-active uppercase">Техпарк та тарифи</span>
+<h2 class="font-headline-xl-mobile text-headline-xl-mobile text-text-primary uppercase mt-1">
+            Ціни та техніка в Києві
+          </h2>
+<p class="font-body-sm text-text-muted mt-1">Прозорі тарифи без прихованих платежів з повним супроводом</p>
+</div>
+<div class="space-y-4">
+<!-- Card 1: Квадро прогулянка -->
+<div class="bg-surface-panel rounded-xl border border-border-subtle p-4 relative overflow-hidden">
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="font-label-caps text-[10px] text-text-dim uppercase tracking-wider">Базовий клас</span>
+<h3 class="font-headline-md text-headline-md text-text-primary font-bold">Квадро прогулянка</h3>
+</div>
+<span class="bg-surface-panel-elevated text-xs font-mono px-2 py-0.5 rounded border border-border-subtle text-text-muted">Квадро 200cc</span>
+</div>
+<p class="font-body-sm text-xs text-text-muted mb-4">Легкі в керуванні квадроцикли, ідеально для початківців та парних прогулянок.</p>
+<div class="grid grid-cols-2 gap-2 mb-3 bg-surface-base p-2.5 rounded-lg border border-border-subtle">
+<div>
+<span class="text-[11px] text-text-dim block">1 година</span>
+<span class="font-price-val text-xl font-bold text-text-primary">1 400 <span class="text-xs font-normal text-text-dim">грн</span></span>
+</div>
+<div>
+<span class="text-[11px] text-text-dim block">2 години</span>
+<span class="font-price-val text-xl font-bold text-text-primary">2 300 <span class="text-xs font-normal text-text-dim">грн</span></span>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-text-muted pb-3 mb-3 border-b border-border-subtle">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-border-active text-sm">person_add</span>
+                Пасажир на квадроциклі:
+              </span>
+<span class="font-bold text-text-primary">+400 грн/година</span>
+</div>
+<a class="block text-center py-2.5 bg-surface-panel-elevated hover:bg-border-active text-text-primary border border-border-subtle hover:border-border-active rounded-lg font-label-caps text-xs uppercase transition-colors" href="#booking">
+              Обрати квадроцикл
+            </a>
+</div>
+<!-- Card 2: Великі квадроцикли 500 см3 (Хіт) -->
+<div class="bg-surface-panel-elevated rounded-xl border-2 border-border-active p-4 relative overflow-hidden shadow-lg shadow-border-active/10">
+<div class="absolute top-0 right-0 bg-border-active text-text-primary text-[10px] font-label-caps px-3 py-0.5 rounded-bl-lg uppercase font-bold tracking-wider">
+              ХІТ СЕЗОНУ
+            </div>
+<div class="flex justify-between items-start mb-2 mt-1">
+<div>
+<span class="font-label-caps text-[10px] text-border-active uppercase tracking-wider">Максимальна потужність</span>
+<h3 class="font-headline-md text-headline-md text-text-primary font-bold">Великі квадроцикли 500 кб</h3>
+</div>
+</div>
+<p class="font-body-sm text-xs text-text-muted mb-4">Повнопривідні монстри 4х4 для подолання глибокого піску, ярів та багнюки.</p>
+<div class="grid grid-cols-2 gap-2 mb-3 bg-surface-base p-2.5 rounded-lg border border-border-subtle">
+<div>
+<span class="text-[11px] text-text-dim block">1 година</span>
+<span class="font-price-val text-xl font-bold text-border-active">3 000 <span class="text-xs font-normal text-text-dim">грн</span></span>
+</div>
+<div>
+<span class="text-[11px] text-text-dim block">2 години</span>
+<span class="font-price-val text-xl font-bold text-border-active">5 200 <span class="text-xs font-normal text-text-dim">грн</span></span>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-text-muted pb-3 mb-3 border-b border-border-subtle">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-border-active text-sm">person_add</span>
+                Пасажир на 500 кб:
+              </span>
+<span class="font-bold text-text-primary">+500 грн/година</span>
+</div>
+<a class="block text-center py-2.5 bg-border-active text-text-primary font-label-caps text-xs uppercase rounded-lg ignition-glow active:scale-98 transition-all" href="#booking">
+              Забронювати 500cc
+            </a>
+</div>
+<!-- Card 3: Мото прогулянка (Ендуро) -->
+<div class="bg-surface-panel rounded-xl border border-border-subtle p-4 relative overflow-hidden">
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="font-label-caps text-[10px] text-text-dim uppercase tracking-wider">Двоколісний адреналін</span>
+<h3 class="font-headline-md text-headline-md text-text-primary font-bold">Мото прогулянка (Ендуро)</h3>
+</div>
+<span class="bg-surface-panel-elevated text-xs font-mono px-2 py-0.5 rounded border border-border-subtle text-text-muted">250 куб.см</span>
+</div>
+<p class="font-body-sm text-xs text-text-muted mb-4">Для любителів швидкості та динамічного балансу. Лісові трампліни та стежки.</p>
+<div class="grid grid-cols-2 gap-2 mb-3 bg-surface-base p-2.5 rounded-lg border border-border-subtle">
+<div>
+<span class="text-[11px] text-text-dim block">2 години</span>
+<span class="font-price-val text-xl font-bold text-text-primary">2 900 <span class="text-xs font-normal text-text-dim">грн</span></span>
+</div>
+<div>
+<span class="text-[11px] text-text-dim block">3 години</span>
+<span class="font-price-val text-xl font-bold text-text-primary">3 600 <span class="text-xs font-normal text-text-dim">грн</span></span>
+</div>
+</div>
+<p class="text-xs text-text-dim mb-3 italic">* Мінімальна тривалість мото-прогулянки 2 години.</p>
+<a class="block text-center py-2.5 bg-surface-panel-elevated hover:bg-border-active text-text-primary border border-border-subtle hover:border-border-active rounded-lg font-label-caps text-xs uppercase transition-colors" href="#booking">
+              Обрати Ендуро
+            </a>
+</div>
+<!-- Card 4: Баггі машинки -->
+<div class="bg-surface-panel rounded-xl border border-border-subtle p-4 relative overflow-hidden">
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="font-label-caps text-[10px] text-text-dim uppercase tracking-wider">Каркасна безпека</span>
+<h3 class="font-headline-md text-headline-md text-text-primary font-bold">Баггі машинки</h3>
+</div>
+<span class="bg-surface-panel-elevated text-xs font-mono px-2 py-0.5 rounded border border-border-subtle text-text-muted">Баггі UTV</span>
+</div>
+<p class="font-body-sm text-xs text-text-muted mb-4">Спортивне авто-кермо, надійний каркас безпеки та сидіння пліч-о-пліч.</p>
+<div class="grid grid-cols-2 gap-2 mb-3 bg-surface-base p-2.5 rounded-lg border border-border-subtle">
+<div>
+<span class="text-[11px] text-text-dim block">1 година</span>
+<span class="font-price-val text-xl font-bold text-text-primary">2 000 <span class="text-xs font-normal text-text-dim">грн</span></span>
+</div>
+<div>
+<span class="text-[11px] text-text-dim block">2 години</span>
+<span class="font-price-val text-xl font-bold text-text-primary">3 600 <span class="text-xs font-normal text-text-dim">грн</span></span>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-text-muted pb-3 mb-3 border-b border-border-subtle">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-border-active text-sm">person_add</span>
+                Пасажир у баггі:
+              </span>
+<span class="font-bold text-text-primary">+500 грн/година</span>
+</div>
+<a class="block text-center py-2.5 bg-surface-panel-elevated hover:bg-border-active text-text-primary border border-border-subtle hover:border-border-active rounded-lg font-label-caps text-xs uppercase transition-colors" href="#booking">
+              Обрати Баггі
+            </a>
+</div>
+<!-- VIP Format Badge Box -->
+<div class="p-3.5 rounded-lg bg-surface-base border border-warning-caution/40 flex items-start gap-3">
+<span class="material-symbols-outlined text-warning-caution text-xl">star</span>
+<div class="text-xs">
+<span class="font-bold text-text-primary block">VIP-формат індивідуального заїзду:</span>
+<span class="text-text-muted">За індивідуальну прогулянку без сторонніх людей доплачується <strong class="text-warning-caution">+1000 грн/година</strong> за всю Вашу компанію.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: ONLINE BOOKING (Мобільна форма онлайн-бронювання) -->
+<section class="py-10 px-margin-mobile bg-surface-panel/30 border-b border-border-subtle" id="booking">
+<div class="max-w-md mx-auto space-y-6">
+<div>
+<span class="font-label-caps text-label-caps text-border-active uppercase">Швидка бронь</span>
+<h2 class="font-headline-xl-mobile text-headline-xl-mobile text-text-primary uppercase mt-1">
+            Забронювати прогулянку
+          </h2>
+<p class="font-body-sm text-text-muted mt-1">Заповніть форму — менеджер зв'яжеться з вами за 5 хвилин для підтвердження часу</p>
+</div>
+<form class="space-y-4 bg-surface-panel p-4 rounded-xl border border-border-subtle" id="booking-form" onsubmit="event.preventDefault(); alert('Дякуємо! Вашу заявку на прогулянку прийнято. Менеджер зв\'яжеться з Вами найближчим часом!');">
+<!-- Technique Selector Pills -->
+<div>
+<label class="block font-label-caps text-[11px] text-text-muted uppercase mb-2">1. Оберіть вид техніки</label>
+<div class="grid grid-cols-2 gap-2 text-xs">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="vehicle" type="radio" value="quad"/>
+<div class="p-2.5 rounded-lg bg-surface-base border border-border-subtle peer-checked:border-border-active peer-checked:bg-surface-panel-elevated peer-checked:text-border-active text-text-muted text-center transition-all font-semibold">
+                  Квадроцикли
+                </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="vehicle" type="radio" value="quad500"/>
+<div class="p-2.5 rounded-lg bg-surface-base border border-border-subtle peer-checked:border-border-active peer-checked:bg-surface-panel-elevated peer-checked:text-border-active text-text-muted text-center transition-all font-semibold">
+                  Великі 500 кб
+                </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="vehicle" type="radio" value="moto"/>
+<div class="p-2.5 rounded-lg bg-surface-base border border-border-subtle peer-checked:border-border-active peer-checked:bg-surface-panel-elevated peer-checked:text-border-active text-text-muted text-center transition-all font-semibold">
+                  Мото (Ендуро)
+                </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="vehicle" type="radio" value="buggy"/>
+<div class="p-2.5 rounded-lg bg-surface-base border border-border-subtle peer-checked:border-border-active peer-checked:bg-surface-panel-elevated peer-checked:text-border-active text-text-muted text-center transition-all font-semibold">
+                  Баггі машинки
+                </div>
+</label>
+</div>
+</div>
+<!-- Duration Selector -->
+<div>
+<label class="block font-label-caps text-[11px] text-text-muted uppercase mb-2">2. Тривалість прогулянки</label>
+<div class="grid grid-cols-3 gap-2 text-xs">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="duration" type="radio" value="1h"/>
+<div class="p-2.5 rounded-lg bg-surface-base border border-border-subtle peer-checked:border-border-active peer-checked:text-text-primary text-text-muted text-center font-semibold">
+                  1 година
+                </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="duration" type="radio" value="2h"/>
+<div class="p-2.5 rounded-lg bg-surface-base border border-border-subtle peer-checked:border-border-active peer-checked:text-text-primary text-text-muted text-center font-semibold">
+                  2 години
+                </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="duration" type="radio" value="3h"/>
+<div class="p-2.5 rounded-lg bg-surface-base border border-border-subtle peer-checked:border-border-active peer-checked:text-text-primary text-text-muted text-center font-semibold">
+                  3 години
+                </div>
+</label>
+</div>
+</div>
+<!-- Personal Data Inputs -->
+<div class="space-y-3 pt-1">
+<div>
+<label class="block font-label-caps text-[11px] text-text-muted uppercase mb-1">Ваше ім'я</label>
+<input class="w-full bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-sm focus:border-border-active focus:ring-1 focus:ring-border-active outline-none" placeholder="Олександр" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-[11px] text-text-muted uppercase mb-1">Номер телефону</label>
+<input class="w-full bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-sm focus:border-border-active focus:ring-1 focus:ring-border-active outline-none" placeholder="+380 98 000 00 00" required="" type="tel"/>
+</div>
+<div>
+<label class="block font-label-caps text-[11px] text-text-muted uppercase mb-1">Бажана дата заїзду</label>
+<input class="w-full bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-sm focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-text-muted" required="" type="date"/>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full py-3.5 bg-border-active text-text-primary font-label-caps text-label-caps uppercase rounded-lg ignition-glow font-bold mt-2 active:scale-98 transition-all" type="submit">
+            Підтвердити та забронювати
+          </button>
+</form>
+<!-- Fast Social Contact Channels -->
+<div class="pt-2">
+<p class="text-center font-label-caps text-[11px] text-text-dim uppercase mb-3">Або напишіть нам напряму в месенджер</p>
+<div class="grid grid-cols-2 gap-3">
+<a class="flex items-center justify-center gap-2 p-2.5 bg-surface-panel rounded-lg border border-border-subtle hover:border-[#2AABEE] text-text-primary text-xs font-semibold" href="https://t.me/Kvadro_kyiv1" rel="noopener" target="_blank">
+<span class="material-symbols-outlined text-sm text-[#2AABEE]">send</span>
+<span>Telegram (@Kvadro_kyiv1)</span>
+</a>
+<a class="flex items-center justify-center gap-2 p-2.5 bg-surface-panel rounded-lg border border-border-subtle hover:border-[#E1306C] text-text-primary text-xs font-semibold" href="https://www.instagram.com/kvadro_kyiv1" rel="noopener" target="_blank">
+<span class="material-symbols-outlined text-sm text-[#E1306C]">photo_camera</span>
+<span>Instagram</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: RIDERS GALLERY (Галерея райдерів) -->
+<section class="py-10 px-margin-mobile border-b border-border-subtle">
+<div class="max-w-md mx-auto space-y-5">
+<div class="flex justify-between items-end">
+<div>
+<span class="font-label-caps text-label-caps text-border-active uppercase">Живі емоції</span>
+<h2 class="font-headline-xl-mobile text-headline-xl-mobile text-text-primary uppercase mt-1">
+              Галерея райдерів
+            </h2>
+</div>
+<a class="text-border-active text-xs font-bold hover:underline flex items-center" href="https://www.instagram.com/kvadro_kyiv1" target="_blank">
+            @kvadro_kyiv1
+            <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</a>
+</div>
+<!-- 2x2 Bento Mobile Image Grid -->
+<div class="grid grid-cols-2 gap-2.5">
+<div class="relative rounded-lg overflow-hidden border border-border-subtle aspect-square group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A happy group of friends in safety helmets and mud-splattered motocross jerseys sitting on powerful quad bikes in a sunlit pine forest in Kyiv. Vibrant action shot, high contrast outdoor motorsport aesthetic, orange accents on gear, cinematic dirt trail atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFw5iJLaF7SBL5DGJ72iDav64DkS_p5raG2k6W6ISV_FtpbJIWxHMKz4RrGt5obf9-EIYtmrTrKLSFWU2GOrQUuLp3jjzpW6cMcGPfamPvHwobBbgUjQTuwg6H8lAnc3i4t38U-h00Cp1rmcKXSOSVIOjgxe1bMkNfZ0Bo0U1astJZTiD0vXxkjnetUvLgfnZOvcrI0hfwye5SyzQWdDdR9ZE_r8uM3qtm-nZ-9YVI"/>
+<div class="absolute bottom-2 left-2 bg-surface-base/80 px-2 py-0.5 rounded text-[10px] font-mono text-text-primary">
+              #груповийзаїзд
+            </div>
+</div>
+<div class="relative rounded-lg overflow-hidden border border-border-subtle aspect-square group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Close up dynamic shot of an aggressive off-road buggy vehicle sliding sideways on loose sand with high dirt rooster tail. Sunset lighting slicing through forest trees, deep charcoal panels and searing motorsport orange roll cage frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAirJsHTC3ELDaWjnIMIUyB-TnURKUkv7lhsj-t3gsV5lJ1rD_DOADldnwcJk1cqvZzIGtesGisMSM3PWKKEa0rnj87oEf1NvdXy0GvA4a4uHbZq8YrmHYazO9DHiXcWMBNxCfC_tvUL1Q6B5fnrxfjR0umvye0cdw94N9S-5KHkskvFjxI7PMu6S8fwWuNlkQUZIgv-r8BScn0k9kBaArcmYp29_P-aMwCGCx6L8Y_"/>
+<div class="absolute bottom-2 left-2 bg-surface-base/80 px-2 py-0.5 rounded text-[10px] font-mono text-text-primary">
+              #баггікиїв
+            </div>
+</div>
+<div class="relative rounded-lg overflow-hidden border border-border-subtle aspect-square group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="An enduro dirt bike rider standing on motorcycle pegs navigating a steep wooded hillside trail covered in pine needles. Modern protective motocross gear, high-energy adrenaline mood, dark slate tones with vivid orange decals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLBjTV6OtWpUqPSz3NLHUA-DS49FVo42-Xv6AuWBndfGkJWQ_AkgVFO4ZsMeEtJsCh6QafZIpRaj2JLQ2EF3q-x1rygLuGYJBhc4LYx6in31auH6yjsYgmoWu1WeUrwyoe6NKn3ezBj_Kj23hzh6IyG02caBfpSSUnoWe-dtX9ZhLzz7KdOn7h_Px1Tv8lfNMtPyv-L02jnl1FMQat6N4UxGxYG8UhLNsq2SSP37xu"/>
+<div class="absolute bottom-2 left-2 bg-surface-base/80 px-2 py-0.5 rounded text-[10px] font-mono text-text-primary">
+              #ендуро250
+            </div>
+</div>
+<div class="relative rounded-lg overflow-hidden border border-border-subtle aspect-square group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A smiling couple covered in dry mud splashes posing together next to a large 500cc ATV quad bike at the forest photo zone. Clear sunny daylight, genuine joyful smiles, clean professional protective goggles and jersey." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlNEiH-KclVbsArqaxdGEhxegb2L4GXKO8NqK-mEjKS9C41W8nRo00Q2bod-jJFTGDScobxb3uiELe-7kqLKoVZiVaxIKxtC0eQwRIazeqK2Me6jxy9_e5x1pU08MAe-s8qQyFDmk12-NKbVoWoSR70e4hJs0jWbt_IB0BGLrCZnSElcFyZuN6E_bp9t48edAVHo8es7iUfuOnJHqxvV3IgDsQo-C2jCpzvM_ciQ0r"/>
+<div class="absolute bottom-2 left-2 bg-surface-base/80 px-2 py-0.5 rounded text-[10px] font-mono text-text-primary">
+              #фотозона
+            </div>
+</div>
+</div>
+<p class="text-xs text-text-dim text-center">
+          Під час кожного заїзду інструктор робить безкоштовні яскраві фото та відео на пам'ять!
+        </p>
+</div>
+</section>
+<!-- SECTION: GIFT CERTIFICATES (Подарункові сертифікати) -->
+<section class="py-10 px-margin-mobile bg-surface-panel/40 border-b border-border-subtle">
+<div class="max-w-md mx-auto space-y-5">
+<div>
+<span class="font-label-caps text-label-caps text-border-active uppercase">Ідеальний подарунок</span>
+<h2 class="font-headline-xl-mobile text-headline-xl-mobile text-text-primary uppercase mt-1">
+            Подарункові сертифікати
+          </h2>
+</div>
+<!-- Stylized Certificate Voucher Card -->
+<div class="relative bg-gradient-to-br from-surface-panel-elevated to-surface-panel p-5 rounded-2xl border-2 border-border-active shadow-2xl overflow-hidden">
+<div class="absolute -right-8 -top-8 w-28 h-28 bg-border-active/20 rounded-full blur-2xl"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<img alt="Logo" class="w-10 h-10 rounded-full border border-border-active" src="https://lh3.googleusercontent.com/aida/AEtjO1Wd6Djfr1bFqVtpMjUN7ZrjFOkf_addVjvkgKH2mgGwfjgXAt2Z07tltf9tPQNBjxbeaEcBEpx-abOMMWiy3iZJ0qy3M_0UobkMAxvjJlSfznMJyTh0vsSHWzcPLqwgn8_rzt94cQNVHDYdCaLLIjqe334CzG92ibwnYQDW-YwN0Nh19t6CtzjZKGFnDKmsqEl3MYs55Wy6DzUnGxzJKc9DUSipMdVMXz1JieeYJDhiC00GAZKdcv-x1UZn"/>
+<div>
+<span class="font-headline-sm text-xs font-bold uppercase text-text-primary block">KVADRO KYIV 1</span>
+<span class="font-label-caps text-[9px] text-border-active uppercase">ПОДАРУНКОВИЙ СЕРТИФІКАТ</span>
+</div>
+</div>
+<span class="bg-border-active text-text-primary font-bold text-xs px-2.5 py-1 rounded">
+              -10% БОНУС
+            </span>
+</div>
+<div class="space-y-2 mb-4 text-xs text-text-muted">
+<p class="text-text-primary font-semibold">Даруйте справжні емоції та адреналін, які запам'ятаються назавжди!</p>
+<ul class="space-y-1.5 pt-1">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-border-active text-sm">check_circle</span>
+<span>Дійсний <strong>1 рік</strong> з моменту придбання</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-border-active text-sm">check_circle</span>
+<span>Щоденна доставка <strong>«Новою Поштою»</strong> або e-формат</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-border-active text-sm">check_circle</span>
+<span>Знижкова картка <strong>-10% на всі наступні поїздки</strong> в подарунок</span>
+</li>
+</ul>
+</div>
+<a class="block w-full text-center py-3 bg-border-active hover:bg-brand-amber text-text-primary font-label-caps text-xs uppercase rounded-lg ignition-glow font-bold transition-all" href="#booking">
+            Придбати сертифікат
+          </a>
+</div>
+</div>
+</section>
+<!-- SECTION: LOCATION & MAP (Наша локація) -->
+<section class="py-10 px-margin-mobile border-b border-border-subtle" id="location">
+<div class="max-w-md mx-auto space-y-5">
+<div>
+<span class="font-label-caps text-label-caps text-border-active uppercase">Зручний доїзд</span>
+<h2 class="font-headline-xl-mobile text-headline-xl-mobile text-text-primary uppercase mt-1">
+            Ми знаходимось у Києві
+          </h2>
+<p class="font-body-sm text-text-muted mt-1">Дарницький р-н, Бортничі, вул. Лісова 76К</p>
+</div>
+<!-- Location Description -->
+<div class="bg-surface-panel p-4 rounded-xl border border-border-subtle space-y-3 text-xs text-text-muted">
+<p class="text-text-primary font-medium">
+            Лісова місцевість. Ліс великий та безпечний! По дорозі на Вас чекають: гірки, схили, піски, підйоми та чудові фотозони.
+          </p>
+<div class="flex items-center gap-2 text-border-active font-semibold pt-1">
+<span class="material-symbols-outlined text-base">local_bar</span>
+<span>Бонус після поїздки: безкоштовні прохолодні напої для всіх учасників!</span>
+</div>
+</div>
+<!-- Map Mockup Container -->
+<div class="relative rounded-xl overflow-hidden border border-border-subtle group">
+<img class="w-full h-48 object-cover" data-alt="A stylized dark mode map visualization of Kyiv showing the Bortnychi pine forest area near Lisova street, featuring a glowing orange pin marker for off-road quad biking trails and route vectors. High-contrast UI navigation layout." data-location="Kyiv" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8kRr4quBJHYhUe9PaYOeyIlnFfb9f13KwxR3mkMmsW_j1QU5uCHXBQ7MUJXIeXEp18IJqyVWe64jZzc5qmsmxpdDpWaZc5Xm2iBvBtcHQRmJPsg3D5TEYRbIeASFVLm9LNFGmdLe7VUccUNM2Nz3AUWxNUnJFTYogquWplMl14TDhaEmS7zDIJymyZCTsMwCj1ihMmabAnByHN-Tb5sHigKcXZPqyQc1wlP6GAdZZ"/>
+<div class="absolute inset-0 bg-surface-base/30 backdrop-blur-[1px] flex items-center justify-center p-4">
+<a class="px-4 py-2.5 bg-surface-panel-elevated/95 border border-border-active rounded-lg text-text-primary font-label-caps text-xs uppercase flex items-center gap-2 ignition-glow hover:bg-border-active transition-all" href="https://www.google.com/maps/place/50%C2%B023'06.7%22N+30%C2%B042'48.5%22E" rel="noopener" target="_blank">
+<span class="material-symbols-outlined text-border-active text-sm">near_me</span>
+<span>Відкрити на карті Google</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-center">
+<div class="p-3 bg-surface-panel rounded-lg border border-border-subtle">
+<span class="text-xs text-text-dim block">Графік роботи</span>
+<span class="font-bold text-text-primary text-xs">Щодня 08:00 — 20:00</span>
+</div>
+<div class="p-3 bg-surface-panel rounded-lg border border-border-subtle">
+<span class="text-xs text-text-dim block">Парковка</span>
+<span class="font-bold text-text-primary text-xs">Безкоштовна на базі</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: REVIEWS (Відгуки наших клієнтів) -->
+<section class="py-10 px-margin-mobile bg-surface-panel/30 border-b border-border-subtle">
+<div class="max-w-md mx-auto space-y-5">
+<div>
+<span class="font-label-caps text-label-caps text-border-active uppercase">Реальні враження</span>
+<h2 class="font-headline-xl-mobile text-headline-xl-mobile text-text-primary uppercase mt-1">
+            Відгуки клієнтів
+          </h2>
+</div>
+<div class="space-y-3">
+<!-- Review 1 -->
+<div class="bg-surface-panel p-4 rounded-xl border border-border-subtle space-y-2">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-border-active/20 flex items-center justify-center text-border-active font-bold text-xs">
+                  ОК
+                </div>
+<span class="font-bold text-sm text-text-primary">Олена &amp; Костянтин</span>
+</div>
+<div class="flex text-border-active">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="text-xs text-text-muted leading-relaxed">
+              «Все було супер, дякую❤️ Ви класні! Маршрут дуже гарний, квадріки новенькі, було де розігнатися і пострибати на кочках😎 Отримали купу задоволення і класно відсвяткували річницю🥳»
+            </p>
+</div>
+<!-- Review 2 -->
+<div class="bg-surface-panel p-4 rounded-xl border border-border-subtle space-y-2">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-border-active/20 flex items-center justify-center text-border-active font-bold text-xs">
+                  МВ
+                </div>
+<span class="font-bold text-sm text-text-primary">Максим (Корпоратив)</span>
+</div>
+<div class="flex text-border-active">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="text-xs text-text-muted leading-relaxed">
+              «Вирішили з друзями орендувати 9 квадроциклів та були приємно вражені якістю обслуговування та маршрутами. Інструктору окрема дяка за такі покатушки, це було ТОП😎 Рекомендую всім!»
+            </p>
+</div>
+<!-- Review 3 -->
+<div class="bg-surface-panel p-4 rounded-xl border border-border-subtle space-y-2">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-border-active/20 flex items-center justify-center text-border-active font-bold text-xs">
+                  ІН
+                </div>
+<span class="font-bold text-sm text-text-primary">Інна</span>
+</div>
+<div class="flex text-border-active">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="text-xs text-text-muted leading-relaxed">
+              «Відвідала вас і не пошкодувала! Крута локація і круті інструктори! Нова і чиста екіпіровка, за це вам великий ➕❤️ Отримали незабутні спогади та круті фото і відео🤘🔥»
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: FAQ / TIPS (Корисні поради для райдерів) -->
+<section class="py-10 px-margin-mobile border-b border-border-subtle" id="faq">
+<div class="max-w-md mx-auto space-y-5">
+<div>
+<span class="font-label-caps text-label-caps text-border-active uppercase">Часті питання</span>
+<h2 class="font-headline-xl-mobile text-headline-xl-mobile text-text-primary uppercase mt-1">
+            Корисні поради
+          </h2>
+</div>
+<div class="space-y-2.5">
+<!-- Accordion 1 -->
+<details class="bg-surface-panel rounded-lg border border-border-subtle p-3 group">
+<summary class="font-headline-sm text-xs font-bold text-text-primary cursor-pointer list-none flex justify-between items-center">
+<span>Чи можна орендувати квадроцикл без водійських прав?</span>
+<span class="material-symbols-outlined text-border-active text-base transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="text-xs text-text-muted mt-2 pt-2 border-t border-border-subtle">
+              Так, водійське посвідчення не потрібне! Маршрути проходять лісовими спецтрасами. Перед виїздом інструктор проводить повний 10-хвилинний навчальний курс, якого достатньо для легкого старту.
+            </p>
+</details>
+<!-- Accordion 2 -->
+<details class="bg-surface-panel rounded-lg border border-border-subtle p-3 group">
+<summary class="font-headline-sm text-xs font-bold text-text-primary cursor-pointer list-none flex justify-between items-center">
+<span>Як правильно одягнутися на заїзд?</span>
+<span class="material-symbols-outlined text-border-active text-base transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="text-xs text-text-muted mt-2 pt-2 border-t border-border-subtle">
+              Одягайте зручний закритий одяг та спортивне взуття, яке не шкода трохи припилити. Захисне джерсі, рукавички та окуляри ми видаємо безкоштовно на базі.
+            </p>
+</details>
+<!-- Accordion 3 -->
+<details class="bg-surface-panel rounded-lg border border-border-subtle p-3 group">
+<summary class="font-headline-sm text-xs font-bold text-text-primary cursor-pointer list-none flex justify-between items-center">
+<span>Чи можна кататися вдвох на одному квадроциклі?</span>
+<span class="material-symbols-outlined text-border-active text-base transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="text-xs text-text-muted mt-2 pt-2 border-t border-border-subtle">
+              Так, наші квадроцикли та баггі розраховані на двох. Доплата за другого пасажира становить від 400 до 500 грн/година залежно від обраної техніки.
+            </p>
+</details>
+<!-- Accordion 4 -->
+<details class="bg-surface-panel rounded-lg border border-border-subtle p-3 group">
+<summary class="font-headline-sm text-xs font-bold text-text-primary cursor-pointer list-none flex justify-between items-center">
+<span>Чи проводите ви заїзди під час дощу?</span>
+<span class="material-symbols-outlined text-border-active text-base transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="text-xs text-text-muted mt-2 pt-2 border-t border-border-subtle">
+              Дощ робить трасу ще більш екстремальною та веселою! У дощову погоду ми надаємо водонепроникні дощовики та бахіли.
+            </p>
+</details>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER (Shared Components Anchor) -->
+<footer class="bg-surface-base dark:bg-surface-base border-t border-border-subtle dark:border-border-subtle w-full">
+<div class="w-full px-space-md py-8 max-w-md mx-auto flex flex-col items-center text-center gap-4">
+<!-- Brand & Description -->
+<div class="flex items-center gap-2">
+<img alt="Logo" class="w-8 h-8 rounded-full border border-border-active" src="https://lh3.googleusercontent.com/aida/AEtjO1Wd6Djfr1bFqVtpMjUN7ZrjFOkf_addVjvkgKH2mgGwfjgXAt2Z07tltf9tPQNBjxbeaEcBEpx-abOMMWiy3iZJ0qy3M_0UobkMAxvjJlSfznMJyTh0vsSHWzcPLqwgn8_rzt94cQNVHDYdCaLLIjqe334CzG92ibwnYQDW-YwN0Nh19t6CtzjZKGFnDKmsqEl3MYs55Wy6DzUnGxzJKc9DUSipMdVMXz1JieeYJDhiC00GAZKdcv-x1UZn"/>
+<span class="font-headline-sm text-headline-sm font-bold text-text-primary dark:text-text-primary uppercase">
+          KVADRO KYIV 1
+        </span>
+</div>
+<p class="text-xs text-text-dim">
+        м. Київ, Дарницький р-н, вул. Лісова 76К (Бортничі)<br/>
+        Графік: Щодня 08:00 – 20:00
+      </p>
+<!-- Fast Contact Links -->
+<div class="flex flex-wrap justify-center gap-4 text-xs font-semibold text-text-muted">
+<a class="hover:text-border-active" href="tel:+380984327179">+380 (98) 432-71-79</a>
+<a class="hover:text-border-active" href="https://t.me/Kvadro_kyiv1" target="_blank">Telegram @Kvadro_kyiv1</a>
+<a class="hover:text-border-active" href="https://www.instagram.com/kvadro_kyiv1" target="_blank">Instagram</a>
+</div>
+<!-- Footer Policy Links -->
+<div class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] text-text-dim dark:text-text-dim">
+<a class="hover:text-border-active dark:hover:text-border-active transition-colors duration-150" href="#location">Локація в Бортничах</a>
+<a class="hover:text-border-active dark:hover:text-border-active transition-colors duration-150" href="#faq">Інструктаж та безпека</a>
+<a class="hover:text-border-active dark:hover:text-border-active transition-colors duration-150" href="#prices">Подарункові сертифікати</a>
+<a class="hover:text-border-active dark:hover:text-border-active transition-colors duration-150" href="#">Правила та умови</a>
+<a class="hover:text-border-active dark:hover:text-border-active transition-colors duration-150" href="#">Політика конфіденційності</a>
+</div>
+<!-- Verbatim Copyright -->
+<p class="font-body-sm text-[11px] text-text-dim pt-2 border-t border-border-subtle w-full">
+        © 2025 KVADRO KYIV 1. Екстремальний відпочинок у Бортничах. Всі права захищені.
+      </p>
+</div>
+</footer>
+<!-- MOBILE BOTTOM BAR (Shared Components & Sticky Thumb Zone) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-space-sm py-2 bg-surface-panel-elevated/95 dark:bg-surface-panel-elevated/95 backdrop-blur-md border-t border-border-subtle dark:border-border-subtle shadow-2xl">
+<!-- Tours -->
+<a class="flex flex-col items-center justify-center text-text-muted dark:text-text-muted py-space-xs px-2 hover:text-border-active transition-colors active:scale-95" href="#tours">
+<span class="material-symbols-outlined text-xl">sports_motorsports</span>
+<span class="font-label-caps text-[10px] uppercase mt-0.5">Маршрути</span>
+</a>
+<!-- Book (Active State Intent) -->
+<a class="flex flex-col items-center justify-center bg-border-active text-text-primary rounded-lg py-1.5 px-4 font-bold shadow-md shadow-border-active/30 active:scale-95 transition-transform" href="#booking">
+<span class="material-symbols-outlined text-xl">calendar_today</span>
+<span class="font-label-caps text-[10px] uppercase mt-0.5">Бронювання</span>
+</a>
+<!-- Prices -->
+<a class="flex flex-col items-center justify-center text-text-muted dark:text-text-muted py-space-xs px-2 hover:text-border-active transition-colors active:scale-95" href="#prices">
+<span class="material-symbols-outlined text-xl">payments</span>
+<span class="font-label-caps text-[10px] uppercase mt-0.5">Ціни</span>
+</a>
+<!-- Contact / Call -->
+<a class="flex flex-col items-center justify-center text-text-muted dark:text-text-muted py-space-xs px-2 hover:text-border-active transition-colors active:scale-95" href="tel:+380984327179">
+<span class="material-symbols-outlined text-xl">call</span>
+<span class="font-label-caps text-[10px] uppercase mt-0.5">Контакти</span>
+</a>
+</nav>
+<!-- Interactive JavaScript for Mobile Drawer -->
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeDrawer = document.getElementById('close-drawer');
+    const navDrawer = document.getElementById('nav-drawer');
+
+    function toggleMenu() {
+      navDrawer.classList.toggle('hidden');
+    }
+
+    menuBtn?.addEventListener('click', toggleMenu);
+    closeDrawer?.addEventListener('click', toggleMenu);
+
+    // Close drawer when clicking outside or on links
+    navDrawer?.addEventListener('click', (e) => {
+      if (e.target === navDrawer || e.target.closest('a')) {
+        navDrawer.classList.add('hidden');
+      }
+    });
+  </script>
+</body></html>

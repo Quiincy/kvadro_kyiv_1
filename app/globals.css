@@ -3,19 +3,139 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0B0E14;
+  --foreground: #F8FAFC;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  overflow-x: clip;
 }
+
+/* Global Anchor Scroll Margin for all sections and anchor targets */
+section[id],
+footer[id],
+[id="stages"],
+[id="steps"],
+[id="tours"],
+[id="price"],
+[id="prices"],
+[id="pricing"],
+[id="vehicles"],
+[id="booking"],
+[id="routes"],
+[id="certificates"],
+[id="location"],
+[id="reviews"],
+[id="faq"],
+[id="contacts"] {
+  scroll-margin-top: 5.5rem; /* ~88px offset for mobile header */
+}
+
+@media (min-width: 1024px) {
+  section[id],
+  footer[id],
+  [id="stages"],
+  [id="steps"],
+  [id="tours"],
+  [id="price"],
+  [id="prices"],
+  [id="pricing"],
+  [id="vehicles"],
+  [id="booking"],
+  [id="routes"],
+  [id="certificates"],
+  [id="location"],
+  [id="reviews"],
+  [id="faq"],
+  [id="contacts"] {
+    scroll-margin-top: 6.5rem; /* ~104px offset for desktop header */
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0E14;
+}
+::-webkit-scrollbar-thumb {
+  background: #252F45;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF5722;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(22, 29, 43, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(26, 35, 52, 0.85);
+  border-color: rgba(255, 87, 34, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(255, 87, 34, 0.15);
+}
+
+/* Glow effects */
+.orange-glow {
+  box-shadow: 0 0 35px -5px rgba(255, 87, 34, 0.35);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 87, 34, 0.5);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.ignition-glow {
+  box-shadow: 0px 4px 24px rgba(255, 50, 8, 0.4);
+}
+
+.technical-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(37, 47, 69, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 47, 69, 0.25) 1px, transparent 1px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scaleUp {
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
