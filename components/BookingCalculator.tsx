@@ -2,6 +2,7 @@
 
 import React, { useState, useId, useRef, useEffect, useMemo } from 'react'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
+import { FormFieldTooltip, FormAlertBanner } from '@/components/ui/FormFieldTooltip'
 import { Check, Send, Phone, Calendar, User, Sparkles, CheckCircle2, ChevronDown } from 'lucide-react'
 import { defaultSettings, defaultFleet, FleetItem } from '@/lib/defaultData'
 import {
@@ -320,6 +321,8 @@ export function BookingCalculator({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
+  const [nameError, setNameError] = useState('')
+  const [phoneError, setPhoneError] = useState('')
 
   const nameInputId = useId()
   const phoneInputId = useId()
@@ -335,12 +338,14 @@ export function BookingCalculator({
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatUkrainianPhone(e.target.value)
     setClientPhone(formatted)
+    if (phoneError) setPhoneError('')
     if (errorMsg) setErrorMsg('')
   }
 
   const onPhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     handlePhoneKeyDown(e, (formatted) => {
       setClientPhone(formatted)
+      if (phoneError) setPhoneError('')
       if (errorMsg) setErrorMsg('')
     })
   }
@@ -367,12 +372,27 @@ export function BookingCalculator({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!clientName.trim() || !isCompleteUkrainianPhone(clientPhone)) {
-      setErrorMsg("Будь ласка, вкажіть ваше ім'я та повний номер телефону (+380 (XX) XXX-XX-XX).")
+    const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024
+
+    if (!clientName.trim()) {
+      setNameError("Будь ласка, вкажіть ваше ім'я")
+      setPhoneError('')
+      const el = document.getElementById(isDesktop ? desktopNameInputId : nameInputId)
+      el?.focus()
+      return
+    }
+
+    if (!isCompleteUkrainianPhone(clientPhone)) {
+      setNameError('')
+      setPhoneError('Введіть повний номер телефону')
+      const el = document.getElementById(isDesktop ? desktopPhoneInputId : phoneInputId)
+      el?.focus()
       return
     }
 
     setIsSubmitting(true)
+    setNameError('')
+    setPhoneError('')
     setErrorMsg('')
 
     try {
@@ -498,7 +518,12 @@ export function BookingCalculator({
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4 bg-surface-panel p-4 rounded-xl border border-border-subtle" id="booking-form">
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className="space-y-4 bg-surface-panel p-4 rounded-xl border border-border-subtle"
+              id="booking-form"
+            >
               {/* Technique Selector Pills - stabilized border */}
               <div>
                 <label className="block font-label-caps text-[11px] text-text-muted uppercase mb-2 font-semibold tracking-wider">
@@ -580,11 +605,24 @@ export function BookingCalculator({
                   <input
                     id={nameInputId}
                     type="text"
-                    required
+                    aria-required="true"
+                    aria-invalid={Boolean(nameError)}
                     value={clientName}
-                    onChange={(e) => setClientName(e.target.value)}
+                    onChange={(e) => {
+                      setClientName(e.target.value)
+                      if (nameError) setNameError('')
+                      if (errorMsg) setErrorMsg('')
+                    }}
                     placeholder="Олександр"
-                    className="w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-base placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none"
+                    className={`w-full max-w-full min-w-0 box-border block bg-surface-base border rounded-lg px-3 py-2.5 text-text-primary text-base placeholder:text-text-dim outline-none transition-all ${
+                      nameError
+                        ? 'border-border-active ring-2 ring-border-active/25 bg-border-active/[0.03]'
+                        : 'border-border-subtle focus:border-border-active focus:ring-1 focus:ring-border-active'
+                    }`}
+                  />
+                  <FormFieldTooltip
+                    message={nameError}
+                    subtext="Як наш адміністратор може до вас звертатися?"
                   />
                 </div>
                 <div className="min-w-0">
@@ -594,14 +632,23 @@ export function BookingCalculator({
                   <input
                     id={phoneInputId}
                     type="tel"
-                    required
+                    aria-required="true"
+                    aria-invalid={Boolean(phoneError)}
                     value={clientPhone}
                     onChange={handlePhoneChange}
                     onKeyDown={onPhoneKeyDown}
                     onFocus={handlePhoneFocusOrClick}
                     onClick={handlePhoneFocusOrClick}
                     placeholder="+380 (98) 000-00-00"
-                    className="w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary text-base font-mono placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none"
+                    className={`w-full max-w-full min-w-0 box-border block bg-surface-base border rounded-lg px-3 py-2.5 text-text-primary text-base font-mono placeholder:text-text-dim outline-none transition-all ${
+                      phoneError
+                        ? 'border-border-active ring-2 ring-border-active/25 bg-border-active/[0.03]'
+                        : 'border-border-subtle focus:border-border-active focus:ring-1 focus:ring-border-active'
+                    }`}
+                  />
+                  <FormFieldTooltip
+                    message={phoneError}
+                    subtext="Формат: +380 (XX) XXX-XX-XX"
                   />
                 </div>
                 <div className="min-w-0">
@@ -644,9 +691,7 @@ export function BookingCalculator({
                 </span>
               </div>
 
-              {errorMsg && (
-                <p className="text-xs text-red-400 font-semibold">{errorMsg}</p>
-              )}
+              <FormAlertBanner message={errorMsg} onDismiss={() => setErrorMsg('')} />
 
               {/* Submit Button */}
               <button
@@ -863,7 +908,7 @@ export function BookingCalculator({
                   </div>
                 </div>
               ) : (
-                <form className="space-y-6" id="reservationForm" onSubmit={handleSubmit}>
+                <form className="space-y-6" id="reservationForm" onSubmit={handleSubmit} noValidate>
                   {/* Vehicle Selection Radio Matrix - stabilized border */}
                   <div>
                     <label className="block font-headline-sm text-sm uppercase text-text-primary font-bold mb-3">
@@ -939,7 +984,7 @@ export function BookingCalculator({
                   />
 
                   {/* Rider details */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                     <div className="min-w-0">
                       <label htmlFor={desktopNameInputId} className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
                         Ваше ім&apos;я:
@@ -947,12 +992,25 @@ export function BookingCalculator({
                       <input
                         id={desktopNameInputId}
                         type="text"
-                        required
+                        aria-required="true"
+                        aria-invalid={Boolean(nameError)}
                         aria-label="Ваше ім'я"
                         value={clientName}
-                        onChange={(e) => setClientName(e.target.value)}
+                        onChange={(e) => {
+                          setClientName(e.target.value)
+                          if (nameError) setNameError('')
+                          if (errorMsg) setErrorMsg('')
+                        }}
                         placeholder="Олександр"
-                        className="w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-base md:text-sm transition-colors"
+                        className={`w-full max-w-full min-w-0 box-border block bg-surface-base border rounded-xl px-4 py-3 text-text-primary placeholder:text-text-dim outline-none text-base md:text-sm transition-all ${
+                          nameError
+                            ? 'border-border-active ring-2 ring-border-active/25 bg-border-active/[0.03]'
+                            : 'border-border-subtle focus:border-border-active focus:ring-1 focus:ring-border-active'
+                        }`}
+                      />
+                      <FormFieldTooltip
+                        message={nameError}
+                        subtext="Як наш адміністратор може до вас звертатися?"
                       />
                     </div>
                     <div className="min-w-0">
@@ -962,7 +1020,8 @@ export function BookingCalculator({
                       <input
                         id={desktopPhoneInputId}
                         type="tel"
-                        required
+                        aria-required="true"
+                        aria-invalid={Boolean(phoneError)}
                         aria-label="Номер телефону"
                         value={clientPhone}
                         onChange={handlePhoneChange}
@@ -970,7 +1029,15 @@ export function BookingCalculator({
                         onFocus={handlePhoneFocusOrClick}
                         onClick={handlePhoneFocusOrClick}
                         placeholder="+380 (98) 000-00-00"
-                        className="w-full max-w-full min-w-0 box-border block bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary font-mono placeholder:text-text-dim focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-base md:text-sm transition-colors"
+                        className={`w-full max-w-full min-w-0 box-border block bg-surface-base border rounded-xl px-4 py-3 text-text-primary font-mono placeholder:text-text-dim outline-none text-base md:text-sm transition-all ${
+                          phoneError
+                            ? 'border-border-active ring-2 ring-border-active/25 bg-border-active/[0.03]'
+                            : 'border-border-subtle focus:border-border-active focus:ring-1 focus:ring-border-active'
+                        }`}
+                      />
+                      <FormFieldTooltip
+                        message={phoneError}
+                        subtext="Формат: +380 (XX) XXX-XX-XX"
                       />
                     </div>
                   </div>
@@ -1024,9 +1091,7 @@ export function BookingCalculator({
                     />
                   </div>
 
-                  {errorMsg && (
-                    <p className="text-xs text-red-400 font-semibold">{errorMsg}</p>
-                  )}
+                  <FormAlertBanner message={errorMsg} onDismiss={() => setErrorMsg('')} />
 
                   {/* Submit Button */}
                   <button

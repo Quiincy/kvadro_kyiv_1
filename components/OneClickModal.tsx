@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { MaterialIcon } from '@/components/ui/MaterialIcon'
+import { FormFieldTooltip, FormAlertBanner } from '@/components/ui/FormFieldTooltip'
 import { X, Phone, CheckCircle2, Send, Sparkles, ShieldCheck, Clock, Check } from 'lucide-react'
 import { defaultSettings } from '@/lib/defaultData'
 import {
@@ -34,6 +35,7 @@ export function OneClickModal({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
+  const [phoneError, setPhoneError] = useState('')
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -45,6 +47,7 @@ export function OneClickModal({
       }
       setIsSuccess(false)
       setErrorMsg('')
+      setPhoneError('')
       if (!phone || phone.length < UKRAINE_PHONE_PREFIX.length) {
         setPhone(UKRAINE_PHONE_PREFIX)
       }
@@ -75,12 +78,14 @@ export function OneClickModal({
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatUkrainianPhone(e.target.value)
     setPhone(formatted)
+    if (phoneError) setPhoneError('')
     if (errorMsg) setErrorMsg('')
   }
 
   const handlePhoneKeyDownInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     handlePhoneKeyDown(e, (formatted) => {
       setPhone(formatted)
+      if (phoneError) setPhoneError('')
       if (errorMsg) setErrorMsg('')
     })
   }
@@ -89,11 +94,13 @@ export function OneClickModal({
     e.preventDefault()
 
     if (!isCompleteUkrainianPhone(phone)) {
-      setErrorMsg('Будь ласка, введіть повний номер телефону (наприклад: +380 (98) 000-00-00)')
+      setPhoneError('Будь ласка, введіть повний номер телефону')
+      inputRef.current?.focus()
       return
     }
 
     setIsSubmitting(true)
+    setPhoneError('')
     setErrorMsg('')
 
     try {
@@ -132,6 +139,7 @@ export function OneClickModal({
     setPhone('')
     setName('')
     setErrorMsg('')
+    setPhoneError('')
     onClose()
   }
 
@@ -241,7 +249,7 @@ export function OneClickModal({
             </div>
           ) : (
             /* ================= FORM STATE ================= */
-            <form onSubmit={handleSubmit} className="space-y-5 animate-fadeIn">
+            <form onSubmit={handleSubmit} noValidate className="space-y-5 animate-fadeIn">
               {/* Header */}
               <div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-border-active/15 border border-border-active/30 text-border-active text-xs font-label-caps uppercase font-bold tracking-wider mb-2">
@@ -284,16 +292,25 @@ export function OneClickModal({
                     ref={inputRef}
                     id="oneclick-phone"
                     type="tel"
-                    required
+                    aria-required="true"
+                    aria-invalid={Boolean(phoneError)}
                     value={phone}
                     onChange={handlePhoneChange}
                     onKeyDown={handlePhoneKeyDownInput}
                     onFocus={handlePhoneFocusOrClick}
                     onClick={handlePhoneFocusOrClick}
                     placeholder="+380 (98) 000-00-00"
-                    className="w-full bg-surface-base border border-border-subtle rounded-xl pl-10 pr-4 py-3.5 text-text-primary placeholder:text-text-dim font-mono text-base focus:border-border-active focus:ring-2 focus:ring-border-active/30 outline-none transition-all"
+                    className={`w-full bg-surface-base border rounded-xl pl-10 pr-4 py-3.5 text-text-primary placeholder:text-text-dim font-mono text-base outline-none transition-all ${
+                      phoneError
+                        ? 'border-border-active ring-2 ring-border-active/30 bg-border-active/[0.03]'
+                        : 'border-border-subtle focus:border-border-active focus:ring-2 focus:ring-border-active/30'
+                    }`}
                   />
                 </div>
+                <FormFieldTooltip
+                  message={phoneError}
+                  subtext="Приклад: +380 (98) 432-71-79"
+                />
               </div>
 
               {/* Optional Name Input */}
@@ -315,11 +332,7 @@ export function OneClickModal({
               </div>
 
               {/* Error Alert */}
-              {errorMsg && (
-                <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-xs text-red-400 font-medium">
-                  {errorMsg}
-                </div>
-              )}
+              <FormAlertBanner message={errorMsg} onDismiss={() => setErrorMsg('')} />
 
               {/* Submit CTA */}
               <button
