@@ -317,6 +317,9 @@ export function BookingCalculator({
   const phoneInputId = useId()
   const dateInputId = useId()
   const notesInputId = useId()
+  const desktopNameInputId = useId()
+  const desktopPhoneInputId = useId()
+  const desktopDateInputId = useId()
 
   // Phone input formatting helper: +380 (XX) XXX-XX-XX
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -891,12 +894,14 @@ export function BookingCalculator({
                   {/* Rider details */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
+                      <label htmlFor={desktopNameInputId} className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
                         Ваше ім&apos;я:
                       </label>
                       <input
+                        id={desktopNameInputId}
                         type="text"
                         required
+                        aria-label="Ваше ім'я"
                         value={clientName}
                         onChange={(e) => setClientName(e.target.value)}
                         placeholder="Олександр"
@@ -904,12 +909,14 @@ export function BookingCalculator({
                       />
                     </div>
                     <div>
-                      <label className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
+                      <label htmlFor={desktopPhoneInputId} className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
                         Номер телефону:
                       </label>
                       <input
+                        id={desktopPhoneInputId}
                         type="tel"
                         required
+                        aria-label="Номер телефону"
                         value={clientPhone}
                         onChange={handlePhoneChange}
                         onKeyDown={onPhoneKeyDown}
@@ -924,11 +931,13 @@ export function BookingCalculator({
                   {/* Date and Cost Row - Balanced heights to prevent any vertical shift */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
+                      <label htmlFor={desktopDateInputId} className="block font-label-caps text-xs uppercase text-text-muted font-bold mb-2">
                         Бажана дата:
                       </label>
                       <input
+                        id={desktopDateInputId}
                         type="date"
+                        aria-label="Бажана дата заїзду"
                         value={preferredDate}
                         onChange={(e) => setPreferredDate(e.target.value)}
                         className="w-full bg-surface-base border border-border-subtle rounded-xl px-4 py-3 text-text-primary focus:border-border-active focus:ring-1 focus:ring-border-active outline-none text-sm transition-colors"

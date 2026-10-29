@@ -82,6 +82,7 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
                 sizes="(max-width: 768px) 100vw, 500px"
                 className="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
                 priority
+                fetchPriority="high"
               />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-surface-base via-surface-base/30 to-transparent pointer-events-none" />
@@ -207,6 +208,7 @@ export function Hero({ settings }: { settings?: typeof defaultSettings }) {
                     sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 45vw, 520px"
                     className="w-full h-[420px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                     priority
+                    fetchPriority="high"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-base via-transparent to-transparent pointer-events-none" />
 
