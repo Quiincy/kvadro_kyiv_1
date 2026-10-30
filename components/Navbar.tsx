@@ -63,11 +63,11 @@ export function Navbar({ settings, onOpenContacts }: NavbarProps) {
       {/* Slide-out Drawer Navigation Overlay (Mobile) */}
       {drawerOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm transition-opacity lg:hidden"
+          className="fixed inset-0 z-[70] bg-black/80 backdrop-blur-sm transition-opacity lg:hidden"
           onClick={() => setDrawerOpen(false)}
         >
           <div
-            className="fixed inset-y-0 left-0 w-80 max-w-full bg-surface-panel flex flex-col h-full p-4 justify-between shadow-2xl border-r border-border-subtle"
+            className="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-surface-panel flex flex-col h-[100dvh] overflow-y-auto p-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] justify-between gap-6 shadow-2xl border-r border-border-subtle"
             onClick={(e) => e.stopPropagation()}
           >
             <div>
